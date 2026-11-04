@@ -1,0 +1,7 @@
+# Public repo: only the files the live site needs.
+*
+!.gitignore
+!.nojekyll
+!index.html
+!Fakhar-Ud-Din-Khokhar-Resume.pdf
+!og-image.png

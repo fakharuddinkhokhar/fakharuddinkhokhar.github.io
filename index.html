@@ -71,8 +71,7 @@ p{margin:0}
 /* nav */
 .nav{position:sticky;top:0;z-index:var(--z-nav);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:18px}
-.brand-mark{width:32px;height:32px;border-radius:var(--r-control);background:var(--accent);display:grid;place-items:center;color:var(--accent-ink);font-family:var(--mono);font-size:13px;font-weight:600}
+.brand{display:flex;align-items:center;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.01em}
 .nav-links{display:none;gap:2px;list-style:none;margin:0;padding:0}
 .nav-links a{text-decoration:none;color:var(--muted);font-size:14.5px;font-weight:500;padding:10px 12px;border-radius:var(--r-control);display:inline-block;transition:color .2s,background-color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--fg);background:var(--surface)}
@@ -398,7 +397,7 @@ footer a:hover{color:var(--fg)}
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">FK</span>Fakhar Khokhar</a>
+    <a class="brand" href="#top">Fakhar Khokhar</a>
     <nav aria-label="Primary"><ul class="nav-links" id="navLinks">
       <li><a href="#demo">Live demo</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#work">Projects</a></li><li><a href="#contact">Contact</a></li>
     </ul></nav>

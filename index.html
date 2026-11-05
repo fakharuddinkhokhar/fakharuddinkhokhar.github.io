@@ -46,6 +46,7 @@ a{color:inherit}
 h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance;letter-spacing:-.01em}
 p{margin:0}
 [id]{scroll-margin-top:76px}
+section[id]{scroll-margin-top:64px}
 .wrap{max-width:var(--max);margin-inline:auto;padding-inline:20px}
 .section{padding-block:56px}
 @media (min-width:900px){.section{padding-block:80px}}
@@ -86,7 +87,7 @@ p{margin:0}
 @keyframes menuIn{from{opacity:0;transform:translateY(-6px)}}
 .mobile-menu ul{list-style:none;margin:0;padding:8px 20px 16px;display:grid;gap:2px}
 .mobile-menu a{display:block;padding:12px 10px;text-decoration:none;font-weight:500;border-radius:var(--r-control)}
-.mobile-menu .btn{display:flex;margin:10px 10px 0;width:calc(100% - 20px);padding:11px 20px;border-radius:999px}
+.mobile-menu .btn{display:flex;margin:10px 20px 0;width:calc(100% - 40px);padding:11px 20px;border-radius:999px}
 
 /* hero */
 .hero{position:relative;overflow:hidden;padding-block:48px 40px}
@@ -125,12 +126,12 @@ p{margin:0}
 @media (min-width:560px){.runner-bar .title{flex:1 1 auto}}
 .tabs{display:flex;gap:4px}
 .tab{border:1px solid var(--line);background:transparent;color:var(--muted);font-family:var(--mono);font-size:12.5px;padding:8px 12px;min-height:40px;border-radius:var(--r-control);cursor:pointer}
-.tab.ready::after{content:"";display:inline-block;width:7px;height:7px;margin-left:7px;border-radius:50%;background:var(--accent);vertical-align:1px;animation:scPulse 1.2s ease-in-out 3}
+.tab.ready::after{content:"";display:inline-block;width:7px;height:7px;margin-left:7px;border-radius:50%;background:var(--fg);vertical-align:1px;animation:scPulse 1.2s ease-in-out 3}
 .tab[aria-selected="true"]{background:var(--accent-soft);color:var(--accent);border-color:transparent}
 .progress{height:3px;background:var(--line)}
 .progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:var(--accent);transition:transform .35s ease}
 .strip{display:none}
-@media (max-width:859px){.strip{display:flex;gap:14px;align-items:center;position:sticky;top:64px;z-index:1;padding:8px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}.strip>span{white-space:nowrap}.strip .sw{flex:1;margin-left:auto;text-align:right;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis}.term{min-height:0}}
+@media (max-width:859px){.strip{display:flex;gap:14px;align-items:center;position:sticky;top:64px;z-index:1;padding:8px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}.strip>span{white-space:nowrap}.strip .sw{flex:1;margin-left:auto;text-align:right;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis}.term{min-height:0;height:340px;overflow-y:auto;overscroll-behavior:contain}.side #rerun{order:-2}.side #runStatus{order:-1}}
 .panel{display:grid}
 @media (min-width:860px){.panel{grid-template-columns:1.25fr .75fr}}
 .term{padding:16px 18px;font-family:var(--mono);font-size:13px;min-height:340px;display:grid;align-content:start;gap:7px;min-width:0}
@@ -188,12 +189,17 @@ p{margin:0}
 .sev-note{font-size:13px;color:var(--muted);margin-top:8px}
 .verdict{grid-column:1/-1;font-size:15px;line-height:1.55;padding:12px 16px;border-radius:var(--r-control);background:var(--surface-2);border:1px solid var(--line);max-width:none}
 .verdict b{font-weight:600}
+.rver summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center}.rver summary::-webkit-details-marker{display:none}.rver summary h3{margin:0}.rver .rlist{margin-top:6px}
+@media (max-width:859px){.rver summary h3::after{content:" +";color:var(--muted)}.rver[open] summary h3::after{content:" −"}}
 .rlist{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
 .rlist li{display:flex;gap:10px;align-items:flex-start}
 .rlist li::before{content:"✓";flex:none;color:var(--pass);font-family:var(--mono)}
 .rlist li.no::before{content:"✗";color:var(--fail)}
 .rfoot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 .rfoot .delivs{color:var(--fg);max-width:62ch;text-wrap:balance}
+.rcta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.text-btn{background:none;border:0;padding:12px 4px;min-height:44px;font:inherit;font-size:14px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong);cursor:pointer}
+.text-btn:hover{color:var(--fg);text-decoration-color:var(--accent)}
 .rfoot .delivs span{color:var(--muted)}
 
 /* what I do: a ruled list, two columns on wider screens */
@@ -225,13 +231,14 @@ p{margin:0}
 @keyframes detailIn{from{opacity:0;transform:translateY(-4px)}}
 @supports (interpolate-size:allow-keywords){:root{interpolate-size:allow-keywords}.job::details-content{height:0;overflow:clip;transition:height .35s var(--ease-out-expo),content-visibility .35s allow-discrete}.job[open]::details-content{height:auto}@media (prefers-reduced-motion:reduce){.job::details-content{transition:none}}}
 /* phones: date and "Details" share the top row, the text gets the full width; the company line shows once the row is opened */
-@media (max-width:759px){.job summary{grid-template-columns:1fr auto}.job summary>div{grid-column:1/-1}.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}.job:not([open]) .co{display:none}}
+@media (max-width:759px){.job summary{grid-template-columns:1fr auto}.job summary>div{grid-column:1/-1}.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}.job:not([open]):not(:first-child) .co{display:none}}
 .job ul{margin:0;padding:0 0 18px;list-style:none;display:grid;gap:5px;font-size:14.5px}
 .job li,.job .co,.job .win{max-width:72ch}
 @media (min-width:760px){.job ul{padding-left:170px}}
 .job li{display:flex;gap:9px}
 .job li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--muted);margin-top:9px}
 .edu{margin-top:18px;font-size:14.5px;color:var(--muted);max-width:72ch}
+.edu a{padding-block:12px}
 .edu b{color:var(--fg);font-weight:600}
 /* contact */
 .contact-grid{display:grid;gap:28px;margin-top:24px}
@@ -262,8 +269,10 @@ textarea{min-height:120px;resize:vertical}
 .form-note{font-size:13.5px;color:var(--muted)}
 .form-title{font-family:var(--display);font-weight:700;font-size:18px}
 .form-status:empty{display:none}
-.form-toggle{display:none}
-@media (max-width:859px){.form-toggle{display:inline-flex;justify-self:start}.form-toggle[aria-expanded="true"]{display:none}.form:not(.open){display:none}}
+.msg-card{align-self:start;display:grid;gap:10px;justify-items:start;padding:24px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--surface)}
+.msg-card .form{justify-self:stretch;background:none;border:0;border-radius:0;padding:12px 0 0;margin-top:4px;border-top:1px dashed var(--line)}
+.form:not(.open){display:none}
+.wa-alt{margin-top:10px;font-size:14.5px;color:var(--muted)}
 .wa-main{margin-top:20px}
 .wa-main svg{width:18px;height:18px}
 .field input,.field select,.field textarea{scroll-margin-top:120px}
@@ -290,7 +299,8 @@ footer a:hover{color:var(--fg)}
 .selfcheck.warned .sc-dot{background:var(--warn)}
 @keyframes scPulse{50%{opacity:.35}}
 .sc-status{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-@media (max-width:420px){.sc-x{display:none}.selfcheck summary{padding-inline:12px}}
+.sc-y{display:none}
+@media (max-width:420px){.sc-x{display:none}.sc-y{display:inline}.selfcheck summary{padding-inline:12px}}
 .selfcheck.passed .sc-status{color:var(--pass)}
 .selfcheck.warned .sc-status{color:var(--warn)}
 .sc-status::after{content:"+";margin-left:10px;color:var(--muted);display:inline-block;transition:transform .3s var(--ease-out-expo)}
@@ -323,6 +333,7 @@ footer a:hover{color:var(--fg)}
 .about-copy{display:grid;gap:14px;max-width:62ch}
 .about-copy p{font-size:16.5px;line-height:1.65;text-wrap:pretty}
 .about-copy p:first-child{font-size:18px;color:var(--fg)}
+@media (max-width:559px){.about-copy p:nth-child(3),.about-post .post{display:none}}
 /* writing: the latest LinkedIn post */
 .more-posts{display:inline-block;margin-top:14px;padding-block:10px;font-size:15px;font-weight:600}
 .post{display:flex;flex-direction:column;gap:10px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);text-decoration:none;color:var(--fg);min-width:0;transition:border-color .2s,transform .2s var(--ease-out-expo)}
@@ -390,7 +401,7 @@ footer a:hover{color:var(--fg)}
       <li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li>
     </ul></nav>
     <div class="nav-actions">
-      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch to light theme">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch to light theme" title="Switch theme">
         <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
@@ -412,7 +423,7 @@ footer a:hover{color:var(--fg)}
   <div class="scanline" aria-hidden="true"></div>
   <div class="wrap">
     <div>
-      <p class="intro"><b>Fakhar Ud Din Khokhar</b> · SQA Engineer at inDrive · 8+ years in software testing</p>
+      <p class="intro"><b>Fakhar Ud Din Khokhar</b> · SQA Engineer at inDrive · nearly 8 years in software testing</p>
       <h1>Every release gets a verdict, and the reasons behind it.</h1>
       <p class="lead">End-to-end testing and automation for web, iOS and Android, with release reports your team can act on.</p>
       <div class="hero-cta">
@@ -420,7 +431,7 @@ footer a:hover{color:var(--fg)}
         <a class="btn btn-ghost" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
       </div>
       <details class="selfcheck" id="selfcheck">
-        <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i>Tested on your device</span><span class="sc-status" id="scStatus">waiting</span></summary>
+        <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i><span><span class="sc-x">This page, t</span><span class="sc-y">T</span>ested on your device</span></span><span class="sc-status" id="scStatus">waiting</span></summary>
         <ul class="sc-list" id="scList">
           <li data-k="load"><span class="st" aria-hidden="true">◌</span><span class="nm">Page load time</span><span class="val">…</span></li>
           <li data-k="errors"><span class="st" aria-hidden="true">◌</span><span class="nm">Script errors</span><span class="val">…</span></li>
@@ -480,7 +491,7 @@ footer a:hover{color:var(--fg)}
             <div><b class="bad" id="cFail">0</b><small>failed</small></div>
             <div><b id="cTime">0.0s</b><small>test time</small></div>
           </div>
-          <h3>Coverage in this run</h3>
+          <h3>Passed per area</h3>
           <div class="live">
             <div><span>Login and onboarding</span><span id="aAuth">0/2</span></div>
             <div><span>Search and listings</span><span id="aSearch">0/2</span></div>
@@ -519,7 +530,7 @@ footer a:hover{color:var(--fg)}
           <p class="sev-note">Bars show each severity's share of the 2 open bugs. S1 (critical) blocks the release. S2 (high) can ship with a known-issue note. S3 goes into the backlog.</p>
         </div>
         <div class="rcol">
-          <h3>What was verified</h3>
+          <details class="rver" id="rver"><summary><h3>What was verified · 10 tests <span class="ok">✓</span></h3></summary>
           <ul class="rlist">
             <li>Login on web, one-time code on a new Android device</li>
             <li>Search filters, and listing photos compressed under 2 MB (iOS)</li>
@@ -527,7 +538,7 @@ footer a:hover{color:var(--fg)}
             <li>Push on order status (Android) and the in-app inbox</li>
             <li>Arabic right-to-left layout on product pages (iOS)</li>
             <li>Offers API refuses requests without a token</li>
-          </ul>
+          </ul></details>
           <h3 style="margin-top:16px">Not yet verified</h3>
           <ul class="rlist">
             <li class="no">Tabby instalment total at checkout (BUG-2031)</li>
@@ -536,7 +547,7 @@ footer a:hover{color:var(--fg)}
         </div>
         <div class="rfoot">
           <p class="delivs"><span>Delivered with every release:</span> PDF report · Jira bugs with video · test run in TestRail · go / no-go call</p>
-          <button class="btn btn-ghost btn-sm" id="rerun2" type="button">Run the suite again</button>
+          <div class="rcta"><a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20saw%20the%20release%20report%20on%20your%20portfolio%20and%20would%20like%20one%20for%20our%20next%20release." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Get this report for your next release</a><button class="text-btn" id="rerun2" type="button">Run again</button></div>
         </div>
       </div>
     </div>
@@ -547,7 +558,7 @@ footer a:hover{color:var(--fg)}
 <section class="section band" id="about">
   <div class="wrap about">
     <div class="about-head">
-      <h2 class="h2">Eight years of asking what could go wrong.</h2>
+      <h2 class="h2">Nearly eight years of asking what could go wrong.</h2>
     </div>
     <div class="about-post">
       <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7517796883344560129/" target="_blank" rel="noopener">
@@ -571,12 +582,12 @@ footer a:hover{color:var(--fg)}
   <div class="wrap">
     <h2 class="h2">What I can own for your product.</h2>
     <ul class="services">
-      <li class="svc"><h3>Manual and exploratory testing</h3><p>Test plans and cases for every new feature, then off-script sessions to find what the cases miss. Web, mobile web and native apps.</p><p class="svc-tools">TestRail · Jira · exploratory sessions</p></li>
+      <li class="svc"><h3>Manual and exploratory testing</h3><p>Test plans and cases for every new feature, then off-script sessions to find what the cases miss. Web, mobile web and native apps.</p><p class="svc-tools">TestRail · Jira</p></li>
       <li class="svc"><h3>Test automation</h3><p>Web and mobile suites that stay easy to maintain (Page Object Model and Page Factory), running in your CI on every build.</p><p class="svc-tools">Selenium · Playwright · Cypress · Appium · TestNG · Robot Framework</p></li>
       <li class="svc"><h3>API and backend testing</h3><p>Happy-path and negative API scenarios, with SQL checks on the data behind every flow.</p><p class="svc-tools">Postman · RestAssured · SQL · JMeter</p></li>
       <li class="svc"><h3>Payments and integrations</h3><p>Payment gateways, cashback and wallet logic, delivery and CRM integrations, and analytics events.</p><p class="svc-tools">Adyen · Tabby · Checkout.com · Zoho CRM</p></li>
-      <li class="svc"><h3>Localisation and devices</h3><p>English and Arabic right-to-left, multi-currency, and real iPhone, Samsung, Pixel and iPad devices. Chrome, Safari and Edge.</p><p class="svc-tools">EN / AR · RTL · real devices</p></li>
-      <li class="svc"><h3>Release sign-off</h3><p>Smoke checklists before every deploy, and a report like the one in the demo for every release.</p><p class="svc-tools">Smoke checklists · go / no-go</p></li>
+      <li class="svc"><h3>Localisation and devices</h3><p>English and Arabic right-to-left, multi-currency, and real iPhone, Samsung, Pixel and iPad devices. Chrome, Safari and Edge.</p><p class="svc-tools">Android Studio · Xcode</p></li>
+      <li class="svc"><h3>Release sign-off</h3><p>Smoke checklists before every deploy, and a report like the one in the demo for every release.</p><p class="svc-tools">TestRail · Jira</p></li>
     </ul>
   </div>
 </section>
@@ -631,15 +642,17 @@ footer a:hover{color:var(--fg)}
           </ol>
         </div>
         <a class="btn btn-primary wa-main" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
+        <p class="wa-alt">Or call <a class="link" href="tel:+923238998463">+92 323 8998463</a></p>
         <div class="contact-list">
-          <a class="contact-item" href="tel:+923238998463"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><div><small>Phone or WhatsApp</small><span class="v">+92 323 8998463</span></div></a>
           <div class="contact-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><a class="v" id="emailText" href="mailto:fakharuddinkhokhar@gmail.com">fakharuddinkhokhar<wbr>@gmail.com</a></div><button class="btn btn-ghost btn-sm copy" type="button" id="copyEmail" aria-label="Copy email address">Copy</button></div>
           <a class="contact-item" href="https://www.linkedin.com/in/fakhar-ud-din-khokhar-435551ba" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5H3.6V20h3.3zM5.3 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM20.4 13c0-3.3-1.8-4.8-4.2-4.8-1.9 0-2.8 1-3.3 1.8V8.5H9.6V20h3.3v-6c0-1.6.3-3.1 2.3-3.1 1.9 0 1.9 1.8 1.9 3.2V20h3.3z"/></svg></span><div><small>LinkedIn</small><span class="v">fakhar-ud-din-khokhar</span></div></a>
         </div>
       </div>
-      <button class="btn btn-ghost form-toggle" id="formToggle" type="button" aria-expanded="false" aria-controls="contactForm">Or send a short message</button>
+      <div class="msg-card">
+      <p class="form-title">Prefer email?</p>
+      <p class="form-note">Write a short message here and it opens in your email app, ready to send.</p>
+      <button class="btn btn-ghost form-toggle" id="formToggle" type="button" aria-expanded="false" aria-controls="contactForm">Write a message</button>
       <form class="form" id="contactForm" novalidate>
-        <p class="form-title">Or send a short message</p>
         <div class="two">
           <label class="field" for="fName"><span class="lbl">Your name <span class="req">(required)</span></span><input type="text" id="fName" name="name" autocomplete="name" required maxlength="120" placeholder="Jane Doe" aria-describedby="eName"><span class="err" id="eName"></span></label>
           <label class="field" for="fEmail"><span class="lbl">Email <span class="req">(required)</span></span><input type="email" id="fEmail" name="email" autocomplete="email" required maxlength="160" placeholder="jane@company.com" aria-describedby="eEmail"><span class="err" id="eEmail"></span></label>
@@ -649,17 +662,18 @@ footer a:hover{color:var(--fg)}
         </label>
         <label class="field" for="fMsg"><span class="lbl">About your product <span class="req">(required)</span></span><textarea id="fMsg" name="message" required maxlength="1500" placeholder="What are you building, which platforms, and what worries you most about the next release?" aria-describedby="eMsg"></textarea><span class="err" id="eMsg"></span></label>
         <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-        <button class="btn btn-ghost" id="sendBtn" type="submit">Send message</button>
+        <button class="btn btn-ghost" id="sendBtn" type="submit">Open in my email app</button>
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        <p class="form-note" id="formNote">Sending opens your email app with this message filled in. WhatsApp is the fastest way to reach me.</p>
+        <p class="form-note" id="formNote">WhatsApp is the fastest way to reach me.</p>
       </form>
+      </div>
     </div>
   </div>
 </section>
 </main>
 <a class="btn wa-bar" id="waBar" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
 
-<footer><div class="wrap"><span>© <span id="year">2026</span> Fakhar Ud Din Khokhar · SQA Engineer</span><ul><li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li><li><a href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download>CV (PDF)</a></li><li><a href="#top">Back to top</a></li></ul></div></footer>
+<footer><div class="wrap"><span>© <span id="year">2026</span> Fakhar Ud Din Khokhar · SQA Engineer</span><ul><li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li><li><a href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download>CV (PDF)</a></li><li><a href="#top">Back to top</a></li></ul></div></footer>
 
 <script>
 (function(){
@@ -724,9 +738,9 @@ footer a:hover{color:var(--fg)}
   });
 
   /* contact form: behind a button on phones */
-  $('formToggle').addEventListener('click',function(){this.setAttribute('aria-expanded','true');$('contactForm').classList.add('open');$('fName').focus();});
+  $('formToggle').addEventListener('click',function(){var open=this.getAttribute('aria-expanded')!=='true';this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'Hide the form':'Write a message';$('contactForm').classList.toggle('open',open);if(open)$('fName').focus();});
   var form=$('contactForm'),status=$('formStatus'),sendBtn=$('sendBtn');
-  if(FORM_ENDPOINT)$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';
+  if(FORM_ENDPOINT){$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';sendBtn.textContent='Send message';}
   function setErr(id,msg,shake){var f=$(id),e=$('e'+id.slice(1));e.textContent=msg||'';f.setAttribute('aria-invalid',msg?'true':'false');if(msg&&shake&&!reduced){f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');}return !msg;}
   function emailErr(v){if(!v)return 'Please enter your email.';if(v.indexOf('@')<0)return 'That email address needs an @, for example jane@company.com.';if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v))return 'That email address needs a full domain after the @, for example jane@company.com.';return '';}
   function validate(){
@@ -766,6 +780,9 @@ footer a:hover{color:var(--fg)}
   /* company logos under the photo: reuse the strip's logos instead of embedding the images twice */
   (function(){var box=$('heroCos'),row=document.querySelector('.logos .logo-row');if(!box||!row)return;var grid=box.querySelector('.hero-cos-grid');
     [].slice.call(row.children).forEach(function(l){grid.appendChild(l.cloneNode(true));});box.removeAttribute('hidden');root.classList.add('cos-on');})();
+
+  /* the report's verified list is open on wide screens, folded on phones */
+  if(window.matchMedia('(min-width:860px)').matches)$('rver').open=true;
 
   /* ===== hero self-check ===== */
   (function(){
@@ -841,13 +858,13 @@ footer a:hover{color:var(--fg)}
     {n:'notifications / push on order status change (android)',ms:1930,s:'pass',a:'aNotif'},
     {n:'api / GET /offers returns 401 without a token',ms:410,s:'pass',a:'aApi'},
     {n:'arabic / right-to-left layout on product page (ios)',ms:1280,s:'pass',a:'aLoc'},
-    {n:'api / POST /leads rejects an invalid KSA phone number',ms:520,s:'fail',a:'aApi',bug:'expected 422, got 200 · BUG-2032 filed, S2 high'},
+    {n:'api / POST /leads rejects an invalid KSA phone number',ms:520,s:'fail',a:'aApi',bug:'expected a 422 rejection, got 200 OK · BUG-2032 filed, S2 high'},
     {n:'notifications / in-app inbox marks message read',ms:1460,s:'pass',a:'aNotif'}
   ];
   var term=$('term'),cmd=$('cmd'),prog=$('prog'),cPass=$('cPass'),cFail=$('cFail'),cTime=$('cTime'),runStatus=$('runStatus');
   var runView=$('runView'),reportView=$('reportView'),tabRun=$('tabRun'),tabReport=$('tabReport');
   var CMD='npm run test:smoke -- --env=staging';
-  var timers=[],started=false,finished=false,areaDone={};
+  var timers=[],started=false,finished=false,areaDone={},areaFail={};
   function clearTimers(){timers.forEach(clearTimeout);timers=[];}
   function later(fn,ms){timers.push(setTimeout(fn,ms));}
   function setRerun(m){var b=$('rerun');b.dataset.mode=m;b.textContent=m==='skip'?'Skip to the report':'Run again';}
@@ -873,7 +890,7 @@ footer a:hover{color:var(--fg)}
     clearTimers();finished=false;areaDone={};runStatus.textContent='';
     while(term.children.length>1)term.removeChild(term.lastChild);
     cmd.textContent='';cmd.classList.add('typing');prog.style.transform='scaleX(0)';cPass.textContent='0';cFail.textContent='0';cTime.textContent='0.0s';
-    ['aAuth','aSearch','aPay','aApi','aLoc','aNotif'].forEach(function(id){var el=$(id);el.textContent='0/'+el.textContent.split('/')[1];el.style.color='';});
+    ['aAuth','aSearch','aPay','aApi','aLoc','aNotif'].forEach(function(id){var el=$(id);if(!el.dataset.total)el.dataset.total=el.textContent.split('/')[1];el.textContent='0/'+el.dataset.total;});areaFail={};
     $('sPass').textContent='0 ✓';$('sFail').textContent='0 ✗';$('sTime').textContent='0.0s';$('sWhat').textContent='starting…';
   }
   function addRow(t){var r=document.createElement('div');r.className='tl run';r.innerHTML='<span class="st" aria-hidden="true">◌</span><span class="nm"></span><span class="ms">…</span>';r.querySelector('.nm').textContent=t.n;term.appendChild(r);$('sWhat').textContent=t.n;term.scrollTop=term.scrollHeight;return r;}
@@ -881,7 +898,8 @@ footer a:hover{color:var(--fg)}
     r.className='tl '+t.s;r.querySelector('.st').textContent=t.s==='pass'?'✓':'✗';r.querySelector('.ms').textContent=(t.ms/1000).toFixed(1)+'s';
     if(t.bug){var b=document.createElement('span');b.className='bug';b.textContent='↳ '+t.bug;r.appendChild(b);}
     term.scrollTop=term.scrollHeight;
-    var a=$(t.a);areaDone[t.a]=(areaDone[t.a]||0)+1;a.textContent=areaDone[t.a]+'/'+a.textContent.split('/')[1];if(t.s==='fail')a.style.color='var(--fail)';
+    var a=$(t.a);if(!a.dataset.total)a.dataset.total=a.textContent.split('/')[1];if(t.s==='pass')areaDone[t.a]=(areaDone[t.a]||0)+1;else areaFail[t.a]=(areaFail[t.a]||0)+1;
+    a.innerHTML=(areaDone[t.a]||0)+'/'+a.dataset.total+' <span class="ok">✓</span>'+(areaFail[t.a]?' <span class="bad">'+areaFail[t.a]+' ✗</span>':'');
   }
   function addDone(pass,fail,total){
     var d=document.createElement('div');d.className='done';

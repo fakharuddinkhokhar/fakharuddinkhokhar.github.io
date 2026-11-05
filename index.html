@@ -93,7 +93,7 @@ section[id]{scroll-margin-top:64px}
 .hero{position:relative;overflow:hidden;padding-block:48px 40px}
 .hero .wrap{position:relative;display:grid;gap:32px;align-items:center}
 @media (min-width:860px){.hero{padding-block:72px 56px}.hero .wrap{grid-template-columns:1.15fr .85fr;gap:48px}}
-.intro{color:var(--muted);font-size:15.5px}
+.intro{color:var(--muted);font-size:15.5px;text-wrap:balance}
 .intro b{color:var(--fg);font-weight:600}
 .hero h1{font-size:clamp(34px,5vw,56px);font-weight:800;margin-top:14px;max-width:17ch}
 .hero .lead{margin-top:14px}
@@ -101,6 +101,7 @@ section[id]{scroll-margin-top:64px}
 .photo-wrap{justify-self:center;width:min(300px,68vw)}
 .photo{width:100%;height:auto;aspect-ratio:1;border-radius:var(--r-photo);object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
 .avail{margin-top:14px;font-size:14px;color:var(--muted);text-align:center;text-wrap:balance}
+.avail b{white-space:nowrap}
 .avail b{color:var(--fg);font-weight:600}
 @media (max-width:859px){.hero{padding-block:22px 26px}.hero .wrap{gap:18px}.photo-wrap{order:-1;justify-self:stretch;width:auto;display:flex;align-items:center;gap:14px}.photo{width:72px;height:72px;flex:none;border-radius:50%;box-shadow:none}.avail{margin-top:0;text-align:left;text-wrap:pretty}}
 
@@ -122,7 +123,6 @@ section[id]{scroll-margin-top:64px}
 .runner{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);box-shadow:var(--shadow);overflow:hidden;overflow:clip;margin-top:28px;min-width:0}
 .runner-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-family:var(--mono);font-size:12.5px;flex-wrap:wrap}
 .runner-bar .title{flex:1 1 100%;min-width:0;display:grid;gap:2px}
-@media (max-width:559px){.runner-bar .plat{display:none}}
 .runner-bar .note{font-family:var(--body);font-size:12.5px;letter-spacing:0;text-transform:none;color:var(--muted)}
 @media (min-width:560px){.runner-bar .title{flex:1 1 auto}}
 .tabs{display:flex;gap:4px}
@@ -132,7 +132,7 @@ section[id]{scroll-margin-top:64px}
 .progress{height:3px;background:var(--line)}
 .progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:var(--accent);transition:transform .35s ease}
 .strip{display:none}
-@media (max-width:859px){.strip{display:flex;gap:14px;align-items:center;position:sticky;top:64px;z-index:1;padding:8px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}.strip>span{white-space:nowrap}.strip .sw{flex:1;margin-left:auto;text-align:right;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis}.term{min-height:0;height:340px;overflow-y:auto;overscroll-behavior:contain}.side #rerun{order:-2}.side #runStatus{order:-1}}
+@media (max-width:859px){.strip{display:flex;gap:14px;align-items:center;position:sticky;top:64px;z-index:1;padding:8px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}.strip>span{white-space:nowrap}.strip .sw{flex:1;margin-left:auto;text-align:right;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis}.term{min-height:0;height:340px;overflow-y:auto;overscroll-behavior:contain}.side .run-ctl{order:-2}.side #runStatus{order:-1}}
 .panel{display:grid}
 @media (min-width:860px){.panel{grid-template-columns:1.25fr .75fr}}
 .term{padding:16px 18px;font-family:var(--mono);font-size:13px;min-height:340px;height:340px;overflow-y:auto;overscroll-behavior:contain;display:grid;align-content:start;gap:7px;min-width:0}
@@ -168,6 +168,7 @@ section[id]{scroll-margin-top:64px}
 .report{display:none;padding:20px;gap:18px;min-width:0}
 .report.show{display:grid}
 @media (min-width:860px){.report.show{grid-template-columns:170px 1.1fr .9fr;align-items:start}}
+@media (max-width:859px){.report>*{order:4}.report .rhead{order:0}.report .verdict{order:1}.report .rfoot{order:2;border-top:0;padding-top:0}}
 .rhead{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .rhead h3{font-size:20px}
 .rhead small{font-family:var(--mono);font-size:12.5px;color:var(--muted);display:block;margin-top:4px}
@@ -191,13 +192,14 @@ section[id]{scroll-margin-top:64px}
 .verdict{grid-column:1/-1;font-size:15px;line-height:1.55;padding:12px 16px;border-radius:var(--r-control);background:var(--surface-2);border:1px solid var(--line);max-width:none}
 .verdict b{font-weight:600}
 .rver summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center}.rver summary::-webkit-details-marker{display:none}.rver summary h3{margin:0}.rver .rlist{margin-top:6px}
-@media (max-width:859px){.rver summary h3::after{content:" +";color:var(--muted)}.rver[open] summary h3::after{content:" −"}}
+.rver summary h3::after{content:"+";display:inline-block;margin-left:10px;font-size:15px;color:var(--muted);transition:transform .3s var(--ease-out-expo)}.rver[open] summary h3::after{transform:rotate(45deg)}
 .rlist{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
 .rlist li{display:flex;gap:10px;align-items:flex-start}
 .rlist li::before{content:"✓";flex:none;color:var(--pass);font-family:var(--mono)}
 .rlist li.no::before{content:"✗";color:var(--fail)}
 .rfoot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 .rfoot .delivs{color:var(--fg);max-width:62ch;text-wrap:balance}
+.run-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}.run-ctl .btn{flex:1 1 auto}
 .rcta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
 .text-btn{background:none;border:0;padding:12px 4px;min-height:44px;font:inherit;font-size:14px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong);cursor:pointer}
 .text-btn:hover{color:var(--fg);text-decoration-color:var(--accent)}
@@ -226,7 +228,7 @@ section[id]{scroll-margin-top:64px}
 .job .win{font-size:15px;font-weight:600;color:var(--fg);margin-top:6px;text-wrap:pretty}
 .job .win::before{content:"↳ ";color:var(--accent);font-family:var(--mono);font-weight:400}
 .job .more{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:6px;white-space:nowrap}
-.job .more::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:16px;display:inline-block;transition:transform .3s var(--ease-out-expo)}
+.job .more::after{content:"+";font-family:var(--mono);color:var(--muted);font-size:16px;display:inline-block;transition:transform .3s var(--ease-out-expo)}
 .job[open] .more::after{transform:rotate(45deg)}
 .job[open] ul{animation:detailIn .35s var(--ease-out-expo)}
 @keyframes detailIn{from{opacity:0;transform:translateY(-4px)}}
@@ -477,7 +479,7 @@ footer a:hover{color:var(--fg)}
     <p class="lead">A smoke suite, the quick check of the flows that matter most, runs below the way it would on every build. When it finishes, the output becomes the release report I send to clients.</p>
 
     <div class="runner rv" id="runner">
-      <div class="runner-bar"><span class="title">Smoke suite · release 3.8.0<span class="plat"> · Chrome, Android, iOS</span><small class="note">Replayed from a real cycle; names and numbers changed.</small></span>
+      <div class="runner-bar"><span class="title">Smoke suite · release 3.8.0<small class="note">Chrome, Android and iOS. Replayed from a real cycle; names and numbers changed.</small></span>
         <div class="tabs" role="tablist" aria-label="Demo views">
           <button class="tab" role="tab" id="tabRun" aria-selected="true" aria-controls="runView" type="button">Test run</button>
           <button class="tab" role="tab" id="tabReport" aria-selected="false" aria-controls="reportView" tabindex="-1" type="button">Release report</button>
@@ -504,7 +506,7 @@ footer a:hover{color:var(--fg)}
             <div><span>Arabic layout (RTL)</span><span id="aLoc">0/1</span></div>
             <div><span>Notifications</span><span id="aNotif">0/2</span></div>
           </div>
-          <button class="btn btn-ghost btn-sm" id="rerun" type="button" data-mode="skip">Skip to the report</button>
+          <div class="run-ctl"><button class="btn btn-ghost btn-sm" id="rerun" type="button" data-mode="skip">Skip to the report</button><button class="text-btn" id="pauseBtn" type="button" aria-pressed="false" hidden>Pause</button></div>
           <p class="form-status" id="runStatus" aria-live="polite"></p>
         </div>
       </div>
@@ -512,9 +514,9 @@ footer a:hover{color:var(--fg)}
       <div class="report" id="reportView" role="tabpanel" aria-labelledby="tabReport">
         <div class="rhead">
           <div><h3>Release report · 3.8.0 smoke</h3><small>Prepared by Fakhar Khokhar · 12 tests · Chrome 129, Android 14, iOS 17</small></div>
-          <div class="stamp" id="stamp">Conditional go</div>
+          <div class="stamp" id="stamp">Go after 1 fix</div>
         </div>
-        <p class="verdict"><b>Verdict: conditional go.</b> Ship once <b>BUG-2031</b> (Tabby instalment total) is fixed and re-tested. BUG-2032 can ship with a known-issue note; server-side validation is scheduled for 3.8.1.</p>
+        <p class="verdict"><b>Verdict: go after one fix.</b> <b>BUG-2031</b> (Tabby instalment total) is critical and blocks the release until it is fixed and re-tested. BUG-2032 can ship with a known-issue note; server-side validation is scheduled for 3.8.1.</p>
         <div class="donut">
           <svg viewBox="0 0 150 150" role="img" aria-label="Pass rate">
             <circle class="track" cx="75" cy="75" r="60"/>
@@ -532,6 +534,11 @@ footer a:hover{color:var(--fg)}
             <div><span class="in">S3 medium</span><div class="bar"><i id="s3" style="background:var(--info)"></i></div><b>0</b></div>
           </div>
           <p class="sev-note">Bars show each severity's share of the 2 open bugs. S1 (critical) blocks the release. S2 (high) can ship with a known-issue note. S3 goes into the backlog.</p>
+          <h3 style="margin-top:16px">Not yet verified</h3>
+          <ul class="rlist">
+            <li class="no">Tabby instalment total at checkout (BUG-2031)</li>
+            <li class="no">KSA phone-number validation on the leads API (BUG-2032)</li>
+          </ul>
         </div>
         <div class="rcol">
           <details class="rver" id="rver"><summary><h3>What was verified · 10 tests in 6 areas <span class="ok">✓</span></h3></summary>
@@ -543,15 +550,10 @@ footer a:hover{color:var(--fg)}
             <li>Arabic right-to-left layout on product pages (iOS)</li>
             <li>Offers API refuses requests without a token</li>
           </ul></details>
-          <h3 style="margin-top:16px">Not yet verified</h3>
-          <ul class="rlist">
-            <li class="no">Tabby instalment total at checkout (BUG-2031)</li>
-            <li class="no">KSA phone-number validation on the leads API (BUG-2032)</li>
-          </ul>
         </div>
         <div class="rfoot">
           <p class="delivs"><span>Delivered with every release:</span> PDF report · Jira bugs with video · test run in TestRail · go / no-go call</p>
-          <div class="rcta"><a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20saw%20the%20release%20report%20on%20your%20portfolio%20and%20would%20like%20one%20for%20our%20next%20release." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Get a report like this</a><button class="text-btn" id="rerun2" type="button">Run again</button></div>
+          <div class="rcta"><a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20saw%20the%20release%20report%20on%20your%20portfolio%20and%20would%20like%20one%20for%20our%20next%20release." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Ask for one on WhatsApp</a><button class="text-btn" id="copyReport" type="button">Copy link to this report</button><button class="text-btn" id="rerun2" type="button">Run again</button></div>
         </div>
       </div>
     </div>
@@ -587,8 +589,8 @@ footer a:hover{color:var(--fg)}
     <h2 class="h2">What I can own for your product.</h2>
     <ul class="services">
       <li class="svc"><h3>Manual and exploratory testing</h3><p>Test plans and cases for every new feature, then off-script sessions to find what the cases miss. Web, mobile web and native apps.</p><p class="svc-tools">TestRail · Jira</p></li>
-      <li class="svc"><h3>Test automation</h3><p>Web and mobile suites that stay easy to maintain (Page Object Model and Page Factory), running in your CI on every build.</p><p class="svc-tools">Selenium · Playwright · Cypress · Appium · TestNG · Robot Framework</p></li>
-      <li class="svc"><h3>API and backend testing</h3><p>Happy-path and negative API scenarios, with SQL checks on the data behind every flow.</p><p class="svc-tools">Postman · RestAssured · SQL · JMeter</p></li>
+      <li class="svc"><h3>Test automation</h3><p>Regression suites for web and mobile that run on every build, so fixed bugs stay fixed. Structured to stay cheap to maintain as the app changes.</p><p class="svc-tools">Selenium · Playwright · Cypress · Appium · TestNG · Robot Framework</p></li>
+      <li class="svc"><h3>API and backend testing</h3><p>Checks that your API accepts what it should and refuses what it shouldn't, and that the data behind every screen is right.</p><p class="svc-tools">Postman · RestAssured · SQL · JMeter</p></li>
       <li class="svc"><h3>Payments and integrations</h3><p>Payment gateways, cashback and wallet logic, delivery and CRM integrations, and analytics events.</p><p class="svc-tools">Adyen · Tabby · Checkout.com · Zoho CRM</p></li>
       <li class="svc"><h3>Localisation and devices</h3><p>English and Arabic right-to-left, multi-currency, and real iPhone, Samsung, Pixel and iPad devices. Chrome, Safari and Edge.</p><p class="svc-tools">Android Studio · Xcode</p></li>
       <li class="svc"><h3>Release sign-off</h3><p>Smoke checklists before every deploy, and a report like the one in the demo for every release.</p><p class="svc-tools">TestRail · Jira</p></li>
@@ -662,7 +664,7 @@ footer a:hover{color:var(--fg)}
         <label class="field" for="fService"><span class="lbl">What do you need? <span class="req">(optional)</span></span>
           <select id="fService" name="service" aria-describedby="eService"><option value="">Choose one, or leave it</option><option>Manual and exploratory testing</option><option>Test automation (web or mobile)</option><option>API or payments testing</option><option>A QA engineer for my team</option><option>Not sure yet, let's talk</option></select><span class="err" id="eService"></span>
         </label>
-        <label class="field" for="fMsg"><span class="lbl">About your product <span class="req">(required)</span></span><textarea id="fMsg" name="message" required maxlength="1500" placeholder="What are you building, which platforms, and what worries you most about the next release?" aria-describedby="eMsg"></textarea><span class="err" id="eMsg"></span></label>
+        <label class="field" for="fMsg"><span class="lbl">About your product <span class="req">(required, a sentence or two)</span></span><textarea id="fMsg" name="message" required maxlength="1500" placeholder="What are you building, which platforms, and what worries you most about the next release?" aria-describedby="eMsg"></textarea><span class="err" id="eMsg"></span></label>
         <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
         <button class="btn btn-ghost" id="sendBtn" type="submit">Open in my email app</button>
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
@@ -740,7 +742,10 @@ footer a:hover{color:var(--fg)}
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(fb);}else{fb();}
   });
 
-  /* contact form: behind a button on phones */
+  /* contact form: opens from a button; a draft survives a reload in this browser only */
+  var DRAFT_KEY='fk-draft',draftIds=['fName','fEmail','fService','fMsg'];
+  function saveDraft(){var d={};draftIds.forEach(function(id){d[id]=$(id).value;});try{localStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(e){}}
+  function clearDraft(){try{localStorage.removeItem(DRAFT_KEY);}catch(e){}}
   $('formToggle').addEventListener('click',function(){var open=this.getAttribute('aria-expanded')!=='true';this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'Hide the form':'Or write a short message here';$('contactForm').classList.toggle('open',open);if(open)$('fName').focus();});
   var form=$('contactForm'),status=$('formStatus'),sendBtn=$('sendBtn');
   if(FORM_ENDPOINT){$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';sendBtn.textContent='Send message';}
@@ -770,12 +775,13 @@ footer a:hover{color:var(--fg)}
     if(FORM_ENDPOINT){
       sendBtn.disabled=true;sendBtn.textContent='Sending…';status.textContent='Sending your message…';
       fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-        .then(function(r){if(!r.ok)throw new Error('status '+r.status);status.className='form-status ok';status.textContent='Sent. I\'ll reply within one business day.';form.reset();})
+        .then(function(r){if(!r.ok)throw new Error('status '+r.status);clearDraft();status.className='form-status ok';status.textContent='Sent. I\'ll reply within one business day.';form.reset();})
         .catch(function(){status.className='form-status bad';status.innerHTML='Your message didn\'t go through. Email me directly at <a class="link" href="mailto:'+to+'">'+to+'</a> or use WhatsApp above.';})
         .then(function(){sendBtn.disabled=false;sendBtn.textContent='Send message';});
     }else{
       var body='Name: '+data.name+'\nEmail: '+data.email+'\nNeed: '+data.service+'\n\n'+data.message;
       status.className='form-status';status.innerHTML='Your email app should open with the message filled in. If it doesn\'t, email me at <a class="link" href="mailto:'+to+'">'+to+'</a> or use WhatsApp above.';
+      clearDraft();
       window.location.href='mailto:'+to+'?subject='+encodeURIComponent('QA enquiry: '+data.service)+'&body='+encodeURIComponent(body);
     }
   });
@@ -806,7 +812,8 @@ footer a:hover{color:var(--fg)}
     function summary(){var pass=rows.filter(function(li){return li.classList.contains('pass');}).length,warn=rows.length-pass;
       box.classList.remove('running');box.classList.toggle('passed',warn===0);box.classList.toggle('warned',warn>0);
       status.innerHTML=warn===0?'✓ '+pass+'/'+rows.length+'<span class="sc-x"> passed</span>':pass+'/'+rows.length+'<span class="sc-x"> passed</span> · '+warn+' to check';
-      live.textContent='Live page check: '+pass+' of '+rows.length+' checks passed on your device.';}
+      live.textContent='Live page check: '+pass+' of '+rows.length+' checks passed on your device.';
+      box.querySelector('.sc-note').textContent=warn===0?'Measured just now by this page\'s own script, in your browser. Nothing is sent anywhere.':'Amber means a check missed its target on this visit, often because of a slow network. Measured just now in your browser; nothing is sent anywhere.';}
     function run(animated){
       box.classList.add('running');box.classList.remove('passed','warned');
       rows.forEach(function(li){li.className='';li.querySelector('.st').textContent='◌';li.querySelector('.val').textContent='…';});
@@ -859,7 +866,7 @@ footer a:hover{color:var(--fg)}
     {n:'checkout / Tabby instalment plan updates total',ms:3410,s:'fail',a:'aPay',bug:'expected AED 1,200 in 4 × 300, got 3 × 300 · BUG-2031 filed, S1 critical, trace and video attached'},
     {n:'cashback / credited after order confirmation',ms:1720,s:'pass',a:'aPay'},
     {n:'notifications / push on order status change (android)',ms:1930,s:'pass',a:'aNotif'},
-    {n:'api / GET /offers returns 401 without a token',ms:410,s:'pass',a:'aApi'},
+    {n:'api / GET /offers refuses a request without a token (401)',ms:410,s:'pass',a:'aApi'},
     {n:'arabic / right-to-left layout on product page (ios)',ms:1280,s:'pass',a:'aLoc'},
     {n:'api / POST /leads rejects an invalid KSA phone number',ms:520,s:'fail',a:'aApi',bug:'the API should reject this number (422) but accepted it (200) · BUG-2032 filed, S2 high'},
     {n:'notifications / in-app inbox marks message read',ms:1460,s:'pass',a:'aNotif'}
@@ -869,8 +876,10 @@ footer a:hover{color:var(--fg)}
   var CMD='npm run test:smoke -- --env=staging';
   var timers=[],started=false,finished=false,areaDone={},areaFail={};
   function clearTimers(){timers.forEach(clearTimeout);timers=[];}
-  function later(fn,ms){timers.push(setTimeout(fn,ms));}
-  function setRerun(m){var b=$('rerun');b.dataset.mode=m;b.textContent=m==='skip'?'Skip to the report':m==='report'?'View release report':'Run again';b.className=m==='report'?'btn btn-primary btn-sm':'btn btn-ghost btn-sm';}
+  var paused=false;
+  function later(fn,ms){timers.push(setTimeout(function(){if(paused){later(fn,200);return;}fn();},ms));}
+  function setPause(p){paused=p;var b=$('pauseBtn');b.textContent=p?'Resume':'Pause';b.setAttribute('aria-pressed',p?'true':'false');if(p)$('sWhat').textContent='paused';}
+  function setRerun(m){var b=$('rerun');b.dataset.mode=m;$('pauseBtn').hidden=!(m==='skip'&&started&&!finished);if(m!=='skip')setPause(false);b.textContent=m==='skip'?'Skip to the report':m==='report'?'View release report':'Run again';b.className=m==='report'?'btn btn-primary btn-sm':'btn btn-ghost btn-sm';}
   function selectTab(which){
     var run=which==='run';if(!run)tabReport.classList.remove('ready');
     runView.hidden=!run;reportView.classList.toggle('show',!run);if(run)$('strip').removeAttribute('hidden');else $('strip').setAttribute('hidden','');
@@ -878,6 +887,7 @@ footer a:hover{color:var(--fg)}
     tabReport.setAttribute('aria-selected',run?'false':'true');tabReport.tabIndex=run?-1:0;
   }
   function showRun(){selectTab('run');}
+  function revealReport(){if(window.matchMedia('(min-width:860px)').matches){var r=runner.getBoundingClientRect();if(r.bottom>window.innerHeight)window.scrollTo({top:r.top+window.scrollY-72,behavior:reduced?'auto':'smooth'});}try{history.replaceState(null,'','#report');}catch(e){}}
   function showReport(){
     selectTab('report');
     var pass=TESTS.filter(function(t){return t.s==='pass';}).length,pct=Math.round(pass/TESTS.length*100);
@@ -937,17 +947,27 @@ footer a:hover{color:var(--fg)}
     }
   }
   tabRun.addEventListener('click',showRun);
-  tabReport.addEventListener('click',function(){started=true;if(!finished){clearTimers();reset();finishInstant();}showReport();});
+  tabReport.addEventListener('click',function(){started=true;if(!finished){clearTimers();reset();finishInstant();}showReport();revealReport();});
+  tabRun.addEventListener('click',function(){if(location.hash==='#report'){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}});
+  $('pauseBtn').addEventListener('click',function(){setPause(!paused);});
+  $('copyReport').addEventListener('click',function(){var b=this,u=location.href.split('#')[0]+'#report';function ok(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link to this report';},1800);}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok).catch(function(){b.textContent=u;});else b.textContent=u;});
+  /* #report opens the finished report directly, for links shared with a team */
+  if(location.hash==='#report'){started=true;finishInstant();showReport();setTimeout(function(){runner.scrollIntoView({block:'start'});},60);}
   [tabRun,tabReport].forEach(function(t){t.addEventListener('keydown',function(e){
     if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key==='Home'||e.key==='End'){e.preventDefault();var other=t===tabRun?tabReport:tabRun;other.click();other.focus();}
   });});
-  $('rerun').addEventListener('click',function(){var m=this.dataset.mode;if(m==='skip'){started=true;clearTimers();reset();finishInstant();showReport();tabReport.focus();}else if(m==='report'){showReport();tabReport.focus();}else{showRun();run();}});
+  $('rerun').addEventListener('click',function(){var m=this.dataset.mode;if(m==='skip'){started=true;clearTimers();reset();finishInstant();showReport();tabReport.focus();}else if(m==='report'){showReport();revealReport();tabReport.focus();}else{showRun();run();}});
   $('rerun2').addEventListener('click',function(){showRun();run();tabRun.focus();});
   $('watchBtn').addEventListener('click',function(e){e.preventDefault();if(window.matchMedia('(max-width:859px)').matches)runner.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});else{var lead=document.querySelector('#demo .lead');window.scrollTo({top:lead.getBoundingClientRect().top+window.scrollY-84,behavior:reduced?'auto':'smooth'});}showRun();setTimeout(run,reduced?0:450);});
   function autoStart(){if(!started){run();}}
   if('IntersectionObserver' in window){var rio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){autoStart();rio.disconnect();}});},{threshold:.2,rootMargin:'0px 0px -15% 0px'});rio.observe(runner.querySelector('.runner-bar'));
     window.addEventListener('scroll',function onS(){if(started){window.removeEventListener('scroll',onS);return;}var r=runner.getBoundingClientRect();if(r.top<window.innerHeight*.8&&r.bottom>0){autoStart();window.removeEventListener('scroll',onS);}},{passive:true});}
   else{run();}
+
+  /* restore a saved draft and open the form so it is visible */
+  (function(){var d=null;try{d=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null');}catch(e){}
+    if(d&&draftIds.some(function(id){return d[id];})){draftIds.forEach(function(id){if(d[id])$(id).value=d[id];});var t=$('formToggle');t.setAttribute('aria-expanded','true');t.textContent='Hide the form';$('contactForm').classList.add('open');}
+    draftIds.forEach(function(id){$(id).addEventListener('input',saveDraft);});})();
 
   $('year').textContent=new Date().getFullYear();
 })();

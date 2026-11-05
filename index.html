@@ -101,7 +101,7 @@ section[id]{scroll-margin-top:64px}
 .photo-wrap{justify-self:center;width:min(300px,68vw)}
 .photo{width:100%;height:auto;aspect-ratio:1;border-radius:var(--r-photo);object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
 .avail{margin-top:14px;font-size:14px;color:var(--muted);text-align:center;text-wrap:balance}
-.avail b{white-space:nowrap}
+@media (min-width:860px){.avail b{white-space:nowrap}}
 .avail b{color:var(--fg);font-weight:600}
 @media (max-width:859px){.hero{padding-block:22px 26px}.hero .wrap{gap:18px}.photo-wrap{order:-1;justify-self:stretch;width:auto;display:flex;align-items:center;gap:14px}.photo{width:72px;height:72px;flex:none;border-radius:50%;box-shadow:none}.avail{margin-top:0;text-align:left;text-wrap:pretty}}
 

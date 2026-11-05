@@ -222,6 +222,49 @@ section[id]{scroll-margin-top:64px}
 .services:not(.expanded){grid-template-columns:1fr 1fr;column-gap:16px}.services:not(.expanded) .svc{padding:12px 0}.services:not(.expanded) .svc h3{font-size:15.5px;line-height:1.25}.services:not(.expanded) .svc p{display:none}
 .svc-more{display:inline-block;margin-top:6px}}
 
+/* skills radar: four groups as quadrants, rings by how recently each skill was used */
+.skills{margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
+.skills-h{font-size:20px;font-weight:700}
+.skills-lead{margin-top:6px;color:var(--muted);font-size:15px;max-width:62ch}
+.skills-grid{display:grid;gap:20px;margin-top:20px}
+@media (min-width:860px){.skills-grid{grid-template-columns:minmax(0,600px) 1fr;gap:36px;align-items:center}}
+.radar{position:relative;width:100%;max-width:600px;aspect-ratio:1;display:none}
+@media (min-width:860px){.radar{display:block}}
+.radar-rings{position:absolute;inset:0;width:100%;height:100%}
+.radar-rings circle{fill:none;stroke:var(--line);stroke-width:1}
+.radar-rings circle:first-child{fill:color-mix(in srgb,var(--surface) 45%,transparent)}
+.radar-rings line{stroke:var(--line);stroke-width:1;stroke-dasharray:3 5}
+.rq{position:absolute;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.rq-tl{left:0;top:0}.rq-tr{right:0;top:0;text-align:right}.rq-bl{left:0;bottom:0}.rq-br{right:0;bottom:0;text-align:right}
+.sk{position:absolute;display:inline-flex;align-items:center;gap:6px;padding:3px 4px;min-height:24px;border:0;background:none;color:var(--fg);font:500 12.5px/1.2 var(--body);white-space:nowrap;cursor:pointer;border-radius:6px;transform:translate(-9px,-50%)}
+.sk.left{flex-direction:row-reverse;transform:translate(calc(-100% + 9px),-50%)}
+.sk:hover,.sk.on{background:var(--surface-2)}
+.sk:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.sk-dot{flex:none;width:10px;height:10px;border-radius:50%;display:inline-block}
+.sk-dot.r0{background:var(--accent)}
+.sk-dot.r1{border:2px solid var(--accent);background:transparent}
+.sk-dot.r2{border:1.5px solid var(--line-strong);background:transparent}
+.skill-chips{display:grid;gap:14px}
+@media (min-width:860px){.skill-chips{display:none}}
+.sc-ring{display:grid;gap:8px}.sc-ring .skill-detail{margin-top:4px}
+.sc-ring h4{margin:0 0 8px;font:500 12px/1.3 var(--mono);color:var(--muted);letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.sc-ring ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.sc-ring .sk{position:static;transform:none;min-height:32px;padding:4px 9px;border:1px solid var(--line);background:var(--surface);font-size:13px}
+.sc-ring ul{gap:5px}
+.lead-narrow{display:none}
+.sk-older{justify-self:start}
+@media (max-width:859px){.lead-wide{display:none}.lead-narrow{display:inline}.skill-detail{padding:14px}.skill-detail:not(.shown){display:none}.skill-detail .sd-legend{display:none}.sd-body{min-height:0}.skill-chips:not(.all) .sc-ring.old{display:none}}
+@media (min-width:860px){.sk-older{display:none}}
+.sc-ring .sk.on{border-color:var(--accent)}
+.skill-detail{border:1px solid var(--line);border-radius:var(--r-card);background:var(--surface);padding:18px;display:grid;gap:14px;align-self:start}
+@media (min-width:860px){.skill-detail{align-self:center}}
+.sd-body{min-height:5.5em}
+.sd-name{font-family:var(--display);font-size:19px;font-weight:700}
+.sd-meta{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:4px}
+.sd-where{margin-top:8px;font-size:15px}
+.sd-hint{color:var(--muted);font-size:15px}
+.sd-legend{list-style:none;margin:0;padding:12px 0 0;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.sd-legend li{display:flex;align-items:center;gap:7px}
 /* experience */
 .band{background:var(--bg-2);border-block:1px solid var(--line)}
 .jobs{margin-top:24px;border-top:1px solid var(--line)}
@@ -610,6 +653,28 @@ footer a:hover{color:var(--fg)}
       <li class="svc"><h3>Release sign-off</h3><p>Smoke checklists before every deploy, and a report like the one in the demo for every release.</p><p class="svc-tools">TestRail · Jira</p></li>
     </ul>
     <button class="text-btn svc-more" id="svcMore" type="button" aria-expanded="false" aria-controls="svcList">Show what each one covers</button>
+    <div class="skills" id="skills">
+      <h3 class="skills-h">Skills, by how recently I've used them</h3>
+      <p class="skills-lead"><span class="lead-wide">Four groups, three rings. The inner ring is what I use now. Point at or tap a skill to see where I used it.</span><span class="lead-narrow">Grouped by how recently I've used each one. Tap a skill to see where.</span></p>
+      <div class="skills-grid">
+        <div class="radar" id="radar" role="group" aria-label="Skills radar, grouped by area and how recently used">
+          <svg class="radar-rings" viewBox="0 0 600 600" aria-hidden="true">
+            <circle cx="300" cy="300" r="270"/><circle cx="300" cy="300" r="232"/><circle cx="300" cy="300" r="172"/>
+            <line x1="300" y1="30" x2="300" y2="570"/><line x1="30" y1="300" x2="570" y2="300"/>
+          </svg>
+          <span class="rq rq-tl">Testing practice</span><span class="rq rq-tr">Automation</span><span class="rq rq-bl">API and data</span><span class="rq rq-br">Integrations and tools</span>
+        </div>
+        <div class="skill-chips" id="skillChips"></div>
+        <aside class="skill-detail" id="skillDetail">
+          <div class="sd-body" id="sdBody" aria-live="polite"><p class="sd-hint">Point at or tap a skill to see where I used it and when.</p></div>
+          <ul class="sd-legend" aria-label="Ring legend">
+            <li><i class="sk-dot r0" aria-hidden="true"></i>2025 – now</li>
+            <li><i class="sk-dot r1" aria-hidden="true"></i>2021 – 2024</li>
+            <li><i class="sk-dot r2" aria-hidden="true"></i>2019 – 2020</li>
+          </ul>
+        </aside>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -990,6 +1055,70 @@ footer a:hover{color:var(--fg)}
   (function(){var d=null;try{d=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null');}catch(e){}
     if(d&&draftIds.some(function(id){return d[id];})){draftIds.forEach(function(id){if(d[id])$(id).value=d[id];});var t=$('formToggle');t.setAttribute('aria-expanded','true');t.textContent='Hide the form';$('contactForm').classList.add('open');}
     draftIds.forEach(function(id){$(id).addEventListener('input',saveDraft);});})();
+
+  /* ===== skills radar: facts from the resume; ring = when last used ===== */
+  (function(){
+    var radar=$('radar'),chips=$('skillChips'),body=$('sdBody');if(!radar)return;
+    var RING=['2025 – now','2021 – 2024','2019 – 2020'],GROUP={t:'Testing practice',a:'Automation',d:'API and data',i:'Integrations and tools'};
+    var RECENT='My recent roles (inDrive, Homie)';
+    var S=[
+      ['Test planning','t',0,'inDrive (a plan for every new feature), Homie (test strategy and process)'],
+      ['Exploratory testing','t',0,'inDrive, Homie, The Entertainer'],
+      ['Regression and smoke','t',0,'Every role; at Homie the suites gated every deployment'],
+      ['Real devices and emulators','t',0,'inDrive, on Android and iOS before each rollout'],
+      ['Release sign-off','t',0,'Homie (go / no-go reports), The Entertainer (launches and campaigns)'],
+      ['AI-assisted test design','t',0,'My current work: AI drafts cases and data, I decide what matters'],
+      ['Arabic right-to-left','t',1,'CarSwitch, buyer and seller journeys in Arabic'],
+      ['Appium','a',0,'inDrive, Homie, The Entertainer, CarSwitch'],
+      ['Selenium','a',0,'Aerodyne (2025), The Entertainer, CarSwitch'],
+      ['Robot Framework','a',0,'Aerodyne (until Feb 2025)'],
+      ['Playwright','a',0,RECENT],
+      ['Cypress','a',0,RECENT],
+      ['Page Factory','a',0,RECENT],
+      ['TestNG','a',1,'The Entertainer, CarSwitch'],
+      ['Page Object Model','a',1,'The Entertainer, CarSwitch (the suite became the team standard)'],
+      ['API testing','d',0,'inDrive, Homie, CarSwitch'],
+      ['Postman','d',0,'Homie'],
+      ['RestAssured','d',0,'Homie'],
+      ['SQL and database checks','d',0,'Homie, CarSwitch'],
+      ['JMeter','d',0,RECENT],
+      ['Data scraping','d',1,'CarSwitch (competitor listings), GlowfishLabs'],
+      ['Octoparse','d',2,'GlowfishLabs (listing datasets from 4 marketplaces)'],
+      ['C#','d',2,'GlowfishLabs'],
+      ['Payment gateways','i',0,'Homie, The Entertainer'],
+      ['Jira','i',0,'Homie, The Entertainer'],
+      ['TestRail','i',0,RECENT],
+      ['Git','i',0,RECENT],
+      ['Python','i',0,RECENT],
+      ['Adyen, Tabby, Checkout.com','i',1,'The Entertainer'],
+      ['Analytics events','i',1,'The Entertainer (Braze, MoEngage, Firebase, New Relic)'],
+      ['Deliverect orders','i',1,'The Entertainer'],
+      ['Java','i',1,'The Entertainer, CarSwitch'],
+      ['Zoho CRM','i',1,'CarSwitch (lead routing)']
+    ];
+    var Q={t:[180,270],a:[270,360],d:[90,180],i:[0,90]},RAD=[[78,122,160],[202],[252]];
+    function show(sk,btns){btns.forEach(function(b){b.classList.toggle('on',b.dataset.k===sk[0]);});
+      body.innerHTML='<p class="sd-name"></p><p class="sd-meta"></p><p class="sd-where"></p>';
+      body.querySelector('.sd-name').textContent=sk[0];body.querySelector('.sd-meta').textContent=GROUP[sk[1]]+' · '+RING[sk[2]];body.querySelector('.sd-where').textContent=sk[3];}
+    function btn(sk){var b=document.createElement('button');b.type='button';b.className='sk';b.dataset.k=sk[0];b.innerHTML='<i class="sk-dot r'+sk[2]+'" aria-hidden="true"></i><span></span>';b.querySelector('span').textContent=sk[0];b.setAttribute('aria-label',sk[0]+', '+RING[sk[2]]);return b;}
+    var all=[];
+    /* radar: each quadrant gets its own rows (one skill per row, inner ring nearest the axis), and each dot sits on its ring for that row, so labels never collide */
+    var SIDE={t:[-1,-1],a:[1,-1],d:[-1,1],i:[1,1]},RR=[150,206,256];
+    Object.keys(SIDE).forEach(function(g){
+      var items=S.filter(function(x){return x[1]===g;}).sort(function(a,b){return a[2]-b[2];});
+      items.forEach(function(sk,k){var dy=22+25*k,R=RR[sk[2]],dx=dy<R-14?Math.sqrt(R*R-dy*dy):14;
+        var x=300+SIDE[g][0]*dx,y=300+SIDE[g][1]*dy,b=btn(sk);b.style.left=(x/6)+'%';b.style.top=(y/6)+'%';if(x<300)b.classList.add('left');radar.appendChild(b);all.push(b);});
+    });
+    /* phones: the same skills as chips, grouped by ring */
+    [0,1,2].forEach(function(r){var box=document.createElement('div');box.className='sc-ring'+(r?' old':'');box.innerHTML='<h4><i class="sk-dot r'+r+'" aria-hidden="true"></i>'+RING[r]+'</h4><ul></ul>';var ul=box.querySelector('ul');
+      S.filter(function(x){return x[2]===r;}).forEach(function(sk){var li=document.createElement('li'),b=btn(sk);li.appendChild(b);ul.appendChild(li);all.push(b);});chips.appendChild(box);});
+    var older=S.filter(function(x){return x[2]>0;}).length,ob=document.createElement('button');ob.type='button';ob.className='text-btn sk-older';ob.setAttribute('aria-expanded','false');ob.textContent='Show older skills ('+older+')';
+    ob.addEventListener('click',function(){var open=!chips.classList.contains('all');chips.classList.toggle('all',open);ob.setAttribute('aria-expanded',open?'true':'false');ob.textContent=open?'Hide older skills':'Show older skills ('+older+')';});chips.appendChild(ob);
+    var detail=$('skillDetail'),home=detail.parentNode,narrow=window.matchMedia('(max-width:859px)');
+    function place(b){if(narrow.matches&&b.closest('.sc-ring')){b.closest('.sc-ring').appendChild(detail);detail.classList.add('shown');}else if(detail.parentNode!==home){home.appendChild(detail);}}
+    narrow.addEventListener&&narrow.addEventListener('change',function(){if(!narrow.matches&&detail.parentNode!==home)home.appendChild(detail);});
+    all.forEach(function(b){var sk=S.filter(function(x){return x[0]===b.dataset.k;})[0];['mouseenter','focus','click'].forEach(function(ev){b.addEventListener(ev,function(){if(ev!=='mouseenter'||!narrow.matches){show(sk,all);place(b);}});});});
+  })();
 
   $('year').textContent=new Date().getFullYear();
 })();

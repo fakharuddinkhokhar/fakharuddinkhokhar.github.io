@@ -221,7 +221,8 @@ p{margin:0}
 .job[open] ul{animation:detailIn .35s var(--ease-out-expo)}
 @keyframes detailIn{from{opacity:0;transform:translateY(-4px)}}
 @supports (interpolate-size:allow-keywords){:root{interpolate-size:allow-keywords}.job::details-content{height:0;overflow:clip;transition:height .35s var(--ease-out-expo),content-visibility .35s allow-discrete}.job[open]::details-content{height:auto}@media (prefers-reduced-motion:reduce){.job::details-content{transition:none}}}
-@media (max-width:759px){.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}}
+/* phones: date and "Details" share the top row, the text gets the full width; the company line shows once the row is opened */
+@media (max-width:759px){.job summary{grid-template-columns:1fr auto}.job summary>div{grid-column:1/-1}.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}.job:not([open]) .co{display:none}}
 .job ul{margin:0;padding:0 0 18px;list-style:none;display:grid;gap:5px;font-size:14.5px}
 @media (min-width:760px){.job ul{padding-left:170px}}
 .job li{display:flex;gap:9px}
@@ -240,7 +241,7 @@ p{margin:0}
 .contact-item small{display:block;color:var(--muted);font-size:12.5px}
 .contact-item .v{font-weight:600;overflow-wrap:break-word}
 .contact-item .copy{margin-left:auto;flex:none}
-.form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);padding:24px;display:grid;gap:14px;min-width:0}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);padding:24px;display:grid;align-content:start;align-self:start;gap:14px;min-width:0}
 .form .two{display:grid;gap:14px}
 @media (min-width:560px){.form .two{grid-template-columns:1fr 1fr}}
 .field{display:grid;align-content:start;gap:5px;font-size:14px;font-weight:500}

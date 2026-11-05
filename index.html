@@ -71,7 +71,7 @@ p{margin:0}
 /* nav */
 .nav{position:sticky;top:0;z-index:var(--z-nav);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-.brand{display:flex;align-items:center;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;min-height:44px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.01em}
 .nav-links{display:none;gap:2px;list-style:none;margin:0;padding:0}
 .nav-links a{text-decoration:none;color:var(--muted);font-size:14.5px;font-weight:500;padding:10px 12px;border-radius:var(--r-control);display:inline-block;transition:color .2s,background-color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--fg);background:var(--surface)}
@@ -85,7 +85,7 @@ p{margin:0}
 @keyframes menuIn{from{opacity:0;transform:translateY(-6px)}}
 .mobile-menu ul{list-style:none;margin:0;padding:8px 20px 16px;display:grid;gap:2px}
 .mobile-menu a{display:block;padding:12px 10px;text-decoration:none;font-weight:500;border-radius:var(--r-control)}
-.mobile-menu .btn{margin:10px 10px 0;width:calc(100% - 20px)}
+.mobile-menu .btn{display:flex;margin:10px 10px 0;width:calc(100% - 20px);padding:11px 20px;border-radius:999px}
 
 /* hero */
 .hero{position:relative;overflow:hidden;padding-block:48px 40px}
@@ -100,7 +100,7 @@ p{margin:0}
 .photo{width:100%;height:auto;aspect-ratio:1;border-radius:var(--r-photo);object-fit:cover;border:1px solid var(--line);box-shadow:var(--shadow)}
 .avail{margin-top:14px;font-size:14px;color:var(--muted);text-align:center;text-wrap:balance}
 .avail b{color:var(--fg);font-weight:600}
-@media (max-width:859px){.hero{padding-block:28px 36px}.hero .wrap{gap:22px}.photo-wrap{order:-1;justify-self:stretch;width:auto;display:flex;align-items:center;gap:14px}.photo{width:72px;height:72px;flex:none;border-radius:50%;box-shadow:none}.avail{margin-top:0;text-align:left;text-wrap:pretty}}
+@media (max-width:859px){.hero{padding-block:22px 26px}.hero .wrap{gap:18px}.photo-wrap{order:-1;justify-self:stretch;width:auto;display:flex;align-items:center;gap:14px}.photo{width:72px;height:72px;flex:none;border-radius:50%;box-shadow:none}.avail{margin-top:0;text-align:left;text-wrap:pretty}}
 
 /* worked with */
 .logos{border-block:1px solid var(--line);background:var(--bg-2);padding-block:22px}
@@ -179,7 +179,7 @@ p{margin:0}
 .donut p{font-size:12.5px;color:var(--muted);text-align:center;max-width:16ch}
 .rcol h3{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:10px}
 .sev{display:grid;gap:8px}
-.sev div{display:grid;grid-template-columns:7.5em 1fr 2em;gap:10px;align-items:center;font-size:13px;font-family:var(--mono)}
+.sev>div{display:grid;grid-template-columns:7.5em 1fr 2em;gap:10px;align-items:center;font-size:13px;font-family:var(--mono)}
 .sev .bar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
 .sev .bar i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;transition:transform .9s ease .3s}
 .sev b{text-align:right;font-weight:500}
@@ -191,21 +191,16 @@ p{margin:0}
 .rlist li::before{content:"✓";flex:none;color:var(--pass);font-family:var(--mono)}
 .rlist li.no::before{content:"✗";color:var(--fail)}
 .rfoot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-.rfoot .delivs{display:flex;flex-wrap:wrap;gap:6px}
-.rfoot .delivs span{padding:5px 10px;border-radius:var(--r-chip);background:var(--surface-2);border:1px solid var(--line);font-family:var(--mono);font-size:12.5px;color:var(--fg)}
+.rfoot .delivs{color:var(--fg);max-width:62ch}
+.rfoot .delivs span{color:var(--muted)}
 
-/* what I do */
-.services{display:grid;gap:14px;margin-top:28px}
-@media (min-width:640px){.services{grid-template-columns:repeat(2,1fr)}}
-@media (min-width:960px){.services{grid-template-columns:repeat(3,1fr)}}
-.svc{display:flex;flex-direction:column;gap:8px;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);min-width:0;transition:border-color .2s,transform .2s cubic-bezier(.16,1,.3,1)}
-.svc:hover{border-color:var(--accent);transform:translateY(-3px)}
+/* what I do: a ruled list, two columns on wider screens */
+.services{list-style:none;margin:24px 0 0;padding:0;display:grid;border-top:1px solid var(--line)}
+@media (min-width:760px){.services{grid-template-columns:1fr 1fr;column-gap:48px}}
+.svc{display:grid;gap:4px;align-content:start;padding:18px 0;border-bottom:1px solid var(--line);min-width:0}
 .svc h3{font-size:18px;font-weight:700}
 .svc p{color:var(--muted);font-size:15px;text-wrap:pretty}
-.svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);list-style:none;margin-bottom:0;padding-left:0}
-.svc-tags li{font-family:var(--mono);font-size:12.5px;padding:4px 9px;border-radius:var(--r-chip);background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
-.stack{margin-top:18px;font-size:14.5px;color:var(--muted)}
-.stack b{color:var(--fg);font-weight:600}
+.svc .svc-tools{font-family:var(--mono);font-size:12.5px;margin-top:4px}
 
 /* experience */
 .band{background:var(--bg-2);border-block:1px solid var(--line)}
@@ -218,12 +213,14 @@ p{margin:0}
 .job h3{font-size:17.5px;font-weight:700}
 .job h3 span{font-weight:500;color:var(--muted)}
 .job .co{font-size:14.5px;color:var(--muted);margin-top:2px}
+.job .win{font-size:15px;font-weight:600;color:var(--fg);margin-top:6px;text-wrap:pretty}
+.job .win::before{content:"↳ ";color:var(--accent);font-family:var(--mono);font-weight:400}
 .job .more{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:6px;white-space:nowrap}
 .job .more::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:16px;display:inline-block;transition:transform .3s var(--ease-out-expo)}
 .job[open] .more::after{transform:rotate(45deg)}
 .job[open] ul{animation:detailIn .35s var(--ease-out-expo)}
 @keyframes detailIn{from{opacity:0;transform:translateY(-4px)}}
-@supports (interpolate-size:allow-keywords){:root{interpolate-size:allow-keywords}.job::details-content{height:0;overflow:clip;transition:height .35s var(--ease-out-expo),content-visibility .35s allow-discrete}.job[open]::details-content{height:auto}}
+@supports (interpolate-size:allow-keywords){:root{interpolate-size:allow-keywords}.job::details-content{height:0;overflow:clip;transition:height .35s var(--ease-out-expo),content-visibility .35s allow-discrete}.job[open]::details-content{height:auto}@media (prefers-reduced-motion:reduce){.job::details-content{transition:none}}}
 @media (max-width:759px){.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}}
 .job ul{margin:0;padding:0 0 18px;list-style:none;display:grid;gap:5px;font-size:14.5px}
 @media (min-width:760px){.job ul{padding-left:170px}}
@@ -231,29 +228,6 @@ p{margin:0}
 .job li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--muted);margin-top:9px}
 .edu{margin-top:18px;font-size:14.5px;color:var(--muted)}
 .edu b{color:var(--fg);font-weight:600}
-.certs{margin-top:28px}
-.certs h3{font-size:18px;font-weight:700}
-.cert-list{list-style:none;margin:12px 0 0;padding:0;border-top:1px solid var(--line)}
-.cert-list a{display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:baseline;min-height:44px;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--fg)}
-@media (min-width:760px){.cert-list a{grid-template-columns:1fr auto auto}}
-.cert-list .cn{font-weight:600}
-.cert-list .cm{font-size:13.5px;color:var(--muted);grid-row:2;grid-column:1}
-@media (min-width:760px){.cert-list .cm{grid-row:auto;grid-column:auto}}
-.cert-list .cv{font-size:13.5px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong);grid-row:1/3;grid-column:2;align-self:center}
-@media (min-width:760px){.cert-list .cv{grid-row:auto;grid-column:auto}}
-.cert-list .cv::after{content:" ↗";display:inline-block;text-decoration:none;transition:transform .2s var(--ease-out-expo)}
-.cert-list a:hover .cv::after,.cert-list a:focus-visible .cv::after{transform:translate(2px,-2px)}
-.cert-list a:hover .cv{color:var(--fg);text-decoration-color:var(--accent)}
-
-/* projects */
-.cases{display:grid;gap:0;margin-top:24px;border-top:1px solid var(--line)}
-@media (min-width:860px){.cases{grid-template-columns:repeat(3,1fr);column-gap:40px}}
-.case{padding:22px 0;border-bottom:1px solid var(--line);display:grid;gap:8px;align-content:start}
-.case .tag{font-size:13.5px;color:var(--muted)}
-.case h3{font-size:20px}
-.case .caught{font-family:var(--display);font-size:19px;font-weight:700;line-height:1.3;color:var(--fg);text-wrap:balance;margin-block:2px 4px}
-.case p{color:var(--muted);font-size:14.5px;text-wrap:pretty}
-
 /* contact */
 .contact-grid{display:grid;gap:28px;margin-top:24px}
 @media (min-width:860px){.contact-grid{grid-template-columns:1fr 1fr;gap:48px}}
@@ -265,12 +239,11 @@ p{margin:0}
 .contact-item div{min-width:0}
 .contact-item small{display:block;color:var(--muted);font-size:12.5px}
 .contact-item .v{font-weight:600;overflow-wrap:break-word}
-.contact-item{flex-wrap:wrap}
 .contact-item .copy{margin-left:auto;flex:none}
 .form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);padding:24px;display:grid;gap:14px;min-width:0}
 .form .two{display:grid;gap:14px}
 @media (min-width:560px){.form .two{grid-template-columns:1fr 1fr}}
-.field{display:grid;gap:5px;font-size:14px;font-weight:500}
+.field{display:grid;align-content:start;gap:5px;font-size:14px;font-weight:500}
 .field .req{color:var(--muted);font-weight:400}
 input,select,textarea{width:100%;font:inherit;font-size:16px;padding:11px 13px;border-radius:var(--r-control);border:1px solid var(--line-strong);background:var(--bg);color:var(--fg)}
 input::placeholder,textarea::placeholder{color:var(--muted)}
@@ -293,7 +266,7 @@ textarea{min-height:120px;resize:vertical}
 footer{border-top:1px solid var(--line);padding-block:24px;color:var(--muted);font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
 footer ul{display:flex;flex-wrap:wrap;gap:4px 8px;list-style:none;margin:0;padding:0}
-footer a{text-decoration:none;color:var(--muted);display:inline-block;padding:10px 8px}
+footer a{text-decoration:none;color:var(--muted);display:inline-block;padding:11px 8px}
 footer a:hover{color:var(--fg)}
 
 /* touch targets */
@@ -334,26 +307,33 @@ footer a:hover{color:var(--fg)}
 .hero-cos .logo{font-size:14px;gap:8px}
 .hero-cos .logo img{width:28px;height:28px}
 @media (max-width:859px){.hero-cos{display:none}}
-@media (min-width:860px){.photo-wrap{width:min(320px,68vw)}.cos-on .logos .logo-row{display:none}}
+@media (min-width:860px){.photo-wrap{width:min(320px,68vw)}.cos-on .logos{display:none}}
 /* about */
 .about{display:grid;gap:20px}
 @media (min-width:860px){.about{grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}}
-.about-meta{margin-top:12px;font-size:14px;color:var(--muted)}
+
 .about-copy{display:grid;gap:14px;max-width:62ch}
 .about-copy p{font-size:16.5px;line-height:1.65;text-wrap:pretty}
 .about-copy p:first-child{font-size:18px;color:var(--fg)}
-/* writing: recent LinkedIn posts */
-.writing-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px}
-.posts{display:grid;gap:14px;margin-top:24px}
-@media (min-width:760px){.posts{grid-template-columns:repeat(3,1fr)}}
-.post{display:flex;flex-direction:column;gap:10px;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);text-decoration:none;color:var(--fg);min-width:0;transition:border-color .2s,transform .2s var(--ease-out-expo)}
+/* writing: the latest LinkedIn post */
+.writing{display:grid;gap:24px;align-items:center}
+@media (min-width:860px){.writing{grid-template-columns:.9fr 1.1fr;gap:56px}}
+.more-posts{display:inline-block;margin-top:14px;padding-block:10px;font-size:15px;font-weight:600}
+.post{display:flex;flex-direction:column;gap:10px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);text-decoration:none;color:var(--fg);min-width:0;transition:border-color .2s,transform .2s var(--ease-out-expo)}
 .post:hover{border-color:var(--accent);transform:translateY(-3px)}
 .post-meta{font-size:13px;color:var(--muted)}
-.post h3{font-size:18px;font-weight:700;line-height:1.25}
-.post p{font-size:14.5px;color:var(--muted);text-wrap:pretty}
+.post h3{font-size:20px;font-weight:700;line-height:1.25}
+.post p{font-size:15px;color:var(--muted);text-wrap:pretty}
 .post-cta{margin-top:auto;padding-top:8px;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)}
 .post-cta::after{content:" \2197";display:inline-block;text-decoration:none;transition:transform .2s var(--ease-out-expo)}
 .post:hover .post-cta::after{transform:translate(2px,-2px)}
+/* contact: how we'd start, a real three-step sequence */
+.start{margin-top:22px}
+.start h3{font-size:18px;font-weight:700}
+.steps{list-style:none;counter-reset:step;margin:12px 0 0;padding:0;display:grid;gap:12px}
+.steps li{counter-increment:step;display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:15px;color:var(--muted);text-wrap:pretty}
+.steps li::before{content:counter(step);width:28px;height:28px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--accent)}
+.steps b{color:var(--fg);font-weight:600}
 /* CV button in the nav */
 .nav-actions #navCv{display:none}
 @media (min-width:1040px){.nav-actions #navCv{display:inline-flex;min-height:40px;padding:8px 14px;font-size:14px}}
@@ -389,7 +369,7 @@ footer a:hover{color:var(--fg)}
 @keyframes barIn{from{opacity:0;transform:translateY(120%)}}
 .rv{transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
 .rv.pre{opacity:0;transform:translateY(14px)}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv.pre{opacity:1;transform:none}.scanline{display:none}html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv.pre{opacity:1;transform:none}.scanline{display:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -399,7 +379,7 @@ footer a:hover{color:var(--fg)}
   <div class="wrap">
     <a class="brand" href="#top">Fakhar Khokhar</a>
     <nav aria-label="Primary"><ul class="nav-links" id="navLinks">
-      <li><a href="#demo">Live demo</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#work">Projects</a></li><li><a href="#contact">Contact</a></li>
+      <li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li>
     </ul></nav>
     <div class="nav-actions">
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch to light theme">
@@ -412,8 +392,8 @@ footer a:hover{color:var(--fg)}
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <ul><li><a href="#demo">Live demo</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#work">Projects</a></li><li><a href="#contact">Contact</a></li><li><a class="menu-cv" href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CV (PDF)</a></li></ul>
-    <a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener">Message me on WhatsApp</a>
+    <ul><li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li><li><a class="menu-cv" href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download CV (PDF)</a></li></ul>
+    <a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
   </div>
 </header>
 
@@ -429,7 +409,7 @@ footer a:hover{color:var(--fg)}
       <p class="lead">End-to-end testing and automation for web, iOS and Android, with release reports your team can act on.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" id="watchBtn" href="#runner">Watch a test run<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener">Message me on WhatsApp</a>
+        <a class="btn btn-ghost" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
       </div>
       <details class="selfcheck" id="selfcheck">
         <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i>Tested live on your device</span><span class="sc-status" id="scStatus">waiting</span></summary>
@@ -437,7 +417,7 @@ footer a:hover{color:var(--fg)}
           <li data-k="load"><span class="st" aria-hidden="true">◌</span><span class="nm">Page load time</span><span class="val">…</span></li>
           <li data-k="errors"><span class="st" aria-hidden="true">◌</span><span class="nm">Script errors</span><span class="val">…</span></li>
           <li data-k="alt"><span class="st" aria-hidden="true">◌</span><span class="nm">Images with alt text</span><span class="val">…</span></li>
-          <li data-k="contrast"><span class="st" aria-hidden="true">◌</span><span class="nm">Text contrast (AA needs 4.5:1)</span><span class="val">…</span></li>
+          <li data-k="contrast"><span class="st" aria-hidden="true">◌</span><span class="nm">Text contrast (accessibility minimum 4.5:1)</span><span class="val">…</span></li>
           <li data-k="fit"><span class="st" aria-hidden="true">◌</span><span class="nm">Fits your screen, no sideways scroll</span><span class="val">…</span></li>
         </ul>
         <p class="sc-note">Measured just now by this page's own script, in your browser. Nothing is sent anywhere.</p>
@@ -471,7 +451,7 @@ footer a:hover{color:var(--fg)}
   <div class="wrap">
     <p class="eyebrow">Live demo</p>
     <h2 class="h2">This is what a release looks like when I test it.</h2>
-    <p class="lead">A smoke suite runs below the way it would in CI. When it finishes, the output becomes the release report I send to clients.</p>
+    <p class="lead">A smoke suite, the quick check of the flows that matter most, runs below the way it would on every build. When it finishes, the output becomes the release report I send to clients.</p>
 
     <div class="runner rv" id="runner">
       <div class="runner-bar"><span class="title">Smoke suite · release 3.8.0 · Chrome, Android, iOS<small class="note">Replayed from a real cycle; names and numbers changed.</small></span>
@@ -527,18 +507,19 @@ footer a:hover{color:var(--fg)}
             <div><span class="wn">S2 high</span><div class="bar"><i id="s2" style="background:var(--warn)"></i></div><b>1</b></div>
             <div><span class="in">S3 medium</span><div class="bar"><i id="s3" style="background:var(--info)"></i></div><b>0</b></div>
           </div>
-          <p class="sev-note">Bars show each severity's share of the 2 open defects. S1 blocks the release. S2 can ship with a known-issue note. S3 goes into the backlog.</p>
+          <p class="sev-note">Bars show each severity's share of the 2 open bugs. S1 (critical) blocks the release. S2 (high) can ship with a known-issue note. S3 goes into the backlog.</p>
           <h3 style="margin-top:16px">Verdict</h3>
           <p class="verdict"><b>Conditional go:</b> ship once <b>BUG-2031</b> (Tabby instalment total) is fixed and re-tested. BUG-2032 can ship with a known-issue note; server-side validation is scheduled for 3.8.1.</p>
         </div>
         <div class="rcol">
           <h3>What was verified</h3>
           <ul class="rlist">
-            <li>Login, one-time code and device trust on Android and iOS</li>
+            <li>Login on web, one-time code on a new Android device</li>
+            <li>Search filters, and listing photos compressed under 2 MB (iOS)</li>
             <li>Card payment via Adyen, cashback credited on confirmation</li>
-            <li>Push and in-app notifications on order status change</li>
+            <li>Push on order status (Android) and the in-app inbox</li>
             <li>Arabic right-to-left layout on product pages (iOS)</li>
-            <li>API authentication on the offers endpoint</li>
+            <li>Offers API refuses requests without a token</li>
           </ul>
           <h3 style="margin-top:16px">Not yet verified</h3>
           <ul class="rlist">
@@ -547,8 +528,8 @@ footer a:hover{color:var(--fg)}
           </ul>
         </div>
         <div class="rfoot">
-          <span>Delivered with every release:</span><button class="btn btn-ghost btn-sm" id="rerun2" type="button">Run the suite again</button>
-          <div class="delivs"><span>PDF report</span><span>Jira defects with video</span><span>TestRail run</span><span>Go / no-go call</span></div>
+          <p class="delivs"><span>Delivered with every release:</span> PDF report · Jira bugs with video · test run in TestRail · go / no-go call</p>
+          <button class="btn btn-ghost btn-sm" id="rerun2" type="button">Run the suite again</button>
         </div>
       </div>
     </div>
@@ -560,10 +541,9 @@ footer a:hover{color:var(--fg)}
   <div class="wrap about">
     <div class="about-head">
       <h2 class="h2">Eight years of asking what could go wrong.</h2>
-      <p class="about-meta">QA since 2019 · Lahore, UTC+5 · remote</p>
     </div>
     <div class="about-copy">
-      <p>I started in QA in 2019 as an intern at GlowfishLabs, and I have spent the eight years since on products where a missed bug costs real money: payments, cash-back, ride-hailing and marketplaces used in dozens of countries.</p>
+      <p>I started in QA in 2019 as an intern at GlowfishLabs, and I have spent every year since on products where a missed bug costs real money: payments, cash-back, ride-hailing and marketplaces used in dozens of countries.</p>
       <p>My best bug reports usually start where users never look: the timeout right after a card is charged, the request behind a screen that says "Saved", the Arabic layout nobody opened on an iPhone.</p>
       <p>I automate what should run on every build, with Selenium, Playwright and Appium. AI drafts my test cases and data; which risks matter, and whether a red test is a real bug, stays my call. Then I write the report I would want to read: what was tested, what failed, and whether to ship.</p>
     </div>
@@ -574,15 +554,14 @@ footer a:hover{color:var(--fg)}
 <section class="section" id="services">
   <div class="wrap">
     <h2 class="h2">What I can own for your product.</h2>
-    <div class="services">
-      <article class="svc"><h3>Manual and exploratory testing</h3><p>Test plans and cases for new features, then off-script sessions to find what the cases miss. Web, mobile web and native apps.</p><ul class="svc-tags" aria-label="Tools"><li>TestRail</li><li>Jira</li><li>Exploratory charters</li></ul></article>
-      <article class="svc"><h3>Test automation</h3><p>Selenium, Playwright and Cypress for web; Appium for iOS and Android. Page Object Model and Page Factory frameworks on TestNG, Robot Framework suites, wired into your CI.</p><ul class="svc-tags" aria-label="Tools"><li>Selenium</li><li>Playwright</li><li>Cypress</li><li>Appium</li></ul></article>
-      <article class="svc"><h3>API and backend testing</h3><p>Happy-path and negative API scenarios in Postman and RestAssured, with SQL checks on the data behind every flow.</p><ul class="svc-tags" aria-label="Tools"><li>Postman</li><li>RestAssured</li><li>SQL</li></ul></article>
-      <article class="svc"><h3>Payments and integrations</h3><p>Payment gateways, cashback and wallet logic, delivery and CRM integrations, analytics events. The flows where a bug costs real money.</p><ul class="svc-tags" aria-label="Tools"><li>Adyen</li><li>Tabby</li><li>Checkout.com</li><li>Zoho CRM</li></ul></article>
-      <article class="svc"><h3>Localisation and devices</h3><p>English and Arabic right-to-left, multi-currency, and a real-device matrix across iPhone, Samsung, Pixel and iPad. Chrome, Safari and Edge.</p><ul class="svc-tags" aria-label="Tools"><li>EN / AR</li><li>RTL</li><li>Real devices</li></ul></article>
-      <article class="svc"><h3>Release reporting and sign-off</h3><p>Cycle reports with pass rate, defects by severity and risk, then a clear go / no-go recommendation for every release.</p><ul class="svc-tags" aria-label="Tools"><li>Release reports</li><li>Go / no-go</li><li>Smoke checklists</li></ul></article>
-    </div>
-    <p class="stack"><b>Everyday stack:</b> Selenium, Playwright, Cypress, Appium, Robot Framework, TestNG, Java, Python, Postman, RestAssured, JMeter, SQL Server, Git, Jira, TestRail, Android Studio, Xcode.</p>
+    <ul class="services">
+      <li class="svc"><h3>Manual and exploratory testing</h3><p>Test plans and cases for every new feature, then off-script sessions to find what the cases miss. Web, mobile web and native apps.</p><p class="svc-tools">TestRail · Jira · exploratory charters</p></li>
+      <li class="svc"><h3>Test automation</h3><p>Web and mobile suites built on the Page Object Model and Page Factory, running in your CI on every build.</p><p class="svc-tools">Selenium · Playwright · Cypress · Appium · TestNG · Robot Framework</p></li>
+      <li class="svc"><h3>API and backend testing</h3><p>Happy-path and negative API scenarios, with SQL checks on the data behind every flow.</p><p class="svc-tools">Postman · RestAssured · SQL · JMeter</p></li>
+      <li class="svc"><h3>Payments and integrations</h3><p>Payment gateways, cashback and wallet logic, delivery and CRM integrations, analytics events. The flows where a bug costs real money.</p><p class="svc-tools">Adyen · Tabby · Checkout.com · Zoho CRM</p></li>
+      <li class="svc"><h3>Localisation and devices</h3><p>English and Arabic right-to-left, multi-currency, and real iPhone, Samsung, Pixel and iPad devices. Chrome, Safari and Edge.</p><p class="svc-tools">EN / AR · RTL · real devices</p></li>
+      <li class="svc"><h3>Release reports and sign-off</h3><p>Pass rate, open bugs by severity and the risks that remain, then a clear go / no-go call for every release.</p><p class="svc-tools">Release reports · go / no-go · smoke checklists</p></li>
+    </ul>
   </div>
 </section>
 
@@ -596,7 +575,7 @@ footer a:hover{color:var(--fg)}
         <ul><li>Test plans and scenarios for every new feature</li><li>Manual, exploratory and regression passes on real devices and emulators across Android and iOS before each rollout</li><li>Appium UI automation for both platforms, plus direct API testing to verify what the app sends and receives</li></ul>
       </details>
       <details class="job">
-        <summary><time>Feb 2025 – Mar 2026</time><div><h3>Senior Software Test Engineer <span>· Homie</span></h3><p class="co">Cash-back platform, UAE. Web, mobile web and native apps.</p></div><span class="more">Details</span></summary>
+        <summary><time>Feb 2025 – Mar 2026</time><div><h3>Senior Software Test Engineer <span>· Homie</span></h3><p class="co">Cash-back platform, UAE. Web, mobile web and native apps.</p><p class="win">Caught production data that didn't match the third-party portal's records.</p></div><span class="more">Details</span></summary>
         <ul><li>Defined test strategy, plans and processes; owned regression and smoke suites before every deploy</li><li>Payment gateway, cashback logic, API and database validation end to end</li><li>Appium mobile automation, Postman and RestAssured API suites, release reports with go / no-go</li></ul>
       </details>
       <details class="job">
@@ -604,11 +583,11 @@ footer a:hover{color:var(--fg)}
         <ul><li>Robot Framework and Selenium automation that raised regression coverage and cut manual effort</li><li>Functional, regression and smoke testing across environments; test data and environment management</li></ul>
       </details>
       <details class="job">
-        <summary><time>Sep 2021 – Jul 2024</time><div><h3>Senior Software Test Engineer <span>· The Entertainer</span></h3><p class="co">Lifestyle and rewards platform in more than 14 countries. Consumer apps, admin portals and merchant tools.</p></div><span class="more">Details</span></summary>
-        <ul><li>Owned test planning, execution and release sign-off for major launches and seasonal campaigns</li><li>Validated Adyen, Tabby and Checkout.com payments plus the Deliverect order integration</li><li>Analytics QA across Braze, MoEngage, Firebase and New Relic events</li><li>Selenium and Appium suites in Java with TestNG and the Page Object Model made regression about 40% faster, with zero P1 defects after release</li></ul>
+        <summary><time>Sep 2021 – Jul 2024</time><div><h3>Senior Software Test Engineer <span>· The Entertainer</span></h3><p class="co">Lifestyle and rewards platform in more than 14 countries. Consumer apps, admin portals and merchant tools.</p><p class="win">Made regression about 40% faster, with no critical (P1) bugs after release.</p></div><span class="more">Details</span></summary>
+        <ul><li>Owned test planning, execution and release sign-off for major launches and seasonal campaigns</li><li>Validated Adyen, Tabby and Checkout.com payments plus the Deliverect order integration</li><li>Analytics QA across Braze, MoEngage, Firebase and New Relic events</li><li>Selenium and Appium suites in Java with TestNG and the Page Object Model</li></ul>
       </details>
       <details class="job">
-        <summary><time>Aug 2019 – Sep 2021</time><div><h3>Software Test Engineer <span>· CarSwitch</span></h3><p class="co">Used-car marketplace, UAE and KSA. Joined as Associate QA Engineer under GlowfishLabs, promoted Jan 2021.</p></div><span class="more">Details</span></summary>
+        <summary><time>Aug 2019 – Sep 2021</time><div><h3>Software Test Engineer <span>· CarSwitch</span></h3><p class="co">Used-car marketplace, UAE and KSA. Joined as Associate QA Engineer under GlowfishLabs, promoted Jan 2021.</p><p class="win">Caught an Arabic layout bug on iOS where the price overlapped the main button.</p></div><span class="more">Details</span></summary>
         <ul><li>Owned test strategy, risk-based regression and release sign-off across web, Android and iOS</li><li>Buyer and seller journeys, Arabic right-to-left, Zoho CRM lead routing, competitor data scraping</li><li>Built the Selenium regression suite in Java on TestNG and the Page Object Model, which became the team standard, plus Appium automation for the React Native apps</li><li>API checks that validated backend data against the UI</li></ul>
       </details>
       <details class="job">
@@ -617,72 +596,22 @@ footer a:hover{color:var(--fg)}
       </details>
     </div>
     <p class="edu"><b>BSc Software Engineering</b>, University of Management and Technology, 2014 – 2018. I've written Medium guides on setting up <a class="link" href="https://medium.com/@fakharuddinkhokhar/how-to-setup-appium-with-intellij-using-java-and-maven-step-by-step-guide-for-windows-9fa4e7b4b9ab" target="_blank" rel="noopener">Appium</a> and <a class="link" href="https://medium.com/@fakharuddinkhokhar/how-to-setup-selenium-with-java-using-intellij-idea-d2058b0ccdbd" target="_blank" rel="noopener">Selenium</a> with Java in IntelliJ IDEA, and I write about QA, automation and AI in testing <a class="link" href="https://www.linkedin.com/in/fakhar-ud-din-khokhar-435551ba/recent-activity/all/" target="_blank" rel="noopener">on LinkedIn</a>.</p>
-    <div class="certs">
-      <h3>Certifications</h3>
-      <ul class="cert-list">
-        <li><a href="https://www.mygreatlearning.com/certificate/LZRCVYEX" target="_blank" rel="noopener" aria-label="View the Software Testing certificate (opens in a new tab)"><span class="cn">Software Testing</span><span class="cm">Great Learning · Aug 2024</span><span class="cv">View certificate</span></a></li>
-        <li><a href="https://www.mygreatlearning.com/certificate/SAEHRCCM" target="_blank" rel="noopener" aria-label="View the Selenium Basics certificate (opens in a new tab)"><span class="cn">Selenium Basics</span><span class="cm">Great Learning · Aug 2024</span><span class="cv">View certificate</span></a></li>
-        <li><a href="https://www.mygreatlearning.com/certificate/XGMGZHCA" target="_blank" rel="noopener" aria-label="View the Introduction to Postman API certificate (opens in a new tab)"><span class="cn">Introduction to Postman API</span><span class="cm">Great Learning · Aug 2024</span><span class="cv">View certificate</span></a></li>
-        <li><a href="https://www.mygreatlearning.com/certificate/XCTVSQTQ" target="_blank" rel="noopener" aria-label="View the Python Fundamentals for Beginners certificate (opens in a new tab)"><span class="cn">Python Fundamentals for Beginners</span><span class="cm">Great Learning · Aug 2024</span><span class="cv">View certificate</span></a></li>
-        <li><a href="https://www.mygreatlearning.com/certificate/SSXDUXJN" target="_blank" rel="noopener" aria-label="View the GitHub Tutorial for Beginners certificate (opens in a new tab)"><span class="cn">GitHub Tutorial for Beginners</span><span class="cm">Great Learning · Aug 2024</span><span class="cv">View certificate</span></a></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PROJECTS ===== -->
-<section class="section" id="work">
-  <div class="wrap">
-    <h2 class="h2">Three products, three different testing problems.</h2>
-    <p class="lead">What each product needed from QA, and one thing I caught or changed.</p>
-    <div class="cases">
-      <article class="case">
-        <span class="tag">Used-car marketplace · UAE and KSA</span>
-        <h3>CarSwitch</h3>
-        <p class="caught">Caught an Arabic layout bug on iOS where the price overlapped the main button.</p>
-        <p>End-to-end QA for a bilingual marketplace: buyer search and finance flows, seller listing and KYC, Arabic right-to-left on every screen, a real-device matrix, and Selenium and Appium regression.</p>
-      </article>
-      <article class="case">
-        <span class="tag">Rewards platform · 14+ countries</span>
-        <h3>The Entertainer</h3>
-        <p class="caught">Cut regression time by about 40%, with zero P1 defects after release.</p>
-        <p>QA lead for consumer apps, admin portals and merchant tools. Three payment gateways, a delivery integration, multi-currency, and analytics events the marketing team could trust.</p>
-      </article>
-      <article class="case">
-        <span class="tag">Cash-back platform · UAE</span>
-        <h3>Homie</h3>
-        <p class="caught">Ran the regression and smoke suites that gated every deployment.</p>
-        <p>Full QA lifecycle across web, mobile web and native apps: cashback and transaction logic, payment gateway flows, backend and database checks, and notification events.</p>
-      </article>
-    </div>
   </div>
 </section>
 
 <!-- ===== WRITING ===== -->
-<section class="section band" id="writing">
+<section class="section" id="writing">
   <div class="wrap">
-    <div class="writing-head">
-      <h2 class="h2">What I'm writing about.</h2>
-      <a class="link" href="https://www.linkedin.com/in/fakhar-ud-din-khokhar-435551ba/recent-activity/all/" target="_blank" rel="noopener">All posts on LinkedIn</a>
-    </div>
-    <p class="lead">I post most days about testing, automation and where AI actually helps. Three recent ones:</p>
-    <div class="posts">
+    <div class="writing">
+      <div>
+        <h2 class="h2">What I'm writing about.</h2>
+        <p class="lead">I write on LinkedIn about testing, automation and where AI actually helps.</p>
+        <a class="link more-posts" href="https://www.linkedin.com/in/fakhar-ud-din-khokhar-435551ba/recent-activity/all/" target="_blank" rel="noopener">All posts on LinkedIn</a>
+      </div>
       <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7518159400360943617/" target="_blank" rel="noopener">
-        <span class="post-meta">LinkedIn · <time>20 Oct 2026</time></span>
+        <span class="post-meta">LinkedIn · <time datetime="2026-10-20">20 Oct 2026</time></span>
         <h3>I let AI write my tests. I do not let it decide what to test.</h3>
         <p>It drafts test cases, test data and the boring half of bug reports in minutes. Which risks matter, what done means, and whether a red test is a real bug still come from me.</p>
-        <span class="post-cta">Read the post</span>
-      </a>
-      <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7517796883344560129/" target="_blank" rel="noopener">
-        <span class="post-meta">LinkedIn · <time>19 Oct 2026</time></span>
-        <h3>The test suite passed. That is not the same as the release working.</h3>
-        <p>No suite covers every device, network and data combination real people bring, so for the first hours I watch production as closely as I watched staging.</p>
-        <span class="post-cta">Read the post</span>
-      </a>
-      <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7514172837931302912/" target="_blank" rel="noopener">
-        <span class="post-meta">LinkedIn · <time>9 Oct 2026</time></span>
-        <h3>Payment bugs do not stay small.</h3>
-        <p>The timeout after the charge found more than any other scenario: the money leaves, the confirmation never arrives, and nobody knows whether the order exists.</p>
         <span class="post-cta">Read the post</span>
       </a>
     </div>
@@ -690,16 +619,24 @@ footer a:hover{color:var(--fg)}
 </section>
 
 <!-- ===== CONTACT ===== -->
-<section class="section" id="contact">
+<section class="section band" id="contact">
   <div class="wrap">
     <div class="contact-grid">
       <div>
         <h2 class="h2">Tell me what you're shipping.</h2>
         <p class="lead">A few lines about your product and timeline is enough. I reply within one business day, usually with a couple of questions and a time for a short call.</p>
+        <div class="start">
+          <h3>How we'd start</h3>
+          <ol class="steps">
+            <li><span><b>A free 30-minute call.</b> Your product, your next release date, and what worries you about it.</span></li>
+            <li><span><b>A one-week pilot on that release.</b> Within two working days you get a short test plan for the riskiest flows. Then I test on real devices and log each bug with steps, severity and a video.</span></li>
+            <li><span><b>A release report with a go / no-go call.</b> If it helped, we carry on per release, on a monthly retainer, or hourly for short bursts.</span></li>
+          </ol>
+        </div>
         <a class="btn btn-primary wa-main" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
         <div class="contact-list">
           <a class="contact-item" href="tel:+923238998463"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><div><small>Phone or WhatsApp</small><span class="v">+92 323 8998463</span></div></a>
-          <div class="contact-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><a class="v" id="emailText" href="mailto:fakharuddinkhokhar@gmail.com">fakharuddinkhokhar@gmail.com</a></div><button class="btn btn-ghost btn-sm copy" type="button" id="copyEmail" aria-label="Copy email address">Copy</button></div>
+          <div class="contact-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><a class="v" id="emailText" href="mailto:fakharuddinkhokhar@gmail.com">fakharuddinkhokhar<wbr>@gmail.com</a></div><button class="btn btn-ghost btn-sm copy" type="button" id="copyEmail" aria-label="Copy email address">Copy</button></div>
           <a class="contact-item" href="https://www.linkedin.com/in/fakhar-ud-din-khokhar-435551ba" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5H3.6V20h3.3zM5.3 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM20.4 13c0-3.3-1.8-4.8-4.2-4.8-1.9 0-2.8 1-3.3 1.8V8.5H9.6V20h3.3v-6c0-1.6.3-3.1 2.3-3.1 1.9 0 1.9 1.8 1.9 3.2V20h3.3z"/></svg></span><div><small>LinkedIn</small><span class="v">fakhar-ud-din-khokhar</span></div></a>
         </div>
       </div>
@@ -752,28 +689,31 @@ footer a:hover{color:var(--fg)}
 
   /* mobile menu */
   var menuBtn=$('menuBtn'),menu=$('mobileMenu');
-  function setMenu(open){menu.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',open?'true':'false');menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');}
+  function setMenu(open){menu.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',open?'true':'false');menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');if(window.syncBar)window.syncBar();}
   menuBtn.addEventListener('click',function(){setMenu(!menu.classList.contains('open'));});
   menu.addEventListener('click',function(e){if(e.target.tagName==='A')setMenu(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);menuBtn.focus();}});
 
   /* active section in nav */
   var navLinks=[].slice.call(document.querySelectorAll('#navLinks a'));
-  if('IntersectionObserver' in window){
-    var secs=navLinks.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
-    var sio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){navLinks.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-40% 0px -55% 0px'});
-    secs.forEach(function(s){sio.observe(s);});
-  }
+  /* the section crossing 40% of the viewport wins; sections without a nav link clear the highlight */
+  var secs=[].slice.call(document.querySelectorAll('main section[id]'));
+  function markNav(){var line=window.innerHeight*0.4,cur=null;secs.forEach(function(sec){if(sec.getBoundingClientRect().top<=line)cur=sec;});
+    navLinks.forEach(function(a){a.classList.toggle('active',!!cur&&a.getAttribute('href')==='#'+cur.id);});}
+  window.addEventListener('scroll',markNav,{passive:true});
+  markNav();
 
   /* nav CTA: ghost while the hero CTA is on screen, primary after */
   /* phone: floating WhatsApp bar between the hero and the contact section */
-  var waBar=$('waBar'),heroOut=false,endIn=false;
-  function syncBar(){if(heroOut&&!endIn)waBar.removeAttribute('hidden');else waBar.setAttribute('hidden','');}
+  var waBar=$('waBar'),heroOut=false,endIn=false,demoIn=false;
+  window.syncBar=syncBar;
+  function syncBar(){if(heroOut&&!endIn&&!demoIn&&!menu.classList.contains('open'))waBar.removeAttribute('hidden');else waBar.setAttribute('hidden','');}
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){es.forEach(function(en){heroOut=!en.isIntersecting&&en.boundingClientRect.top<0;syncBar();});}).observe($('watchBtn'));
     var endEls=[$('contact'),document.querySelector('footer')],endState=[false,false];
     var endIO=new IntersectionObserver(function(es){es.forEach(function(en){endState[endEls.indexOf(en.target)]=en.isIntersecting;});endIn=endState[0]||endState[1];syncBar();});
     endEls.forEach(function(el){if(el)endIO.observe(el);});
+    new IntersectionObserver(function(es){demoIn=es[0].isIntersecting;syncBar();},{rootMargin:'-20% 0px -25% 0px'}).observe($('runner'));
   }
 
   /* copy email */
@@ -789,16 +729,20 @@ footer a:hover{color:var(--fg)}
   var form=$('contactForm'),status=$('formStatus'),sendBtn=$('sendBtn');
   if(FORM_ENDPOINT)$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';
   function setErr(id,msg,shake){var f=$(id),e=$('e'+id.slice(1));e.textContent=msg||'';f.setAttribute('aria-invalid',msg?'true':'false');if(msg&&shake&&!reduced){f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');}return !msg;}
+  function emailErr(v){if(!v)return 'Please enter your email.';if(v.indexOf('@')<0)return 'That email address needs an @, for example jane@company.com.';if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v))return 'That email address needs a full domain after the @, for example jane@company.com.';return '';}
   function validate(){
     var ok=true,first=null;
     var name=$('fName').value.trim(),email=$('fEmail').value.trim(),svc=$('fService').value,msg=$('fMsg').value.trim();
     if(!setErr('fName',name?'':'Please enter your name.',true)){ok=false;first=first||$('fName');}
-    if(!setErr('fEmail',email?(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)?'':'That email address needs an @ and a domain, for example jane@company.com.'):'Please enter your work email.',true)){ok=false;first=first||$('fEmail');}
+    if(!setErr('fEmail',emailErr(email),true)){ok=false;first=first||$('fEmail');}
     if(!setErr('fMsg',msg?(msg.length<20?'A sentence or two about your product helps me reply usefully.':''):'Please tell me a little about your product.',true)){ok=false;first=first||$('fMsg');}
     if(first)first.focus();
     return ok;
   }
-  ['fName','fEmail','fService','fMsg'].forEach(function(id){$(id).addEventListener('input',function(){if($(id).getAttribute('aria-invalid')==='true')setErr(id,'');});});
+  ['fName','fService','fMsg'].forEach(function(id){$(id).addEventListener('input',function(){if($(id).getAttribute('aria-invalid')==='true')setErr(id,'');});});
+  /* email: re-check as they fix it once flagged, and check when they leave the field */
+  $('fEmail').addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')setErr('fEmail',emailErr(this.value.trim()));});
+  $('fEmail').addEventListener('blur',function(){var v=this.value.trim();if(v)setErr('fEmail',emailErr(v));});
   form.addEventListener('submit',function(e){
     e.preventDefault();
     status.className='form-status';status.textContent='';
@@ -827,7 +771,6 @@ footer a:hover{color:var(--fg)}
   (function(){
     var box=$('selfcheck');if(!box)return;
     var status=$('scStatus'),live=$('scLive'),rows=[].slice.call(box.querySelectorAll('.sc-list li'));
-    if(window.matchMedia('(min-width:860px)').matches)box.open=true;
     function rgb(c){var m=c.match(/[\d.]+/g);return m?m.slice(0,4).map(Number):null;}
     function lumin(a){var f=function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);};return 0.2126*f(a[0])+0.7152*f(a[1])+0.0722*f(a[2]);}
     function bgOf(el){while(el){var c=rgb(getComputedStyle(el).backgroundColor);if(c&&(c.length<4||c[3]>0.5))return c;el=el.parentElement;}return [255,255,255];}

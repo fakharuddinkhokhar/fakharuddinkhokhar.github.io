@@ -265,6 +265,28 @@ section[id]{scroll-margin-top:64px}
 .sd-hint{color:var(--muted);font-size:15px}
 .sd-legend{list-style:none;margin:0;padding:12px 0 0;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
 .sd-legend li{display:flex;align-items:center;gap:7px}
+/* radar motion: one sweep reveals each skill as it passes, then keeps scanning while on screen; dots ping as it passes */
+.radar{--T:6s;--D:.35s}
+.radar-rings .band{fill:var(--accent-soft);opacity:0;transition:opacity .25s var(--ease-out-quart)}
+.radar.hl .radar-rings .band.on{opacity:1}
+.radar-rings .core{fill:var(--accent);stroke:none}
+.radar-rings .ray{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:1;opacity:0;transition:stroke-dashoffset .35s var(--ease-out-expo),opacity .2s}
+.radar.hl .radar-rings .ray{stroke-dashoffset:0;opacity:.7}
+.radar-sweep{position:absolute;left:5%;top:5%;width:90%;height:90%;border-radius:50%;pointer-events:none;opacity:0;background:conic-gradient(from 0deg,transparent 0deg 285deg,color-mix(in srgb,var(--accent) 6%,transparent) 300deg,color-mix(in srgb,var(--accent) 26%,transparent) 358deg,color-mix(in srgb,var(--accent) 70%,transparent) 359.6deg,transparent 360deg)}
+.radar.scan .radar-sweep{opacity:1;animation:sweep var(--T) linear var(--D) infinite both}
+@keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.radar .sk{transition:filter .2s,background-color .2s}
+.radar.armed .sk{opacity:0}
+.radar.scan .sk{animation:skIn .55s var(--ease-out-expo) var(--d) both}
+@keyframes skIn{from{opacity:0;translate:var(--fx) var(--fy);scale:.5}to{opacity:1;translate:0 0;scale:1}}
+.radar.hl .sk:not(.on){filter:opacity(.38)}
+.radar .sk-dot{position:relative}
+.radar.scan .sk-dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid var(--accent);opacity:0;animation:ping var(--T) linear var(--d) infinite}
+@keyframes ping{0%{opacity:.85;transform:scale(.45)}10%{opacity:0;transform:scale(1.5)}100%{opacity:0;transform:scale(1.5)}}
+.radar.paused .radar-sweep,.radar.paused .sk-dot::after{animation-play-state:paused}
+.sc-ring .sk{animation:chipIn .4s var(--ease-out-expo) both;animation-delay:var(--cd,0s)}
+@keyframes chipIn{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.radar-sweep{display:none}.radar.armed .sk{opacity:1}}
 /* experience */
 .band{background:var(--bg-2);border-block:1px solid var(--line)}
 .jobs{margin-top:24px;border-top:1px solid var(--line)}
@@ -659,9 +681,11 @@ footer a:hover{color:var(--fg)}
       <div class="skills-grid">
         <div class="radar" id="radar" role="group" aria-label="Skills radar, grouped by area and how recently used">
           <svg class="radar-rings" viewBox="0 0 600 600" aria-hidden="true">
-            <circle cx="300" cy="300" r="270"/><circle cx="300" cy="300" r="232"/><circle cx="300" cy="300" r="172"/>
+            <path class="band" data-r="2" fill-rule="evenodd" d="M300 30a270 270 0 1 0 .01 0zM300 68a232 232 0 1 1-.01 0z"/><path class="band" data-r="1" fill-rule="evenodd" d="M300 68a232 232 0 1 0 .01 0zM300 128a172 172 0 1 1-.01 0z"/><path class="band" data-r="0" d="M300 128a172 172 0 1 0 .01 0z"/><circle cx="300" cy="300" r="270"/><circle cx="300" cy="300" r="232"/><circle cx="300" cy="300" r="172"/><circle class="core" cx="300" cy="300" r="4"/>
             <line x1="300" y1="30" x2="300" y2="570"/><line x1="30" y1="300" x2="570" y2="300"/>
+            <line class="ray" id="radarRay" x1="300" y1="300" x2="300" y2="300" pathLength="1"/>
           </svg>
+          <div class="radar-sweep" aria-hidden="true"></div>
           <span class="rq rq-tl">Testing practice</span><span class="rq rq-tr">Automation</span><span class="rq rq-bl">API and data</span><span class="rq rq-br">Integrations and tools</span>
         </div>
         <div class="skill-chips" id="skillChips"></div>
@@ -1097,7 +1121,9 @@ footer a:hover{color:var(--fg)}
       ['Zoho CRM','i',1,'CarSwitch (lead routing)']
     ];
     var Q={t:[180,270],a:[270,360],d:[90,180],i:[0,90]},RAD=[[78,122,160],[202],[252]];
-    function show(sk,btns){btns.forEach(function(b){b.classList.toggle('on',b.dataset.k===sk[0]);});
+    var ray=$('radarRay'),bands=[].slice.call(radar.querySelectorAll('.band'));
+    function aim(b){if(!b||!radar.contains(b)){radar.classList.remove('hl');return;}ray.setAttribute('x2',b.dataset.x);ray.setAttribute('y2',b.dataset.y);bands.forEach(function(p){p.classList.toggle('on',p.dataset.r===b.dataset.r);});radar.classList.add('hl');}
+    function show(sk,btns){btns.forEach(function(b){b.classList.toggle('on',b.dataset.k===sk[0]);});aim(btns.filter(function(b){return b.dataset.k===sk[0]&&radar.contains(b);})[0]);
       body.innerHTML='<p class="sd-name"></p><p class="sd-meta"></p><p class="sd-where"></p>';
       body.querySelector('.sd-name').textContent=sk[0];body.querySelector('.sd-meta').textContent=GROUP[sk[1]]+' · '+RING[sk[2]];body.querySelector('.sd-where').textContent=sk[3];}
     function btn(sk){var b=document.createElement('button');b.type='button';b.className='sk';b.dataset.k=sk[0];b.innerHTML='<i class="sk-dot r'+sk[2]+'" aria-hidden="true"></i><span></span>';b.querySelector('span').textContent=sk[0];b.setAttribute('aria-label',sk[0]+', '+RING[sk[2]]);return b;}
@@ -1107,7 +1133,8 @@ footer a:hover{color:var(--fg)}
     Object.keys(SIDE).forEach(function(g){
       var items=S.filter(function(x){return x[1]===g;}).sort(function(a,b){return a[2]-b[2];});
       items.forEach(function(sk,k){var dy=22+25*k,R=RR[sk[2]],dx=dy<R-14?Math.sqrt(R*R-dy*dy):14;
-        var x=300+SIDE[g][0]*dx,y=300+SIDE[g][1]*dy,b=btn(sk);b.style.left=(x/6)+'%';b.style.top=(y/6)+'%';if(x<300)b.classList.add('left');radar.appendChild(b);all.push(b);});
+        var x=300+SIDE[g][0]*dx,y=300+SIDE[g][1]*dy,b=btn(sk);b.style.left=(x/6)+'%';b.style.top=(y/6)+'%';if(x<300)b.classList.add('left');
+        var th=(Math.atan2(x-300,300-y)*180/Math.PI+360)%360;b.dataset.x=x;b.dataset.y=y;b.dataset.r=sk[2];b.style.setProperty('--d','calc(var(--D) + var(--T) * '+(th/360).toFixed(4)+')');b.style.setProperty('--fx',((300-x)/6).toFixed(2)+'cqw');b.style.setProperty('--fy',((300-y)/6).toFixed(2)+'cqw');radar.appendChild(b);all.push(b);});
     });
     /* phones: the same skills as chips, grouped by ring */
     [0,1,2].forEach(function(r){var box=document.createElement('div');box.className='sc-ring'+(r?' old':'');box.innerHTML='<h4><i class="sk-dot r'+r+'" aria-hidden="true"></i>'+RING[r]+'</h4><ul></ul>';var ul=box.querySelector('ul');
@@ -1115,6 +1142,17 @@ footer a:hover{color:var(--fg)}
     var older=S.filter(function(x){return x[2]>0;}).length,ob=document.createElement('button');ob.type='button';ob.className='text-btn sk-older';ob.setAttribute('aria-expanded','false');ob.textContent='Show older skills ('+older+')';
     ob.addEventListener('click',function(){var open=!chips.classList.contains('all');chips.classList.toggle('all',open);ob.setAttribute('aria-expanded',open?'true':'false');ob.textContent=open?'Hide older skills':'Show older skills ('+older+')';});chips.appendChild(ob);
     var detail=$('skillDetail'),home=detail.parentNode,narrow=window.matchMedia('(max-width:859px)');
+    radar.style.containerType='inline-size';
+    var chipsList=[].slice.call(chips.querySelectorAll('.sk'));chipsList.forEach(function(c,i){c.style.setProperty('--cd',(i*0.025).toFixed(3)+'s');});
+    if(!reduced&&'IntersectionObserver' in window){
+      radar.classList.add('armed');
+      var started=false,fallback=setTimeout(function(){radar.classList.remove('armed');},4000);
+      new IntersectionObserver(function(es){es.forEach(function(en){
+        if(en.isIntersecting&&!started){started=true;clearTimeout(fallback);radar.classList.remove('armed');radar.classList.add('scan');}
+        radar.classList.toggle('paused',started&&!en.isIntersecting);
+      });},{threshold:.25}).observe(radar);
+    }
+    radar.addEventListener('mouseleave',function(){radar.classList.remove('hl');});
     function place(b){if(narrow.matches&&b.closest('.sc-ring')){b.closest('.sc-ring').appendChild(detail);detail.classList.add('shown');}else if(detail.parentNode!==home){home.appendChild(detail);}}
     narrow.addEventListener&&narrow.addEventListener('change',function(){if(!narrow.matches&&detail.parentNode!==home)home.appendChild(detail);});
     all.forEach(function(b){var sk=S.filter(function(x){return x[0]===b.dataset.k;})[0];['mouseenter','focus','click'].forEach(function(ev){b.addEventListener(ev,function(){if(ev!=='mouseenter'||!narrow.matches){show(sk,all);place(b);}});});});

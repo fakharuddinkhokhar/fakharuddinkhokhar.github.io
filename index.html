@@ -122,19 +122,20 @@ section[id]{scroll-margin-top:64px}
 .runner{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-panel);box-shadow:var(--shadow);overflow:hidden;overflow:clip;margin-top:28px;min-width:0}
 .runner-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);color:var(--muted);font-family:var(--mono);font-size:12.5px;flex-wrap:wrap}
 .runner-bar .title{flex:1 1 100%;min-width:0;display:grid;gap:2px}
+@media (max-width:559px){.runner-bar .plat{display:none}}
 .runner-bar .note{font-family:var(--body);font-size:12.5px;letter-spacing:0;text-transform:none;color:var(--muted)}
 @media (min-width:560px){.runner-bar .title{flex:1 1 auto}}
 .tabs{display:flex;gap:4px}
 .tab{border:1px solid var(--line);background:transparent;color:var(--muted);font-family:var(--mono);font-size:12.5px;padding:8px 12px;min-height:40px;border-radius:var(--r-control);cursor:pointer}
 .tab.ready::after{content:"";display:inline-block;width:7px;height:7px;margin-left:7px;border-radius:50%;background:var(--fg);vertical-align:1px;animation:scPulse 1.2s ease-in-out 3}
-.tab[aria-selected="true"]{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.tab[aria-selected="true"]{background:var(--surface-2);color:var(--fg);border-color:var(--line-strong)}
 .progress{height:3px;background:var(--line)}
 .progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:var(--accent);transition:transform .35s ease}
 .strip{display:none}
 @media (max-width:859px){.strip{display:flex;gap:14px;align-items:center;position:sticky;top:64px;z-index:1;padding:8px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}.strip>span{white-space:nowrap}.strip .sw{flex:1;margin-left:auto;text-align:right;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis}.term{min-height:0;height:340px;overflow-y:auto;overscroll-behavior:contain}.side #rerun{order:-2}.side #runStatus{order:-1}}
 .panel{display:grid}
 @media (min-width:860px){.panel{grid-template-columns:1.25fr .75fr}}
-.term{padding:16px 18px;font-family:var(--mono);font-size:13px;min-height:340px;display:grid;align-content:start;gap:7px;min-width:0}
+.term{padding:16px 18px;font-family:var(--mono);font-size:13px;min-height:340px;height:340px;overflow-y:auto;overscroll-behavior:contain;display:grid;align-content:start;gap:7px;min-width:0}
 .term .cmd{color:var(--fg);overflow-wrap:anywhere}
 .term .cmd::before{content:"$ ";color:var(--accent)}
 .term .cmd.typing::after{content:"▍";animation:blink 1s steps(1) infinite}
@@ -209,7 +210,7 @@ section[id]{scroll-margin-top:64px}
 .svc h3{font-size:18px;font-weight:700}
 .svc p{color:var(--muted);font-size:15px;text-wrap:pretty}
 .svc .svc-tools{font-family:var(--mono);font-size:12.5px;margin-top:4px}
-@media (max-width:559px){.svc{padding:14px 0}.svc p:not(.svc-tools){display:none}}
+@media (max-width:559px){.svc{padding:14px 0}.svc .svc-tools{display:none}}
 
 /* experience */
 .band{background:var(--bg-2);border-block:1px solid var(--line)}
@@ -233,16 +234,16 @@ section[id]{scroll-margin-top:64px}
 /* phones: date and "Details" share the top row, the text gets the full width; the company line shows once the row is opened */
 @media (max-width:759px){.job summary{grid-template-columns:1fr auto}.job summary>div{grid-column:1/-1}.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}.job:not([open]):not(:first-child) .co{display:none}}
 .job ul{margin:0;padding:0 0 18px;list-style:none;display:grid;gap:5px;font-size:14.5px}
-.job li,.job .co,.job .win{max-width:72ch}
+.job li,.job .co,.job .win{max-width:66ch}
 @media (min-width:760px){.job ul{padding-left:170px}}
 .job li{display:flex;gap:9px}
 .job li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;background:var(--muted);margin-top:9px}
-.edu{margin-top:18px;font-size:14.5px;color:var(--muted);max-width:72ch}
+.edu{margin-top:18px;font-size:14.5px;color:var(--muted);max-width:66ch}
 .edu a{padding-block:12px}
 .edu b{color:var(--fg);font-weight:600}
 /* contact */
 .contact-grid{display:grid;gap:28px;margin-top:24px}
-@media (min-width:860px){.contact-grid{grid-template-columns:1fr 1fr;gap:48px}}
+@media (min-width:860px){.contact-grid{grid-template-columns:1fr 1fr;gap:56px}.channels{padding-top:6px}}
 .contact-list{display:grid;gap:10px;margin-top:18px}
 .contact-item{display:flex;align-items:center;gap:14px;min-height:56px;padding:12px 16px;border:1px solid var(--line);border-radius:var(--r-card);background:var(--surface);min-width:0;text-decoration:none;transition:border-color .2s}
 .contact-item:hover{border-color:var(--accent)}
@@ -269,8 +270,10 @@ textarea{min-height:120px;resize:vertical}
 .form-note{font-size:13.5px;color:var(--muted)}
 .form-title{font-family:var(--display);font-weight:700;font-size:18px}
 .form-status:empty{display:none}
-.msg-card{align-self:start;display:grid;gap:10px;justify-items:start;padding:24px;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--surface)}
-.msg-card .form{justify-self:stretch;background:none;border:0;border-radius:0;padding:12px 0 0;margin-top:4px;border-top:1px dashed var(--line)}
+.channels{align-self:start;display:grid;gap:0;min-width:0}
+.channels .wa-main{margin-top:0;justify-self:start}
+.channels .form-toggle{justify-self:start;margin-top:8px}
+.channels .form{margin-top:8px}
 .form:not(.open){display:none}
 .wa-alt{margin-top:10px;font-size:14.5px;color:var(--muted)}
 .wa-main{margin-top:20px}
@@ -328,6 +331,7 @@ footer a:hover{color:var(--fg)}
 /* about */
 .about{display:grid;gap:20px;grid-template-areas:"head" "copy" "post"}
 .about-head{grid-area:head}.about-copy{grid-area:copy}.about-post{grid-area:post;display:grid;justify-items:start;gap:4px;min-width:0}
+@media (max-width:559px){.about-post .more-posts{margin-top:0}.about{row-gap:12px}}
 @media (min-width:860px){.about{grid-template-columns:.9fr 1.1fr;grid-template-areas:"head copy" "post copy";grid-template-rows:auto 1fr;column-gap:56px;row-gap:24px;align-items:start}}
 
 .about-copy{display:grid;gap:14px;max-width:62ch}
@@ -354,7 +358,7 @@ footer a:hover{color:var(--fg)}
 /* CV button in the nav */
 .nav-actions #navCv{display:none}
 @media (min-width:900px){.nav-actions #navCv{display:inline-flex;min-height:40px;padding:8px 14px;font-size:14px}}
-@media (min-width:900px) and (max-width:1039px){.nav-actions #navCv{padding:8px 11px}#navCv .cv-t{display:none}.nav-links a{padding:10px 9px}}
+@media (min-width:900px) and (max-width:1039px){.nav-actions #navCv{padding:8px 11px}.nav-links a{padding:10px 8px}.nav .wrap{gap:12px}}
 #navCta svg{width:16px;height:16px}
 .btn-cv svg{width:16px;height:16px}
 .mobile-menu .menu-cv{display:flex;align-items:center;gap:8px}
@@ -473,7 +477,7 @@ footer a:hover{color:var(--fg)}
     <p class="lead">A smoke suite, the quick check of the flows that matter most, runs below the way it would on every build. When it finishes, the output becomes the release report I send to clients.</p>
 
     <div class="runner rv" id="runner">
-      <div class="runner-bar"><span class="title">Smoke suite · release 3.8.0 · Chrome, Android, iOS<small class="note">Replayed from a real cycle; names and numbers changed.</small></span>
+      <div class="runner-bar"><span class="title">Smoke suite · release 3.8.0<span class="plat"> · Chrome, Android, iOS</span><small class="note">Replayed from a real cycle; names and numbers changed.</small></span>
         <div class="tabs" role="tablist" aria-label="Demo views">
           <button class="tab" role="tab" id="tabRun" aria-selected="true" aria-controls="runView" type="button">Test run</button>
           <button class="tab" role="tab" id="tabReport" aria-selected="false" aria-controls="reportView" tabindex="-1" type="button">Release report</button>
@@ -507,7 +511,7 @@ footer a:hover{color:var(--fg)}
 
       <div class="report" id="reportView" role="tabpanel" aria-labelledby="tabReport">
         <div class="rhead">
-          <div><h3>Release report · 3.8.0 smoke</h3><small>Prepared by Fakhar Khokhar · 12 cases · Chrome 129, Android 14, iOS 17</small></div>
+          <div><h3>Release report · 3.8.0 smoke</h3><small>Prepared by Fakhar Khokhar · 12 tests · Chrome 129, Android 14, iOS 17</small></div>
           <div class="stamp" id="stamp">Conditional go</div>
         </div>
         <p class="verdict"><b>Verdict: conditional go.</b> Ship once <b>BUG-2031</b> (Tabby instalment total) is fixed and re-tested. BUG-2032 can ship with a known-issue note; server-side validation is scheduled for 3.8.1.</p>
@@ -518,7 +522,7 @@ footer a:hover{color:var(--fg)}
             <text x="75" y="72" text-anchor="middle" id="donutPct">0%</text>
             <text x="75" y="92" text-anchor="middle" class="cap">PASS RATE</text>
           </svg>
-          <p>10 of 12 cases passed</p>
+          <p>10 of 12 tests passed</p>
         </div>
         <div class="rcol">
           <h3>Open defects by severity</h3>
@@ -530,7 +534,7 @@ footer a:hover{color:var(--fg)}
           <p class="sev-note">Bars show each severity's share of the 2 open bugs. S1 (critical) blocks the release. S2 (high) can ship with a known-issue note. S3 goes into the backlog.</p>
         </div>
         <div class="rcol">
-          <details class="rver" id="rver"><summary><h3>What was verified · 10 tests <span class="ok">✓</span></h3></summary>
+          <details class="rver" id="rver"><summary><h3>What was verified · 10 tests in 6 areas <span class="ok">✓</span></h3></summary>
           <ul class="rlist">
             <li>Login on web, one-time code on a new Android device</li>
             <li>Search filters, and listing photos compressed under 2 MB (iOS)</li>
@@ -547,7 +551,7 @@ footer a:hover{color:var(--fg)}
         </div>
         <div class="rfoot">
           <p class="delivs"><span>Delivered with every release:</span> PDF report · Jira bugs with video · test run in TestRail · go / no-go call</p>
-          <div class="rcta"><a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20saw%20the%20release%20report%20on%20your%20portfolio%20and%20would%20like%20one%20for%20our%20next%20release." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Get this report for your next release</a><button class="text-btn" id="rerun2" type="button">Run again</button></div>
+          <div class="rcta"><a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20saw%20the%20release%20report%20on%20your%20portfolio%20and%20would%20like%20one%20for%20our%20next%20release." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Get a report like this</a><button class="text-btn" id="rerun2" type="button">Run again</button></div>
         </div>
       </div>
     </div>
@@ -558,7 +562,7 @@ footer a:hover{color:var(--fg)}
 <section class="section band" id="about">
   <div class="wrap about">
     <div class="about-head">
-      <h2 class="h2">Nearly eight years of asking what could go wrong.</h2>
+      <h2 class="h2">Nearly 8 years of asking what could go wrong.</h2>
     </div>
     <div class="about-post">
       <a class="post" href="https://www.linkedin.com/feed/update/urn:li:activity:7517796883344560129/" target="_blank" rel="noopener">
@@ -641,17 +645,15 @@ footer a:hover{color:var(--fg)}
             <li><span><b>A release report with a go / no-go call.</b> If it helped, we carry on per release, on a monthly retainer, or hourly for short bursts.</span></li>
           </ol>
         </div>
+      </div>
+      <div class="channels">
         <a class="btn btn-primary wa-main" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
         <p class="wa-alt">Or call <a class="link" href="tel:+923238998463">+92 323 8998463</a></p>
         <div class="contact-list">
           <div class="contact-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><small>Email</small><a class="v" id="emailText" href="mailto:fakharuddinkhokhar@gmail.com">fakharuddinkhokhar<wbr>@gmail.com</a></div><button class="btn btn-ghost btn-sm copy" type="button" id="copyEmail" aria-label="Copy email address">Copy</button></div>
           <a class="contact-item" href="https://www.linkedin.com/in/fakhar-ud-din-khokhar-435551ba" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5H3.6V20h3.3zM5.3 3.5a1.9 1.9 0 1 0 0 3.8 1.9 1.9 0 0 0 0-3.8zM20.4 13c0-3.3-1.8-4.8-4.2-4.8-1.9 0-2.8 1-3.3 1.8V8.5H9.6V20h3.3v-6c0-1.6.3-3.1 2.3-3.1 1.9 0 1.9 1.8 1.9 3.2V20h3.3z"/></svg></span><div><small>LinkedIn</small><span class="v">fakhar-ud-din-khokhar</span></div></a>
         </div>
-      </div>
-      <div class="msg-card">
-      <p class="form-title">Prefer email?</p>
-      <p class="form-note">Write a short message here and it opens in your email app, ready to send.</p>
-      <button class="btn btn-ghost form-toggle" id="formToggle" type="button" aria-expanded="false" aria-controls="contactForm">Write a message</button>
+        <button class="text-btn form-toggle" id="formToggle" type="button" aria-expanded="false" aria-controls="contactForm">Or write a short message here</button>
       <form class="form" id="contactForm" novalidate>
         <div class="two">
           <label class="field" for="fName"><span class="lbl">Your name <span class="req">(required)</span></span><input type="text" id="fName" name="name" autocomplete="name" required maxlength="120" placeholder="Jane Doe" aria-describedby="eName"><span class="err" id="eName"></span></label>
@@ -679,7 +681,7 @@ footer a:hover{color:var(--fg)}
 (function(){
   'use strict';
   /* count script errors from the very start, for the hero self-check */
-  var scErrors=0;window.addEventListener('error',function(){scErrors++;});window.addEventListener('unhandledrejection',function(){scErrors++;});
+  var scErrors=0;window.addEventListener('error',function(e){var f=e&&e.filename||'';if(f&&f.indexOf(location.origin)!==0&&f!==location.href)return;scErrors++;});window.addEventListener('unhandledrejection',function(){scErrors++;});
   /* To receive messages without an email client, create a free form at formspree.io and paste its endpoint here,
      e.g. 'https://formspree.io/f/abcdwxyz'. Leave empty to fall back to the visitor's email app. */
   var FORM_ENDPOINT='';
@@ -704,6 +706,7 @@ footer a:hover{color:var(--fg)}
   function setMenu(open){menu.classList.toggle('open',open);menuBtn.setAttribute('aria-expanded',open?'true':'false');menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');menuBtn.querySelector('path').setAttribute('d',open?'M6 6l12 12M18 6L6 18':'M4 7h16M4 12h16M4 17h16');if(window.syncBar)window.syncBar();}
   menuBtn.addEventListener('click',function(){setMenu(!menu.classList.contains('open'));});
   menu.addEventListener('click',function(e){if(e.target.tagName==='A')setMenu(false);});
+  document.addEventListener('click',function(e){if(menu.classList.contains('open')&&!menu.contains(e.target)&&!menuBtn.contains(e.target))setMenu(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);menuBtn.focus();}});
 
   /* active section in nav */
@@ -738,7 +741,7 @@ footer a:hover{color:var(--fg)}
   });
 
   /* contact form: behind a button on phones */
-  $('formToggle').addEventListener('click',function(){var open=this.getAttribute('aria-expanded')!=='true';this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'Hide the form':'Write a message';$('contactForm').classList.toggle('open',open);if(open)$('fName').focus();});
+  $('formToggle').addEventListener('click',function(){var open=this.getAttribute('aria-expanded')!=='true';this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'Hide the form':'Or write a short message here';$('contactForm').classList.toggle('open',open);if(open)$('fName').focus();});
   var form=$('contactForm'),status=$('formStatus'),sendBtn=$('sendBtn');
   if(FORM_ENDPOINT){$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';sendBtn.textContent='Send message';}
   function setErr(id,msg,shake){var f=$(id),e=$('e'+id.slice(1));e.textContent=msg||'';f.setAttribute('aria-invalid',msg?'true':'false');if(msg&&shake&&!reduced){f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');}return !msg;}
@@ -858,7 +861,7 @@ footer a:hover{color:var(--fg)}
     {n:'notifications / push on order status change (android)',ms:1930,s:'pass',a:'aNotif'},
     {n:'api / GET /offers returns 401 without a token',ms:410,s:'pass',a:'aApi'},
     {n:'arabic / right-to-left layout on product page (ios)',ms:1280,s:'pass',a:'aLoc'},
-    {n:'api / POST /leads rejects an invalid KSA phone number',ms:520,s:'fail',a:'aApi',bug:'expected a 422 rejection, got 200 OK · BUG-2032 filed, S2 high'},
+    {n:'api / POST /leads rejects an invalid KSA phone number',ms:520,s:'fail',a:'aApi',bug:'the API should reject this number (422) but accepted it (200) · BUG-2032 filed, S2 high'},
     {n:'notifications / in-app inbox marks message read',ms:1460,s:'pass',a:'aNotif'}
   ];
   var term=$('term'),cmd=$('cmd'),prog=$('prog'),cPass=$('cPass'),cFail=$('cFail'),cTime=$('cTime'),runStatus=$('runStatus');
@@ -867,7 +870,7 @@ footer a:hover{color:var(--fg)}
   var timers=[],started=false,finished=false,areaDone={},areaFail={};
   function clearTimers(){timers.forEach(clearTimeout);timers=[];}
   function later(fn,ms){timers.push(setTimeout(fn,ms));}
-  function setRerun(m){var b=$('rerun');b.dataset.mode=m;b.textContent=m==='skip'?'Skip to the report':'Run again';}
+  function setRerun(m){var b=$('rerun');b.dataset.mode=m;b.textContent=m==='skip'?'Skip to the report':m==='report'?'View release report':'Run again';b.className=m==='report'?'btn btn-primary btn-sm':'btn btn-ghost btn-sm';}
   function selectTab(which){
     var run=which==='run';if(!run)tabReport.classList.remove('ready');
     runView.hidden=!run;reportView.classList.toggle('show',!run);if(run)$('strip').removeAttribute('hidden');else $('strip').setAttribute('hidden','');
@@ -878,7 +881,7 @@ footer a:hover{color:var(--fg)}
   function showReport(){
     selectTab('report');
     var pass=TESTS.filter(function(t){return t.s==='pass';}).length,pct=Math.round(pass/TESTS.length*100);
-    var d=$('donut'),p=$('donutPct');d.parentNode.setAttribute('aria-label','Pass rate '+pct+' percent, '+pass+' of '+TESTS.length+' cases passed');
+    var d=$('donut'),p=$('donutPct');d.parentNode.setAttribute('aria-label','Pass rate '+pct+' percent, '+pass+' of '+TESTS.length+' tests passed');
     if(reduced){d.style.strokeDashoffset=377-377*pct/100;$('s1').style.transform='scaleX(.5)';$('s2').style.transform='scaleX(.5)';p.textContent=pct+'%';return;}
     d.style.strokeDashoffset=377;$('s1').style.transform='scaleX(0)';$('s2').style.transform='scaleX(0)';p.textContent='0%';
     requestAnimationFrame(function(){requestAnimationFrame(function(){
@@ -904,10 +907,10 @@ footer a:hover{color:var(--fg)}
   function addDone(pass,fail,total){
     var d=document.createElement('div');d.className='done';
     d.innerHTML='<span><b>'+(pass+fail)+' tests</b> · <span class="ok">'+pass+' passed</span> · <span class="bad">'+fail+' failed</span> · '+(total/1000).toFixed(1)+'s</span>';
-    var b=document.createElement('button');b.type='button';b.className='btn btn-primary btn-sm';b.textContent='View release report';b.addEventListener('click',function(){showReport();tabReport.focus();});
-    d.appendChild(b);term.appendChild(d);
+    var b=document.createElement('button');b.type='button';b.className='text-btn';b.textContent='Run again';b.addEventListener('click',function(){showRun();run();});
+    d.appendChild(b);term.appendChild(d);term.scrollTop=term.scrollHeight;
     runStatus.textContent=pass+' passed, '+fail+' failed. Release report ready.';
-    tabReport.classList.add('ready');setRerun('again');
+    tabReport.classList.add('ready');setRerun('report');
   }
   function finishInstant(){
     var pass=0,fail=0,total=0;
@@ -938,9 +941,9 @@ footer a:hover{color:var(--fg)}
   [tabRun,tabReport].forEach(function(t){t.addEventListener('keydown',function(e){
     if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key==='Home'||e.key==='End'){e.preventDefault();var other=t===tabRun?tabReport:tabRun;other.click();other.focus();}
   });});
-  $('rerun').addEventListener('click',function(){if(this.dataset.mode==='skip'){clearTimers();reset();finishInstant();showReport();tabReport.focus();}else{showRun();run();}});
+  $('rerun').addEventListener('click',function(){var m=this.dataset.mode;if(m==='skip'){started=true;clearTimers();reset();finishInstant();showReport();tabReport.focus();}else if(m==='report'){showReport();tabReport.focus();}else{showRun();run();}});
   $('rerun2').addEventListener('click',function(){showRun();run();tabRun.focus();});
-  $('watchBtn').addEventListener('click',function(e){e.preventDefault();$('demo').scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});showRun();setTimeout(run,reduced?0:450);});
+  $('watchBtn').addEventListener('click',function(e){e.preventDefault();if(window.matchMedia('(max-width:859px)').matches)runner.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});else{var lead=document.querySelector('#demo .lead');window.scrollTo({top:lead.getBoundingClientRect().top+window.scrollY-84,behavior:reduced?'auto':'smooth'});}showRun();setTimeout(run,reduced?0:450);});
   function autoStart(){if(!started){run();}}
   if('IntersectionObserver' in window){var rio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){autoStart();rio.disconnect();}});},{threshold:.2,rootMargin:'0px 0px -15% 0px'});rio.observe(runner.querySelector('.runner-bar'));
     window.addEventListener('scroll',function onS(){if(started){window.removeEventListener('scroll',onS);return;}var r=runner.getBoundingClientRect();if(r.top<window.innerHeight*.8&&r.bottom>0){autoStart();window.removeEventListener('scroll',onS);}},{passive:true});}

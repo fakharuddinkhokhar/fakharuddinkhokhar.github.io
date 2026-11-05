@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fakhar Ud Din Khokhar</title>
-<meta name="description" content="Fakhar Ud Din Khokhar, SQA Engineer at inDrive. End-to-end testing and test automation for web, iOS and Android products, with release reports your team can act on.">
+<meta name="description" content="Fakhar Ud Din Khokhar, Software QA Engineer at inDrive. End-to-end testing and test automation for web, iOS and Android products, with release reports your team can act on.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Fakhar Ud Din Khokhar · SQA Engineer">
+<meta property="og:title" content="Fakhar Ud Din Khokhar · Software QA Engineer">
 <meta property="og:description" content="I test web and mobile products end to end, automate regression, and sign off releases with reports clients can act on. inDrive, Homie, The Entertainer, CarSwitch, Aerodyne.">
 <meta property="og:url" content="https://fakharuddinkhokhar.github.io/">
 <meta property="og:image" content="https://fakharuddinkhokhar.github.io/og-image.png">
@@ -522,7 +522,7 @@ footer a:hover{color:var(--fg)}
           <div><h3>Release report · 3.8.0 smoke</h3><small>Prepared by Fakhar Khokhar · 12 tests · Chrome 129, Android 14, iOS 17</small></div>
           <div class="stamp" id="stamp">Go after 1 fix</div>
         </div>
-        <p class="verdict"><b>Verdict: go after one fix.</b> <b>BUG-2031</b> (Tabby instalment total) is critical and blocks the release until it is fixed and re-tested. BUG-2032 can ship if it is listed as a known issue; the server-side fix is planned for 3.8.1.</p>
+        <p class="verdict"><b>Verdict: go after 1 fix.</b> <b>BUG-2031</b> (Tabby instalment total) is critical and blocks the release until it is fixed and re-tested. BUG-2032 can ship if it is listed as a known issue; the server-side fix is planned for 3.8.1.</p>
         <div class="donut">
           <svg viewBox="0 0 150 150" role="img" aria-label="Pass rate">
             <circle class="track" cx="75" cy="75" r="60"/>
@@ -610,7 +610,7 @@ footer a:hover{color:var(--fg)}
     <h2 class="h2">Where I've tested, and what I owned there.</h2>
     <div class="jobs">
       <details class="job">
-        <summary><time>Apr 2026 – now</time><div><h3>SQA Engineer <span>· inDrive</span></h3><p class="co">Mobility platform in 48 countries and 1,000+ cities. Passenger and driver apps on Android and iOS. Remote.</p></div><span class="more">Details</span></summary>
+        <summary><time>Apr 2026 – now</time><div><h3>Software QA Engineer <span>· inDrive</span></h3><p class="co">Mobility platform in 48 countries and 1,000+ cities. Passenger and driver apps on Android and iOS. Remote.</p></div><span class="more">Details</span></summary>
         <ul><li>Test plans and scenarios for every new feature</li><li>Manual, exploratory and regression passes on real devices and emulators across Android and iOS before each rollout</li><li>Appium UI automation for both platforms, plus direct API testing to verify what the app sends and receives</li></ul>
       </details>
       <details class="job">
@@ -683,7 +683,7 @@ footer a:hover{color:var(--fg)}
 </main>
 <a class="btn wa-bar" id="waBar" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
 
-<footer><div class="wrap"><span>© <span id="year">2026</span> Fakhar Ud Din Khokhar · SQA Engineer</span><ul><li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li><li><a href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download>CV (PDF)</a></li><li><a href="#top">Back to top</a></li></ul></div></footer>
+<footer><div class="wrap"><span>© <span id="year">2026</span> Fakhar Ud Din Khokhar · Software QA Engineer</span><ul><li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li><li><a href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download>CV (PDF)</a></li><li><a href="#top">Back to top</a></li></ul></div></footer>
 
 <script>
 (function(){
@@ -758,7 +758,7 @@ footer a:hover{color:var(--fg)}
   if(FORM_ENDPOINT){$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';sendBtn.textContent='Send message';}
   function setErr(id,msg,shake){var f=$(id),e=$('e'+id.slice(1));e.textContent=msg||'';f.setAttribute('aria-invalid',msg?'true':'false');if(msg&&shake&&!reduced){f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');}return !msg;}
   var SHORT_MSG='A sentence or two (at least 20 characters) helps me reply usefully.';
-  function emailErr(v){if(!v)return 'Please enter your email.';if(v.indexOf('@')<0)return 'That email address needs an @, for example jane@company.com.';if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v))return 'That email address needs a full domain after the @, for example jane@company.com.';return '';}
+  function emailErr(v){var EX=', for example jane@company.com.';if(!v)return 'Please enter your email.';if(/\s/.test(v))return 'That email address can\'t contain spaces'+EX;var at=v.split('@').length-1;if(at===0)return 'That email address needs an @'+EX;if(at>1)return 'That email address has more than one @'+EX;var parts=v.split('@'),local=parts[0],domain=parts[1];if(!local)return 'That email address needs your name before the @'+EX;if(/^\.|\.$|\.\./.test(local))return 'The part before the @ can\'t start or end with a dot or have two dots in a row'+EX;if(!/^[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/.test(domain))return 'That email address needs a full domain after the @'+EX;return '';}
   function validate(){
     var ok=true,first=null;
     var name=$('fName').value.trim(),email=$('fEmail').value.trim(),svc=$('fService').value,msg=$('fMsg').value.trim();
@@ -922,7 +922,7 @@ footer a:hover{color:var(--fg)}
     if(t.bug){var b=document.createElement('span');b.className='bug';b.textContent='↳ '+t.bug;r.appendChild(b);}
     term.scrollTop=term.scrollHeight;
     var a=$(t.a);if(!a.dataset.total)a.dataset.total=a.textContent.split('/')[1];if(t.s==='pass')areaDone[t.a]=(areaDone[t.a]||0)+1;else areaFail[t.a]=(areaFail[t.a]||0)+1;
-    a.innerHTML=(areaDone[t.a]||0)+'/'+a.dataset.total+' <span class="ok">✓</span>'+(areaFail[t.a]?' <span class="bad">'+areaFail[t.a]+' ✗</span>':'');
+    var done=(areaDone[t.a]||0)+(areaFail[t.a]||0)===+a.dataset.total;a.innerHTML=(areaDone[t.a]||0)+'/'+a.dataset.total+(done?' <span class="ok">✓</span>':'')+(areaFail[t.a]?' <span class="bad">'+areaFail[t.a]+' ✗</span>':'');
   }
   function addDone(pass,fail,total){
     var d=document.createElement('div');d.className='done';

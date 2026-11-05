@@ -203,6 +203,7 @@ section[id]{scroll-margin-top:64px}
 .rfoot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
 .nw{white-space:nowrap}
 .rfoot .delivs{color:var(--fg);max-width:62ch;text-wrap:balance}
+.rfoot .delivs>span:first-child{display:block;margin-bottom:2px}
 .run-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}.run-ctl .btn{flex:1 1 auto}
 .rcta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
 .text-btn{background:none;border:0;padding:12px 4px;min-height:44px;font:inherit;font-size:14px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong);cursor:pointer}
@@ -386,7 +387,7 @@ footer a:hover{color:var(--fg)}
 @media (min-width:860px){.hero.scan-go .photo-wrap{animation-delay:.32s}}
 @keyframes wipe{from{clip-path:inset(0 0 100% 0);opacity:.15}to{clip-path:inset(0 0 0 0);opacity:1}}
 /* Logos settle in after the scan; service cards stagger when reached */
-.logos.go .logo,.services.in .svc{animation:rise .55s var(--ease-out-expo) backwards;animation-delay:var(--d,0s)}
+.logos.go .logo,.services.is-in .svc{animation:rise .55s var(--ease-out-expo) backwards;animation-delay:var(--d,0s)}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}}
 /* Small feedback */
 .icon-btn svg:not([hidden]){animation:iconIn .4s var(--ease-out-expo)}
@@ -434,7 +435,7 @@ footer a:hover{color:var(--fg)}
   <div class="scanline" aria-hidden="true"></div>
   <div class="wrap">
     <div>
-      <p class="intro"><b>Fakhar Ud Din Khokhar</b> · <span class="nw">SQA Engineer at inDrive</span> · <span class="nw">nearly 8 years in software testing</span></p>
+      <p class="intro"><b>Fakhar Ud Din Khokhar</b> · <span class="nw">Software QA Engineer at inDrive</span> · <span class="nw">nearly 8 years in software testing</span></p>
       <h1>Every release gets a verdict, and the reasons behind it.</h1>
       <p class="lead">End-to-end testing and automation for web, iOS and Android, with release reports your team can act on.</p>
       <div class="hero-cta">
@@ -442,7 +443,7 @@ footer a:hover{color:var(--fg)}
         <a class="btn btn-ghost" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
       </div>
       <details class="selfcheck" id="selfcheck">
-        <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i><span><span class="sc-x">This page, t</span><span class="sc-y">T</span>ested on your device</span></span><span class="sc-status" id="scStatus">waiting</span></summary>
+        <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i><span>Page check<span class="sc-x"> on your device</span></span></span><span class="sc-status" id="scStatus">waiting</span></summary>
         <ul class="sc-list" id="scList">
           <li data-k="load"><span class="st" aria-hidden="true">◌</span><span class="nm">Ready to use in</span><span class="val">…</span></li>
           <li data-k="errors"><span class="st" aria-hidden="true">◌</span><span class="nm">Script errors</span><span class="val">…</span></li>
@@ -546,7 +547,7 @@ footer a:hover{color:var(--fg)}
           </ul>
         </div>
         <div class="rcol">
-          <details class="rver" id="rver"><summary><h3>Verified · 10 tests <span class="ok">✓</span></h3></summary>
+          <details class="rver" id="rver"><summary><h3>Verified · 10 tests, 6 flows <span class="ok">✓</span></h3></summary>
           <ul class="rlist">
             <li>Login on web, one-time code on a new Android device</li>
             <li>Search filters, and listing photos compressed under 2 MB (iOS)</li>
@@ -621,7 +622,7 @@ footer a:hover{color:var(--fg)}
         <ul><li>Robot Framework and Selenium automation that raised regression coverage and cut manual effort</li><li>Functional, regression and smoke testing across environments; test data and environment management</li></ul>
       </details>
       <details class="job">
-        <summary><time>Sep 2021 – Jul 2024</time><div><h3>Senior Software Test Engineer <span>· The Entertainer</span></h3><p class="co">Lifestyle and rewards platform in more than 14 countries. Consumer apps, admin portals and merchant tools.</p><p class="win">Made regression about 40% faster, with no critical bugs after release.</p></div><span class="more">Details</span></summary>
+        <summary><time>Sep 2021 – Jul 2024</time><div><h3>Senior Software Test Engineer <span>· The Entertainer</span></h3><p class="co">Lifestyle and rewards platform in more than 14 countries. Consumer apps, admin portals and merchant tools.</p><p class="win">Cut the full pre-release re-test by about 40%, with no critical bugs after release.</p></div><span class="more">Details</span></summary>
         <ul><li>Owned test planning, execution and release sign-off for major launches and seasonal campaigns</li><li>Validated Adyen, Tabby and Checkout.com payments plus the Deliverect order integration</li><li>Analytics QA across Braze, MoEngage, Firebase and New Relic events</li><li>Selenium and Appium suites in Java with TestNG and the Page Object Model</li></ul>
       </details>
       <details class="job">
@@ -751,26 +752,29 @@ footer a:hover{color:var(--fg)}
   var DRAFT_KEY='fk-draft',draftIds=['fName','fEmail','fService','fMsg'];
   function saveDraft(){var d={};draftIds.forEach(function(id){d[id]=$(id).value;});try{localStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(e){}}
   function clearDraft(){try{localStorage.removeItem(DRAFT_KEY);}catch(e){}}
-  $('clearForm').addEventListener('click',function(){form.reset();draftIds.forEach(function(id){setErr(id,'');});clearDraft();status.textContent='';status.className='form-status';$('fName').focus();});
+  $('clearForm').addEventListener('click',function(){var snap={};draftIds.forEach(function(id){snap[id]=$(id).value;});form.reset();draftIds.forEach(function(id){setErr(id,'');});clearDraft();status.className='form-status';status.innerHTML='Form cleared. <button class="text-btn" type="button" id="undoClear">Undo</button>';$('undoClear').addEventListener('click',function(){draftIds.forEach(function(id){$(id).value=snap[id];});saveDraft();status.textContent='Restored.';$('fName').focus();});$('fName').focus();});
   $('formToggle').addEventListener('click',function(){var open=this.getAttribute('aria-expanded')!=='true';this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'Hide the form':'Or write a short message here';$('contactForm').classList.toggle('open',open);if(open)$('fName').focus();});
   var form=$('contactForm'),status=$('formStatus'),sendBtn=$('sendBtn');
   if(FORM_ENDPOINT){$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';sendBtn.textContent='Send message';}
   function setErr(id,msg,shake){var f=$(id),e=$('e'+id.slice(1));e.textContent=msg||'';f.setAttribute('aria-invalid',msg?'true':'false');if(msg&&shake&&!reduced){f.classList.remove('shake');void f.offsetWidth;f.classList.add('shake');}return !msg;}
+  var SHORT_MSG='A sentence or two (at least 20 characters) helps me reply usefully.';
   function emailErr(v){if(!v)return 'Please enter your email.';if(v.indexOf('@')<0)return 'That email address needs an @, for example jane@company.com.';if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v))return 'That email address needs a full domain after the @, for example jane@company.com.';return '';}
   function validate(){
     var ok=true,first=null;
     var name=$('fName').value.trim(),email=$('fEmail').value.trim(),svc=$('fService').value,msg=$('fMsg').value.trim();
     if(!setErr('fName',name?'':'Please enter your name.',true)){ok=false;first=first||$('fName');}
     if(!setErr('fEmail',emailErr(email),true)){ok=false;first=first||$('fEmail');}
-    if(!setErr('fMsg',msg?(msg.length<20?'A sentence or two about your product helps me reply usefully.':''):'Please tell me a little about your product.',true)){ok=false;first=first||$('fMsg');}
+    if(!setErr('fMsg',msg?(msg.length<20?SHORT_MSG:''):'Please tell me a little about your product.',true)){ok=false;first=first||$('fMsg');}
     if(first)first.focus();
     return ok;
   }
   ['fName','fService','fMsg'].forEach(function(id){$(id).addEventListener('input',function(){if($(id).getAttribute('aria-invalid')==='true')setErr(id,'');});});
   /* email: re-check as they fix it once flagged, and check when they leave the field */
   $('fEmail').addEventListener('input',function(){if(this.getAttribute('aria-invalid')==='true')setErr('fEmail',emailErr(this.value.trim()));});
-  $('fMsg').addEventListener('blur',function(){var v=this.value.trim();if(v&&v.length<20)setErr('fMsg','A sentence or two about your product helps me reply usefully.');});
-  $('fEmail').addEventListener('blur',function(){var v=this.value.trim();if(v)setErr('fEmail',emailErr(v));});
+  /* pressing the submit button blurs the field first; skip the blur check then, so the message can't push the button away mid-click (submit validates anyway) */
+  var pressingSend=false;sendBtn.addEventListener('pointerdown',function(){pressingSend=true;setTimeout(function(){pressingSend=false;},600);});
+  $('fMsg').addEventListener('blur',function(e){if(pressingSend||e.relatedTarget===sendBtn)return;var v=this.value.trim();if(v&&v.length<20)setErr('fMsg',SHORT_MSG);});
+  $('fEmail').addEventListener('blur',function(e){if(pressingSend||e.relatedTarget===sendBtn)return;var v=this.value.trim();if(v)setErr('fEmail',emailErr(v));});
   form.addEventListener('submit',function(e){
     e.preventDefault();
     status.className='form-status';status.textContent='';
@@ -827,7 +831,7 @@ footer a:hover{color:var(--fg)}
       var i=0;
       (function next(){
         if(i>=rows.length){summary();return;}
-        var li=rows[i];li.className='run';status.innerHTML='<span class="sc-x">checking </span>'+(i+1)+'/'+rows.length;
+        var li=rows[i];li.className='run';status.textContent='checking…';
         setTimeout(function(){settle(li);i++;setTimeout(next,90);},320);
       })();
     }
@@ -849,7 +853,7 @@ footer a:hover{color:var(--fg)}
     if(svc&&'IntersectionObserver' in window){
       [].slice.call(svc.children).forEach(function(c,i){c.style.setProperty('--d',(i*0.07).toFixed(2)+'s');});
       /* cards stay visible by default; the stagger only plays when they first scroll into view */
-      var sio2=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){svc.classList.add('in');sio2.disconnect();setTimeout(function(){svc.classList.remove('in');},1400);}});},{rootMargin:'0px 0px -4% 0px'});
+      var sio2=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){svc.classList.add('is-in');sio2.disconnect();setTimeout(function(){svc.classList.remove('is-in');},1400);}});},{rootMargin:'0px 0px -4% 0px'});
       sio2.observe(svc);
     }
   })();
@@ -884,7 +888,7 @@ footer a:hover{color:var(--fg)}
   function clearTimers(){timers.forEach(clearTimeout);timers=[];}
   var paused=false;
   function later(fn,ms){timers.push(setTimeout(function(){if(paused){later(fn,200);return;}fn();},ms));}
-  function setPause(p){paused=p;var b=$('pauseBtn');b.textContent=p?'Resume':'Pause';b.setAttribute('aria-pressed',p?'true':'false');term.classList.toggle('paused',p);runStatus.textContent=p?'Run paused.':'';if(p)$('sWhat').textContent='paused';}
+  function setPause(p){var was=paused;paused=p;var b=$('pauseBtn');b.textContent=p?'Resume':'Pause';b.setAttribute('aria-pressed',p?'true':'false');term.classList.toggle('paused',p);if(p){runStatus.textContent='Run paused.';$('sWhat').textContent='paused';}else if(was)runStatus.textContent='';}
   function setRerun(m){var b=$('rerun');b.dataset.mode=m;$('pauseBtn').hidden=!(m==='skip'&&started&&!finished);if(m!=='skip')setPause(false);b.textContent=m==='skip'?'Skip to the report':m==='report'?'View release report':'Run again';b.className=m==='report'?'btn btn-primary btn-sm':'btn btn-ghost btn-sm';}
   function selectTab(which){
     var run=which==='run';if(!run)tabReport.classList.remove('ready');
@@ -893,7 +897,7 @@ footer a:hover{color:var(--fg)}
     tabReport.setAttribute('aria-selected',run?'false':'true');tabReport.tabIndex=run?-1:0;
   }
   function showRun(){selectTab('run');}
-  function revealReport(){if(window.matchMedia('(min-width:860px)').matches){var r=runner.getBoundingClientRect();if(r.bottom>window.innerHeight)window.scrollTo({top:r.top+window.scrollY-72,behavior:reduced?'auto':'smooth'});}try{history.replaceState(null,'','#report');}catch(e){}}
+  function revealReport(){var r=runner.getBoundingClientRect(),c=document.querySelector('.rcta').getBoundingClientRect();if(c.bottom>window.innerHeight||r.top<0)window.scrollTo({top:r.top+window.scrollY-72,behavior:reduced?'auto':'smooth'});try{history.replaceState(null,'','#report');}catch(e){}}
   function showReport(){
     selectTab('report');
     var pass=TESTS.filter(function(t){return t.s==='pass';}).length,pct=Math.round(pass/TESTS.length*100);
@@ -938,7 +942,7 @@ footer a:hover{color:var(--fg)}
   function run(){
     if(location.hash==='#report'){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
     reset();started=true;setRerun('skip');
-    if(reduced){finishInstant();showReport();return;}
+    if(reduced){finishInstant();return;}
     var i=0;
     (function type(){if(i<CMD.length){cmd.textContent+=CMD[i++];later(type,22+Math.random()*30);}else{cmd.classList.remove('typing');later(step,500);}})();
     var idx=0,pass=0,fail=0,elapsed=0;
@@ -963,7 +967,7 @@ footer a:hover{color:var(--fg)}
   [tabRun,tabReport].forEach(function(t){t.addEventListener('keydown',function(e){
     if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key==='Home'||e.key==='End'){e.preventDefault();var other=t===tabRun?tabReport:tabRun;other.click();other.focus();}
   });});
-  $('rerun').addEventListener('click',function(){var m=this.dataset.mode;if(m==='skip'){started=true;clearTimers();reset();finishInstant();showReport();tabReport.focus();}else if(m==='report'){showReport();revealReport();tabReport.focus();}else{showRun();run();}});
+  $('rerun').addEventListener('click',function(){var m=this.dataset.mode;if(m==='skip'){started=true;clearTimers();reset();finishInstant();showReport();revealReport();tabReport.focus();}else if(m==='report'){showReport();revealReport();tabReport.focus();}else{showRun();run();}});
   $('rerun2').addEventListener('click',function(){showRun();run();tabRun.focus();});
   $('watchBtn').addEventListener('click',function(e){e.preventDefault();var lead=document.querySelector('#demo .lead');window.scrollTo({top:lead.getBoundingClientRect().top+window.scrollY-76,behavior:reduced?'auto':'smooth'});showRun();setTimeout(run,reduced?0:450);});
   function autoStart(){if(!started){run();}}

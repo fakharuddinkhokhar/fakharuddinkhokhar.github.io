@@ -82,7 +82,7 @@ section[id]{scroll-margin-top:64px}
 .icon-btn svg{width:18px;height:18px}
 .nav-actions #navCta{display:none}
 @media (min-width:900px){.nav-links{display:flex}.nav-actions #navCta{display:inline-flex;min-height:40px;padding:8px 16px;font-size:14px}#menuBtn{display:none}}
-.mobile-menu{display:none;border-top:1px solid var(--line);background:var(--bg)}
+.mobile-menu{display:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line-strong);background:var(--bg);box-shadow:var(--shadow)}
 .mobile-menu.open{display:block;animation:menuIn .25s var(--ease-out-expo)}
 @keyframes menuIn{from{opacity:0;transform:translateY(-6px)}}
 .mobile-menu ul{list-style:none;margin:0;padding:8px 20px 16px;display:grid;gap:2px}
@@ -132,10 +132,13 @@ section[id]{scroll-margin-top:64px}
 .progress{height:3px;background:var(--line)}
 .progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:var(--accent);transition:transform .35s ease}
 .strip{display:none}
-@media (max-width:859px){.strip{display:flex;gap:14px;align-items:center;position:sticky;top:64px;z-index:1;padding:8px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}.strip>span{white-space:nowrap}.strip .sw{flex:1;margin-left:auto;text-align:right;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis}.term{min-height:0;height:340px;overflow-y:auto;overscroll-behavior:contain}.side .run-ctl{order:-2}.side #runStatus{order:-1}}
+@media (max-width:859px){.strip{display:flex;gap:14px;align-items:center;position:sticky;top:64px;z-index:1;padding:8px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}.strip>span{white-space:nowrap}.strip .sw{flex:1;margin-left:auto;text-align:right;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis}.term{min-height:0;height:300px;overflow-y:auto}.side .run-ctl{order:-2}.side #runStatus{order:-1}}
 .panel{display:grid}
 @media (min-width:860px){.panel{grid-template-columns:1.25fr .75fr}}
-.term{padding:16px 18px;font-family:var(--mono);font-size:13px;min-height:340px;height:340px;overflow-y:auto;overscroll-behavior:contain;display:grid;align-content:start;gap:7px;min-width:0}
+.term{padding:16px 18px;font-family:var(--mono);font-size:13px;min-height:340px;height:340px;overflow-y:auto;display:grid;align-content:start;gap:7px;min-width:0}
+@media (max-width:859px){.term{height:300px;min-height:0}}
+.term.paused::before{content:"Paused · press Resume to continue";position:sticky;top:-16px;margin:-16px -18px 4px;padding:8px 18px;background:var(--surface-2);border-bottom:1px solid var(--line);color:var(--warn);font-size:12.5px;z-index:1}
+.term.paused .st{animation-play-state:paused!important}
 .term .cmd{color:var(--fg);overflow-wrap:anywhere}
 .term .cmd::before{content:"$ ";color:var(--accent)}
 .term .cmd.typing::after{content:"▍";animation:blink 1s steps(1) infinite}
@@ -191,13 +194,14 @@ section[id]{scroll-margin-top:64px}
 .sev-note{font-size:13px;color:var(--muted);margin-top:8px}
 .verdict{grid-column:1/-1;font-size:15px;line-height:1.55;padding:12px 16px;border-radius:var(--r-control);background:var(--surface-2);border:1px solid var(--line);max-width:none}
 .verdict b{font-weight:600}
-.rver summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center}.rver summary::-webkit-details-marker{display:none}.rver summary h3{margin:0}.rver .rlist{margin-top:6px}
-.rver summary h3::after{content:"+";display:inline-block;margin-left:10px;font-size:15px;color:var(--muted);transition:transform .3s var(--ease-out-expo)}.rver[open] summary h3::after{transform:rotate(45deg)}
+.rver summary{list-style:none;cursor:pointer;min-height:44px;display:flex;align-items:center;gap:12px}.rver summary::-webkit-details-marker{display:none}.rver summary h3{margin:0}.rver .rlist{margin-top:6px}
+.rver summary::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);margin-left:auto;color:var(--muted);display:inline-block;flex:none;transition:transform .3s var(--ease-out-expo)}.rver[open] summary::after{transform:translateY(2px) rotate(-135deg)}
 .rlist{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14.5px}
 .rlist li{display:flex;gap:10px;align-items:flex-start}
 .rlist li::before{content:"✓";flex:none;color:var(--pass);font-family:var(--mono)}
 .rlist li.no::before{content:"✗";color:var(--fail)}
 .rfoot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.nw{white-space:nowrap}
 .rfoot .delivs{color:var(--fg);max-width:62ch;text-wrap:balance}
 .run-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}.run-ctl .btn{flex:1 1 auto}
 .rcta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
@@ -228,8 +232,8 @@ section[id]{scroll-margin-top:64px}
 .job .win{font-size:15px;font-weight:600;color:var(--fg);margin-top:6px;text-wrap:pretty}
 .job .win::before{content:"↳ ";color:var(--accent);font-family:var(--mono);font-weight:400}
 .job .more{font-size:13.5px;color:var(--muted);display:flex;align-items:center;gap:6px;white-space:nowrap}
-.job .more::after{content:"+";font-family:var(--mono);color:var(--muted);font-size:16px;display:inline-block;transition:transform .3s var(--ease-out-expo)}
-.job[open] .more::after{transform:rotate(45deg)}
+.job .more::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);color:var(--muted);display:inline-block;margin-left:2px;transition:transform .3s var(--ease-out-expo)}
+.job[open] .more::after{transform:translateY(2px) rotate(-135deg)}
 .job[open] ul{animation:detailIn .35s var(--ease-out-expo)}
 @keyframes detailIn{from{opacity:0;transform:translateY(-4px)}}
 @supports (interpolate-size:allow-keywords){:root{interpolate-size:allow-keywords}.job::details-content{height:0;overflow:clip;transition:height .35s var(--ease-out-expo),content-visibility .35s allow-discrete}.job[open]::details-content{height:auto}@media (prefers-reduced-motion:reduce){.job::details-content{transition:none}}}
@@ -278,11 +282,12 @@ textarea{min-height:120px;resize:vertical}
 .channels .form{margin-top:8px}
 .form:not(.open){display:none}
 .wa-alt{margin-top:10px;font-size:14.5px;color:var(--muted)}
+.wa-alt a{display:inline-block;padding-block:12px;margin-block:-12px}
 .wa-main{margin-top:20px}
 .wa-main svg{width:18px;height:18px}
 .field input,.field select,.field textarea{scroll-margin-top:120px}
 .wa-bar{display:none}
-@media (max-width:859px){.wa-bar{display:flex;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:var(--z-nav);background:var(--surface);color:var(--fg);border:1px solid var(--line-strong);box-shadow:var(--shadow)}.wa-bar svg{width:18px;height:18px}}
+@media (max-width:859px){.wa-bar{display:flex;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:var(--z-nav);background:var(--accent);color:var(--accent-ink);border:0;box-shadow:var(--shadow)}.wa-bar svg{width:18px;height:18px}}
 
 footer{border-top:1px solid var(--line);padding-block:24px;color:var(--muted);font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
@@ -308,8 +313,8 @@ footer a:hover{color:var(--fg)}
 @media (max-width:420px){.sc-x{display:none}.sc-y{display:inline}.selfcheck summary{padding-inline:12px}}
 .selfcheck.passed .sc-status{color:var(--pass)}
 .selfcheck.warned .sc-status{color:var(--warn)}
-.sc-status::after{content:"+";margin-left:10px;color:var(--muted);display:inline-block;transition:transform .3s var(--ease-out-expo)}
-.selfcheck[open] .sc-status::after{transform:rotate(45deg)}
+.sc-status::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:translateY(-2px) rotate(45deg);margin-left:12px;color:var(--muted);display:inline-block;transition:transform .3s var(--ease-out-expo)}
+.selfcheck[open] .sc-status::after{transform:translateY(2px) rotate(-135deg)}
 .sc-list{list-style:none;margin:0;padding:10px 14px;display:grid;gap:7px;border-top:1px dashed var(--line)}
 .sc-list li{display:grid;grid-template-columns:1.4em 1fr auto;gap:8px;align-items:baseline}
 .sc-list .nm{color:var(--fg);min-width:0}
@@ -429,7 +434,7 @@ footer a:hover{color:var(--fg)}
   <div class="scanline" aria-hidden="true"></div>
   <div class="wrap">
     <div>
-      <p class="intro"><b>Fakhar Ud Din Khokhar</b> · SQA Engineer at inDrive · nearly 8 years in software testing</p>
+      <p class="intro"><b>Fakhar Ud Din Khokhar</b> · <span class="nw">SQA Engineer at inDrive</span> · <span class="nw">nearly 8 years in software testing</span></p>
       <h1>Every release gets a verdict, and the reasons behind it.</h1>
       <p class="lead">End-to-end testing and automation for web, iOS and Android, with release reports your team can act on.</p>
       <div class="hero-cta">
@@ -439,7 +444,7 @@ footer a:hover{color:var(--fg)}
       <details class="selfcheck" id="selfcheck">
         <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i><span><span class="sc-x">This page, t</span><span class="sc-y">T</span>ested on your device</span></span><span class="sc-status" id="scStatus">waiting</span></summary>
         <ul class="sc-list" id="scList">
-          <li data-k="load"><span class="st" aria-hidden="true">◌</span><span class="nm">Page load time</span><span class="val">…</span></li>
+          <li data-k="load"><span class="st" aria-hidden="true">◌</span><span class="nm">Ready to use in</span><span class="val">…</span></li>
           <li data-k="errors"><span class="st" aria-hidden="true">◌</span><span class="nm">Script errors</span><span class="val">…</span></li>
           <li data-k="alt"><span class="st" aria-hidden="true">◌</span><span class="nm">Images with alt text</span><span class="val">…</span></li>
           <li data-k="contrast"><span class="st" aria-hidden="true">◌</span><span class="nm">Hero text contrast (minimum 4.5:1)</span><span class="val">…</span></li>
@@ -516,7 +521,7 @@ footer a:hover{color:var(--fg)}
           <div><h3>Release report · 3.8.0 smoke</h3><small>Prepared by Fakhar Khokhar · 12 tests · Chrome 129, Android 14, iOS 17</small></div>
           <div class="stamp" id="stamp">Go after 1 fix</div>
         </div>
-        <p class="verdict"><b>Verdict: go after one fix.</b> <b>BUG-2031</b> (Tabby instalment total) is critical and blocks the release until it is fixed and re-tested. BUG-2032 can ship with a known-issue note; server-side validation is scheduled for 3.8.1.</p>
+        <p class="verdict"><b>Verdict: go after one fix.</b> <b>BUG-2031</b> (Tabby instalment total) is critical and blocks the release until it is fixed and re-tested. BUG-2032 can ship if it is listed as a known issue; the server-side fix is planned for 3.8.1.</p>
         <div class="donut">
           <svg viewBox="0 0 150 150" role="img" aria-label="Pass rate">
             <circle class="track" cx="75" cy="75" r="60"/>
@@ -533,7 +538,7 @@ footer a:hover{color:var(--fg)}
             <div><span class="wn">S2 high</span><div class="bar"><i id="s2" style="background:var(--warn)"></i></div><b>1</b></div>
             <div><span class="in">S3 medium</span><div class="bar"><i id="s3" style="background:var(--info)"></i></div><b>0</b></div>
           </div>
-          <p class="sev-note">Bars show each severity's share of the 2 open bugs. S1 (critical) blocks the release. S2 (high) can ship with a known-issue note. S3 goes into the backlog.</p>
+          <p class="sev-note">Bars show each severity's share of the 2 open bugs. S1 (critical) blocks the release. S2 (high) can ship if it is listed as a known issue. S3 goes into the backlog.</p>
           <h3 style="margin-top:16px">Not yet verified</h3>
           <ul class="rlist">
             <li class="no">Tabby instalment total at checkout (BUG-2031)</li>
@@ -541,7 +546,7 @@ footer a:hover{color:var(--fg)}
           </ul>
         </div>
         <div class="rcol">
-          <details class="rver" id="rver"><summary><h3>What was verified · 10 tests in 6 areas <span class="ok">✓</span></h3></summary>
+          <details class="rver" id="rver"><summary><h3>Verified · 10 tests <span class="ok">✓</span></h3></summary>
           <ul class="rlist">
             <li>Login on web, one-time code on a new Android device</li>
             <li>Search filters, and listing photos compressed under 2 MB (iOS)</li>
@@ -552,7 +557,7 @@ footer a:hover{color:var(--fg)}
           </ul></details>
         </div>
         <div class="rfoot">
-          <p class="delivs"><span>Delivered with every release:</span> PDF report · Jira bugs with video · test run in TestRail · go / no-go call</p>
+          <p class="delivs"><span>Delivered with every release:</span> <span class="nw">PDF report</span> · <span class="nw">Jira bugs with video</span> · <span class="nw">test run in TestRail</span> · <span class="nw">a ship-or-hold call</span></p>
           <div class="rcta"><a class="btn btn-primary" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20saw%20the%20release%20report%20on%20your%20portfolio%20and%20would%20like%20one%20for%20our%20next%20release." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Ask for one on WhatsApp</a><button class="text-btn" id="copyReport" type="button">Copy link to this report</button><button class="text-btn" id="rerun2" type="button">Run again</button></div>
         </div>
       </div>
@@ -616,7 +621,7 @@ footer a:hover{color:var(--fg)}
         <ul><li>Robot Framework and Selenium automation that raised regression coverage and cut manual effort</li><li>Functional, regression and smoke testing across environments; test data and environment management</li></ul>
       </details>
       <details class="job">
-        <summary><time>Sep 2021 – Jul 2024</time><div><h3>Senior Software Test Engineer <span>· The Entertainer</span></h3><p class="co">Lifestyle and rewards platform in more than 14 countries. Consumer apps, admin portals and merchant tools.</p><p class="win">Made regression about 40% faster, with no critical (P1) bugs after release.</p></div><span class="more">Details</span></summary>
+        <summary><time>Sep 2021 – Jul 2024</time><div><h3>Senior Software Test Engineer <span>· The Entertainer</span></h3><p class="co">Lifestyle and rewards platform in more than 14 countries. Consumer apps, admin portals and merchant tools.</p><p class="win">Made regression about 40% faster, with no critical bugs after release.</p></div><span class="more">Details</span></summary>
         <ul><li>Owned test planning, execution and release sign-off for major launches and seasonal campaigns</li><li>Validated Adyen, Tabby and Checkout.com payments plus the Deliverect order integration</li><li>Analytics QA across Braze, MoEngage, Firebase and New Relic events</li><li>Selenium and Appium suites in Java with TestNG and the Page Object Model</li></ul>
       </details>
       <details class="job">
@@ -644,7 +649,7 @@ footer a:hover{color:var(--fg)}
           <ol class="steps">
             <li><span><b>A free 30-minute call.</b> Your product, your next release date, and what worries you about it.</span></li>
             <li><span><b>A one-week pilot on that release.</b> Within two working days you get a short test plan for the riskiest flows. Then I test on real devices and log each bug with steps, severity and a video.</span></li>
-            <li><span><b>A release report with a go / no-go call.</b> If it helped, we carry on per release, on a monthly retainer, or hourly for short bursts.</span></li>
+            <li><span><b>A release report: ship it or hold it.</b> If it helped, we carry on per release, on a monthly retainer, or hourly for short bursts.</span></li>
           </ol>
         </div>
       </div>
@@ -668,7 +673,7 @@ footer a:hover{color:var(--fg)}
         <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
         <button class="btn btn-ghost" id="sendBtn" type="submit">Open in my email app</button>
         <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        <p class="form-note" id="formNote">WhatsApp is the fastest way to reach me.</p>
+        <p class="form-note" id="formNote">WhatsApp is the fastest way to reach me. <button class="text-btn" type="button" id="clearForm">Clear the form</button></p>
       </form>
       </div>
     </div>
@@ -746,6 +751,7 @@ footer a:hover{color:var(--fg)}
   var DRAFT_KEY='fk-draft',draftIds=['fName','fEmail','fService','fMsg'];
   function saveDraft(){var d={};draftIds.forEach(function(id){d[id]=$(id).value;});try{localStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(e){}}
   function clearDraft(){try{localStorage.removeItem(DRAFT_KEY);}catch(e){}}
+  $('clearForm').addEventListener('click',function(){form.reset();draftIds.forEach(function(id){setErr(id,'');});clearDraft();status.textContent='';status.className='form-status';$('fName').focus();});
   $('formToggle').addEventListener('click',function(){var open=this.getAttribute('aria-expanded')!=='true';this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'Hide the form':'Or write a short message here';$('contactForm').classList.toggle('open',open);if(open)$('fName').focus();});
   var form=$('contactForm'),status=$('formStatus'),sendBtn=$('sendBtn');
   if(FORM_ENDPOINT){$('formNote').textContent='Your message goes straight to my inbox. Nothing is stored anywhere else.';sendBtn.textContent='Send message';}
@@ -780,8 +786,8 @@ footer a:hover{color:var(--fg)}
         .then(function(){sendBtn.disabled=false;sendBtn.textContent='Send message';});
     }else{
       var body='Name: '+data.name+'\nEmail: '+data.email+'\nNeed: '+data.service+'\n\n'+data.message;
-      status.className='form-status';status.innerHTML='Your email app should open with the message filled in. If it doesn\'t, email me at <a class="link" href="mailto:'+to+'">'+to+'</a> or use WhatsApp above.';
-      clearDraft();
+      status.className='form-status';status.innerHTML='Your email app should open with the message filled in. If it doesn\'t, <button class="text-btn" type="button" id="copyMsg">copy your message</button> and paste it into WhatsApp or an email to <a class="link" href="mailto:'+to+'">'+to+'</a>. Your draft stays here until you clear it.';
+      $('copyMsg').addEventListener('click',function(){var b=this;function ok(){b.textContent='message copied';}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(body).then(ok).catch(function(){});});
       window.location.href='mailto:'+to+'?subject='+encodeURIComponent('QA enquiry: '+data.service)+'&body='+encodeURIComponent(body);
     }
   });
@@ -802,7 +808,7 @@ footer a:hover{color:var(--fg)}
     function bgOf(el){while(el){var c=rgb(getComputedStyle(el).backgroundColor);if(c&&(c.length<4||c[3]>0.5))return c;el=el.parentElement;}return [255,255,255];}
     function ratio(el){var fg=rgb(getComputedStyle(el).color),bg=bgOf(el),a=lumin(fg),b=lumin(bg);return (Math.max(a,b)+0.05)/(Math.min(a,b)+0.05);}
     var checks={
-      load:function(){var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null;var ms=n&&n.loadEventEnd>0?n.loadEventEnd:(n&&n.domContentLoadedEventEnd>0?n.domContentLoadedEventEnd:performance.now());return {ok:ms<3000,val:(ms/1000).toFixed(1)+'s'};},
+      load:function(){var n=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null;var ms=n&&n.domContentLoadedEventEnd>0?n.domContentLoadedEventEnd:performance.now();return {ok:ms<3000,val:(ms/1000).toFixed(1)+'s'};},
       errors:function(){return {ok:scErrors===0,val:scErrors===0?'none':String(scErrors)};},
       alt:function(){var im=[].slice.call(document.images),n=im.filter(function(i){return i.hasAttribute('alt');}).length;return {ok:n===im.length,val:n+'/'+im.length};},
       contrast:function(){var els=[document.querySelector('.hero h1'),document.querySelector('.hero .lead'),document.querySelector('.hero .intro')].filter(Boolean),min=Infinity;els.forEach(function(e){min=Math.min(min,ratio(e));});return {ok:min>=4.5,val:'lowest '+min.toFixed(1)+':1'};},
@@ -878,7 +884,7 @@ footer a:hover{color:var(--fg)}
   function clearTimers(){timers.forEach(clearTimeout);timers=[];}
   var paused=false;
   function later(fn,ms){timers.push(setTimeout(function(){if(paused){later(fn,200);return;}fn();},ms));}
-  function setPause(p){paused=p;var b=$('pauseBtn');b.textContent=p?'Resume':'Pause';b.setAttribute('aria-pressed',p?'true':'false');if(p)$('sWhat').textContent='paused';}
+  function setPause(p){paused=p;var b=$('pauseBtn');b.textContent=p?'Resume':'Pause';b.setAttribute('aria-pressed',p?'true':'false');term.classList.toggle('paused',p);runStatus.textContent=p?'Run paused.':'';if(p)$('sWhat').textContent='paused';}
   function setRerun(m){var b=$('rerun');b.dataset.mode=m;$('pauseBtn').hidden=!(m==='skip'&&started&&!finished);if(m!=='skip')setPause(false);b.textContent=m==='skip'?'Skip to the report':m==='report'?'View release report':'Run again';b.className=m==='report'?'btn btn-primary btn-sm':'btn btn-ghost btn-sm';}
   function selectTab(which){
     var run=which==='run';if(!run)tabReport.classList.remove('ready');
@@ -930,6 +936,7 @@ footer a:hover{color:var(--fg)}
     addDone(pass,fail,total);finished=true;
   }
   function run(){
+    if(location.hash==='#report'){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
     reset();started=true;setRerun('skip');
     if(reduced){finishInstant();showReport();return;}
     var i=0;
@@ -950,15 +957,15 @@ footer a:hover{color:var(--fg)}
   tabReport.addEventListener('click',function(){started=true;if(!finished){clearTimers();reset();finishInstant();}showReport();revealReport();});
   tabRun.addEventListener('click',function(){if(location.hash==='#report'){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}});
   $('pauseBtn').addEventListener('click',function(){setPause(!paused);});
-  $('copyReport').addEventListener('click',function(){var b=this,u=location.href.split('#')[0]+'#report';function ok(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link to this report';},1800);}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok).catch(function(){b.textContent=u;});else b.textContent=u;});
+  $('copyReport').addEventListener('click',function(){var b=this,u=location.href.split('#')[0]+'#report';function ok(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link to this report';},1800);}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok).catch(fb);else fb();function fb(){var t=document.createElement('textarea');t.value=u;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();var c=false;try{c=document.execCommand('copy');}catch(e){}document.body.removeChild(t);if(c)ok();else b.textContent='Copy failed';}});
   /* #report opens the finished report directly, for links shared with a team */
-  if(location.hash==='#report'){started=true;finishInstant();showReport();setTimeout(function(){runner.scrollIntoView({block:'start'});},60);}
+  if(location.hash==='#report'){try{history.scrollRestoration='manual';}catch(e){}started=true;finishInstant();showReport();setTimeout(function(){runner.scrollIntoView({block:'start'});},60);}
   [tabRun,tabReport].forEach(function(t){t.addEventListener('keydown',function(e){
     if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key==='Home'||e.key==='End'){e.preventDefault();var other=t===tabRun?tabReport:tabRun;other.click();other.focus();}
   });});
   $('rerun').addEventListener('click',function(){var m=this.dataset.mode;if(m==='skip'){started=true;clearTimers();reset();finishInstant();showReport();tabReport.focus();}else if(m==='report'){showReport();revealReport();tabReport.focus();}else{showRun();run();}});
   $('rerun2').addEventListener('click',function(){showRun();run();tabRun.focus();});
-  $('watchBtn').addEventListener('click',function(e){e.preventDefault();if(window.matchMedia('(max-width:859px)').matches)runner.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});else{var lead=document.querySelector('#demo .lead');window.scrollTo({top:lead.getBoundingClientRect().top+window.scrollY-84,behavior:reduced?'auto':'smooth'});}showRun();setTimeout(run,reduced?0:450);});
+  $('watchBtn').addEventListener('click',function(e){e.preventDefault();var lead=document.querySelector('#demo .lead');window.scrollTo({top:lead.getBoundingClientRect().top+window.scrollY-76,behavior:reduced?'auto':'smooth'});showRun();setTimeout(run,reduced?0:450);});
   function autoStart(){if(!started){run();}}
   if('IntersectionObserver' in window){var rio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){autoStart();rio.disconnect();}});},{threshold:.2,rootMargin:'0px 0px -15% 0px'});rio.observe(runner.querySelector('.runner-bar'));
     window.addEventListener('scroll',function onS(){if(started){window.removeEventListener('scroll',onS);return;}var r=runner.getBoundingClientRect();if(r.top<window.innerHeight*.8&&r.bottom>0){autoStart();window.removeEventListener('scroll',onS);}},{passive:true});}

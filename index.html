@@ -168,7 +168,7 @@ section[id]{scroll-margin-top:64px}
 .live span:last-child{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--muted)}
 
 /* report */
-.report{display:none;padding:20px;gap:18px;min-width:0}
+.report{display:none;padding:18px 20px;gap:14px;min-width:0}
 .report.show{display:grid}
 @media (min-width:860px){.report.show{grid-template-columns:170px 1.1fr .9fr;align-items:start}}
 @media (max-width:859px){.report>*{order:4}.report .rhead{order:0}.report .verdict{order:1}.report .rfoot{order:2;border-top:0;padding-top:0}}
@@ -217,7 +217,10 @@ section[id]{scroll-margin-top:64px}
 .svc h3{font-size:18px;font-weight:700}
 .svc p{color:var(--muted);font-size:15px;text-wrap:pretty}
 .svc .svc-tools{font-family:var(--mono);font-size:12.5px;margin-top:4px}
-@media (max-width:559px){.svc{padding:14px 0}.svc .svc-tools{display:none}}
+.svc-more{display:none}
+@media (max-width:559px){.svc{padding:14px 0}.svc .svc-tools{display:none}
+.services:not(.expanded){grid-template-columns:1fr 1fr;column-gap:16px}.services:not(.expanded) .svc{padding:12px 0}.services:not(.expanded) .svc h3{font-size:15.5px;line-height:1.25}.services:not(.expanded) .svc p{display:none}
+.svc-more{display:inline-block;margin-top:6px}}
 
 /* experience */
 .band{background:var(--bg-2);border-block:1px solid var(--line)}
@@ -239,7 +242,7 @@ section[id]{scroll-margin-top:64px}
 @keyframes detailIn{from{opacity:0;transform:translateY(-4px)}}
 @supports (interpolate-size:allow-keywords){:root{interpolate-size:allow-keywords}.job::details-content{height:0;overflow:clip;transition:height .35s var(--ease-out-expo),content-visibility .35s allow-discrete}.job[open]::details-content{height:auto}@media (prefers-reduced-motion:reduce){.job::details-content{transition:none}}}
 /* phones: date and "Details" share the top row, the text gets the full width; the company line shows once the row is opened */
-@media (max-width:759px){.job summary{grid-template-columns:1fr auto}.job summary>div{grid-column:1/-1}.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}.job:not([open]):not(:first-child) .co{display:none}}
+@media (max-width:759px){.job summary{grid-template-columns:1fr auto}.job summary>div{grid-column:1/-1}.job .more{grid-row:1;justify-self:end}.job time{grid-row:1}.job:not([open]):has(.win) .co{display:none}.job:not([open]) .co{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}}
 .job ul{margin:0;padding:0 0 18px;list-style:none;display:grid;gap:5px;font-size:14.5px}
 .job li,.job .co,.job .win{max-width:66ch}
 @media (min-width:760px){.job ul{padding-left:170px}}
@@ -252,6 +255,7 @@ section[id]{scroll-margin-top:64px}
 .contact-grid{display:grid;gap:28px;margin-top:24px}
 @media (min-width:860px){.contact-grid{grid-template-columns:1fr 1fr;gap:56px}.channels{padding-top:6px}}
 .contact-list{display:grid;gap:10px;margin-top:18px}
+@media (max-width:559px){.contact-list{gap:8px;margin-top:14px}.contact-list .contact-item{min-height:48px;padding:8px 12px;gap:12px}.contact-list .ic{width:32px;height:32px}}
 .contact-item{display:flex;align-items:center;gap:14px;min-height:56px;padding:12px 16px;border:1px solid var(--line);border-radius:var(--r-card);background:var(--surface);min-width:0;text-decoration:none;transition:border-color .2s}
 .contact-item:hover{border-color:var(--accent)}
 .contact-item .ic{width:36px;height:36px;border-radius:var(--r-control);background:var(--surface-2);color:var(--muted);display:grid;place-items:center;flex:none}
@@ -273,10 +277,13 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-
 textarea{min-height:120px;resize:vertical}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .form-status{font-size:14px;color:var(--muted);min-height:1.4em}
+.form-status .copy-msg{display:flex;margin-top:10px}
 .form-status.ok{color:var(--fg)}.form-status.bad{color:var(--fail)}
 .form-note{font-size:13.5px;color:var(--muted)}
 .form-title{font-family:var(--display);font-weight:700;font-size:18px}
 .form-status:empty{display:none}
+.side #runStatus{min-height:1.6em}.side #runStatus:empty{display:block;visibility:hidden}
+#pauseBtn{min-width:5.2em;text-align:center}
 .channels{align-self:start;display:grid;gap:0;min-width:0}
 .channels .wa-main{margin-top:0;justify-self:start}
 .channels .form-toggle{justify-self:start;margin-top:8px}
@@ -345,6 +352,7 @@ footer a:hover{color:var(--fg)}
 .about-copy{display:grid;gap:14px;max-width:62ch}
 .about-copy p{font-size:16.5px;line-height:1.65;text-wrap:pretty}
 .about-copy p:first-child{font-size:18px;color:var(--fg)}
+@media (max-width:559px){.about-copy p:first-child{font-size:16.5px}}
 @media (max-width:559px){.about-copy p:nth-child(3),.about-post .post{display:none}}
 /* writing: the latest LinkedIn post */
 .more-posts{display:inline-block;margin-top:14px;padding-block:10px;font-size:15px;font-weight:600}
@@ -443,15 +451,15 @@ footer a:hover{color:var(--fg)}
         <a class="btn btn-ghost" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
       </div>
       <details class="selfcheck" id="selfcheck">
-        <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i><span>Page check<span class="sc-x"> on your device</span></span></span><span class="sc-status" id="scStatus">waiting</span></summary>
+        <summary><span class="sc-title"><i class="sc-dot" aria-hidden="true"></i><span>Self-test<span class="sc-x"> on your device</span></span></span><span class="sc-status" id="scStatus">waiting</span></summary>
         <ul class="sc-list" id="scList">
           <li data-k="load"><span class="st" aria-hidden="true">◌</span><span class="nm">Ready to use in</span><span class="val">…</span></li>
-          <li data-k="errors"><span class="st" aria-hidden="true">◌</span><span class="nm">Script errors</span><span class="val">…</span></li>
+          <li data-k="errors"><span class="st" aria-hidden="true">◌</span><span class="nm">Script errors on this page</span><span class="val">…</span></li>
           <li data-k="alt"><span class="st" aria-hidden="true">◌</span><span class="nm">Images with alt text</span><span class="val">…</span></li>
-          <li data-k="contrast"><span class="st" aria-hidden="true">◌</span><span class="nm">Hero text contrast (minimum 4.5:1)</span><span class="val">…</span></li>
+          <li data-k="contrast"><span class="st" aria-hidden="true">◌</span><span class="nm">Text easy to read (contrast 4.5:1 or more)</span><span class="val">…</span></li>
           <li data-k="fit"><span class="st" aria-hidden="true">◌</span><span class="nm">Fits your screen, no sideways scroll</span><span class="val">…</span></li>
         </ul>
-        <p class="sc-note">Measured just now by this page's own script, in your browser. Nothing is sent anywhere.</p>
+        <p class="sc-note">This page tests itself in your browser, the way I test a release: speed, errors, accessibility. Nothing is sent anywhere.</p>
       </details>
       <p class="vh" id="scLive" aria-live="polite"></p>
     </div>
@@ -593,7 +601,7 @@ footer a:hover{color:var(--fg)}
 <section class="section" id="services">
   <div class="wrap">
     <h2 class="h2">What I can own for your product.</h2>
-    <ul class="services">
+    <ul class="services" id="svcList">
       <li class="svc"><h3>Manual and exploratory testing</h3><p>Test plans and cases for every new feature, then off-script sessions to find what the cases miss. Web, mobile web and native apps.</p><p class="svc-tools">TestRail · Jira</p></li>
       <li class="svc"><h3>Test automation</h3><p>Regression suites for web and mobile that run on every build, so fixed bugs stay fixed. Structured to stay cheap to maintain as the app changes.</p><p class="svc-tools">Selenium · Playwright · Cypress · Appium · TestNG · Robot Framework</p></li>
       <li class="svc"><h3>API and backend testing</h3><p>Checks that your API accepts what it should and refuses what it shouldn't, and that the data behind every screen is right.</p><p class="svc-tools">Postman · RestAssured · SQL · JMeter</p></li>
@@ -601,6 +609,7 @@ footer a:hover{color:var(--fg)}
       <li class="svc"><h3>Localisation and devices</h3><p>English and Arabic right-to-left, multi-currency, and real iPhone, Samsung, Pixel and iPad devices. Chrome, Safari and Edge.</p><p class="svc-tools">Android Studio · Xcode</p></li>
       <li class="svc"><h3>Release sign-off</h3><p>Smoke checklists before every deploy, and a report like the one in the demo for every release.</p><p class="svc-tools">TestRail · Jira</p></li>
     </ul>
+    <button class="text-btn svc-more" id="svcMore" type="button" aria-expanded="false" aria-controls="svcList">Show what each one covers</button>
   </div>
 </section>
 
@@ -748,6 +757,8 @@ footer a:hover{color:var(--fg)}
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done).catch(fb);}else{fb();}
   });
 
+  $('svcMore').addEventListener('click',function(){var open=this.getAttribute('aria-expanded')!=='true';this.setAttribute('aria-expanded',open?'true':'false');this.textContent=open?'Show titles only':'Show what each one covers';$('svcList').classList.toggle('expanded',open);});
+
   /* contact form: opens from a button; a draft survives a reload in this browser only */
   var DRAFT_KEY='fk-draft',draftIds=['fName','fEmail','fService','fMsg'];
   function saveDraft(){var d={};draftIds.forEach(function(id){d[id]=$(id).value;});try{localStorage.setItem(DRAFT_KEY,JSON.stringify(d));}catch(e){}}
@@ -790,8 +801,8 @@ footer a:hover{color:var(--fg)}
         .then(function(){sendBtn.disabled=false;sendBtn.textContent='Send message';});
     }else{
       var body='Name: '+data.name+'\nEmail: '+data.email+'\nNeed: '+data.service+'\n\n'+data.message;
-      status.className='form-status';status.innerHTML='Your email app should open with the message filled in. If it doesn\'t, <button class="text-btn" type="button" id="copyMsg">copy your message</button> and paste it into WhatsApp or an email to <a class="link" href="mailto:'+to+'">'+to+'</a>. Your draft stays here until you clear it.';
-      $('copyMsg').addEventListener('click',function(){var b=this;function ok(){b.textContent='message copied';}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(body).then(ok).catch(function(){});});
+      status.className='form-status';status.innerHTML='Your email app should open with the message filled in. If it doesn\'t, copy your message and paste it into WhatsApp or an email to <a class="link" href="mailto:'+to+'">'+to+'</a>. Your draft stays here until you clear it.<button class="btn btn-ghost btn-sm copy-msg" type="button" id="copyMsg">Copy my message</button>';
+      $('copyMsg').addEventListener('click',function(){var b=this;function ok(){b.textContent='Message copied';}function fb(){var t=document.createElement('textarea');t.value=body;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();var c=false;try{c=document.execCommand('copy');}catch(e){}document.body.removeChild(t);if(c)ok();else b.textContent='Couldn\'t copy. Select the text in the form instead';}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(body).then(ok).catch(fb);else fb();});
       window.location.href='mailto:'+to+'?subject='+encodeURIComponent('QA enquiry: '+data.service)+'&body='+encodeURIComponent(body);
     }
   });
@@ -823,7 +834,7 @@ footer a:hover{color:var(--fg)}
       box.classList.remove('running');box.classList.toggle('passed',warn===0);box.classList.toggle('warned',warn>0);
       status.innerHTML=warn===0?'✓ '+pass+'/'+rows.length+'<span class="sc-x"> passed</span>':pass+'/'+rows.length+'<span class="sc-x"> passed</span> · '+warn+' to check';
       live.textContent='Live page check: '+pass+' of '+rows.length+' checks passed on your device.';
-      box.querySelector('.sc-note').textContent=warn===0?'Measured just now by this page\'s own script, in your browser. Nothing is sent anywhere.':'Amber means a check missed its target on this visit, often because of a slow network. Measured just now in your browser; nothing is sent anywhere.';}
+      box.querySelector('.sc-note').textContent=warn===0?'This page tests itself in your browser, the way I test a release: speed, errors, accessibility. Nothing is sent anywhere.':'Amber means a check missed its target on this visit, often because of a slow network. Measured just now in your browser; nothing is sent anywhere.';}
     function run(animated){
       box.classList.add('running');box.classList.remove('passed','warned');
       rows.forEach(function(li){li.className='';li.querySelector('.st').textContent='◌';li.querySelector('.val').textContent='…';});
@@ -876,9 +887,9 @@ footer a:hover{color:var(--fg)}
     {n:'checkout / Tabby instalment plan updates total',ms:3410,s:'fail',a:'aPay',bug:'expected AED 1,200 in 4 × 300, got 3 × 300 · BUG-2031 filed, S1 critical, trace and video attached'},
     {n:'cashback / credited after order confirmation',ms:1720,s:'pass',a:'aPay'},
     {n:'notifications / push on order status change (android)',ms:1930,s:'pass',a:'aNotif'},
-    {n:'api / GET /offers refuses a request without a token (401)',ms:410,s:'pass',a:'aApi'},
+    {n:'api / offers: a request without a login token is refused (401)',ms:410,s:'pass',a:'aApi'},
     {n:'arabic / right-to-left layout on product page (ios)',ms:1280,s:'pass',a:'aLoc'},
-    {n:'api / POST /leads rejects an invalid KSA phone number',ms:520,s:'fail',a:'aApi',bug:'the API should reject this number (422) but accepted it (200) · BUG-2032 filed, S2 high'},
+    {n:'api / POST /leads rejects an invalid KSA phone number',ms:520,s:'fail',a:'aApi',bug:'the API should have refused this number but accepted it (expected 422, got 200) · BUG-2032 filed, S2 high'},
     {n:'notifications / in-app inbox marks message read',ms:1460,s:'pass',a:'aNotif'}
   ];
   var term=$('term'),cmd=$('cmd'),prog=$('prog'),cPass=$('cPass'),cFail=$('cFail'),cTime=$('cTime'),runStatus=$('runStatus');
@@ -897,7 +908,7 @@ footer a:hover{color:var(--fg)}
     tabReport.setAttribute('aria-selected',run?'false':'true');tabReport.tabIndex=run?-1:0;
   }
   function showRun(){selectTab('run');}
-  function revealReport(){var r=runner.getBoundingClientRect(),c=document.querySelector('.rcta').getBoundingClientRect();if(c.bottom>window.innerHeight||r.top<0)window.scrollTo({top:r.top+window.scrollY-72,behavior:reduced?'auto':'smooth'});try{history.replaceState(null,'','#report');}catch(e){}}
+  function revealReport(){var r=runner.getBoundingClientRect(),c=document.querySelector('.rcta').getBoundingClientRect();if(c.bottom>window.innerHeight||r.top<0)window.scrollTo({top:r.top+window.scrollY-68,behavior:reduced?'auto':'smooth'});try{history.replaceState(null,'','#report');}catch(e){}}
   function showReport(){
     selectTab('report');
     var pass=TESTS.filter(function(t){return t.s==='pass';}).length,pct=Math.round(pass/TESTS.length*100);
@@ -961,7 +972,7 @@ footer a:hover{color:var(--fg)}
   tabReport.addEventListener('click',function(){started=true;if(!finished){clearTimers();reset();finishInstant();}showReport();revealReport();});
   tabRun.addEventListener('click',function(){if(location.hash==='#report'){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}});
   $('pauseBtn').addEventListener('click',function(){setPause(!paused);});
-  $('copyReport').addEventListener('click',function(){var b=this,u=location.href.split('#')[0]+'#report';function ok(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link to this report';},1800);}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok).catch(fb);else fb();function fb(){var t=document.createElement('textarea');t.value=u;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();var c=false;try{c=document.execCommand('copy');}catch(e){}document.body.removeChild(t);if(c)ok();else b.textContent='Copy failed';}});
+  $('copyReport').addEventListener('click',function(){var b=this,u=location.origin+location.pathname+'#report';function ok(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link to this report';},1800);}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(ok).catch(fb);else fb();function fb(){var t=document.createElement('textarea');t.value=u;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();var c=false;try{c=document.execCommand('copy');}catch(e){}document.body.removeChild(t);if(c)ok();else b.textContent='Copy failed';}});
   /* #report opens the finished report directly, for links shared with a team */
   if(location.hash==='#report'){try{history.scrollRestoration='manual';}catch(e){}started=true;finishInstant();showReport();setTimeout(function(){runner.scrollIntoView({block:'start'});},60);}
   [tabRun,tabReport].forEach(function(t){t.addEventListener('keydown',function(e){

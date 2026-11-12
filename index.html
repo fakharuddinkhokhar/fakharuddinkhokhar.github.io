@@ -287,6 +287,14 @@ section[id]{scroll-margin-top:64px}
 .sc-ring .sk{animation:chipIn .4s var(--ease-out-expo) both;animation-delay:var(--cd,0s)}
 @keyframes chipIn{from{opacity:0;transform:translateY(6px)}}
 @media (prefers-reduced-motion:reduce){.radar-sweep{display:none}.radar.armed .sk{opacity:1}}
+/* analytics consent bar: equal-weight choices, shown once, reopened from the footer */
+.consent{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;max-width:440px;display:grid;gap:10px;padding:14px 16px;background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r-card);box-shadow:var(--shadow);font-size:14px;color:var(--muted)}
+.consent b{color:var(--fg);font-weight:600}
+.consent-actions{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:559px){.consent{right:16px;max-width:none}}
+.consent:not([hidden]){animation:barIn .35s var(--ease-out-expo)}
+.foot-btn{font-size:14px;padding:11px 8px;text-decoration:none;color:var(--muted)}
+.foot-btn:hover{color:var(--fg)}
 /* experience */
 .band{background:var(--bg-2);border-block:1px solid var(--line)}
 .jobs{margin-top:24px;border-top:1px solid var(--line)}
@@ -781,7 +789,11 @@ footer a:hover{color:var(--fg)}
 </main>
 <a class="btn wa-bar" id="waBar" href="https://wa.me/923238998463?text=Hi%20Fakhar%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20QA%20for%20our%20product." target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.3 7.9L3 21l1.1-4.7A9 9 0 1 1 21 12z"/></svg>Message me on WhatsApp</a>
 
-<footer><div class="wrap"><span>© <span id="year">2026</span> Fakhar Ud Din Khokhar · Software QA Engineer</span><ul><li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li><li><a href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download>CV (PDF)</a></li><li><a href="#top">Back to top</a></li></ul></div></footer>
+<footer><div class="wrap"><span>© <span id="year">2026</span> Fakhar Ud Din Khokhar · Software QA Engineer</span><ul><li><a href="#demo">Live demo</a></li><li><a href="#about">About</a></li><li><a href="#services">What I do</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li><li><a href="Fakhar-Ud-Din-Khokhar-Resume.pdf" download>CV (PDF)</a></li><li><a href="#top">Back to top</a></li><li><button class="text-btn foot-btn" id="consentOpen" type="button" hidden>Analytics settings</button></li></ul></div></footer>
+<div class="consent" id="consent" role="region" aria-label="Analytics choice" hidden>
+  <p><b>Can I count this visit?</b> I use Google Analytics to see which parts of this page are useful. No ads, nothing sold. <a class="link" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses this data</a></p>
+  <div class="consent-actions"><button class="btn btn-ghost btn-sm" id="consentYes" type="button">Allow</button><button class="btn btn-ghost btn-sm" id="consentNo" type="button">No thanks</button></div>
+</div>
 
 <script>
 (function(){
@@ -791,6 +803,9 @@ footer a:hover{color:var(--fg)}
   /* To receive messages without an email client, create a free form at formspree.io and paste its endpoint here,
      e.g. 'https://formspree.io/f/abcdwxyz'. Leave empty to fall back to the visitor's email app. */
   var FORM_ENDPOINT='';
+  /* Google Analytics 4: paste the Measurement ID (G-XXXXXXXXXX) between the quotes to switch it on.
+     Empty means no Google script, no cookies and no consent bar. */
+  var GA_ID='';
 
   var root=document.documentElement,reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $=function(id){return document.getElementById(id);};
@@ -828,7 +843,7 @@ footer a:hover{color:var(--fg)}
   /* phone: floating WhatsApp bar between the hero and the contact section */
   var waBar=$('waBar'),heroOut=false,endIn=false,demoIn=false;
   window.syncBar=syncBar;
-  function syncBar(){if(heroOut&&!endIn&&!demoIn&&!menu.classList.contains('open'))waBar.removeAttribute('hidden');else waBar.setAttribute('hidden','');}
+  function syncBar(){if(heroOut&&!endIn&&!demoIn&&!menu.classList.contains('open')&&$('consent').hidden)waBar.removeAttribute('hidden');else waBar.setAttribute('hidden','');}
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){es.forEach(function(en){heroOut=!en.isIntersecting&&en.boundingClientRect.top<0;syncBar();});}).observe($('watchBtn'));
     var endEls=[$('contact'),document.querySelector('footer')],endState=[false,false];
@@ -892,6 +907,7 @@ footer a:hover{color:var(--fg)}
       var body='Name: '+data.name+'\nEmail: '+data.email+'\nNeed: '+data.service+'\n\n'+data.message;
       status.className='form-status';status.innerHTML='Your email app should open with the message filled in. If it doesn\'t, copy your message and paste it into WhatsApp or an email to <a class="link" href="mailto:'+to+'">'+to+'</a>. Your draft stays here until you clear it.<button class="btn btn-ghost btn-sm copy-msg" type="button" id="copyMsg">Copy my message</button>';
       $('copyMsg').addEventListener('click',function(){var b=this;function ok(){b.textContent='Message copied';}function fb(){var t=document.createElement('textarea');t.value=body;t.setAttribute('readonly','');t.style.cssText='position:fixed;opacity:0';document.body.appendChild(t);t.select();var c=false;try{c=document.execCommand('copy');}catch(e){}document.body.removeChild(t);if(c)ok();else b.textContent='Couldn\'t copy. Select the text in the form instead';}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(body).then(ok).catch(fb);else fb();});
+      track('generate_lead',{method:'email_app',service:data.service});
       window.location.href='mailto:'+to+'?subject='+encodeURIComponent('QA enquiry: '+data.service)+'&body='+encodeURIComponent(body);
     }
   });
@@ -1156,6 +1172,48 @@ footer a:hover{color:var(--fg)}
     function place(b){if(narrow.matches&&b.closest('.sc-ring')){b.closest('.sc-ring').appendChild(detail);detail.classList.add('shown');}else if(detail.parentNode!==home){home.appendChild(detail);}}
     narrow.addEventListener&&narrow.addEventListener('change',function(){if(!narrow.matches&&detail.parentNode!==home)home.appendChild(detail);});
     all.forEach(function(b){var sk=S.filter(function(x){return x[0]===b.dataset.k;})[0];['mouseenter','focus','click'].forEach(function(ev){b.addEventListener(ev,function(){if(ev!=='mouseenter'||!narrow.matches){show(sk,all);place(b);}});});});
+  })();
+
+  /* ===== Google Analytics 4 with Consent Mode v2 =====
+     EEA, UK and Switzerland: analytics stays off until the visitor allows it.
+     Elsewhere it is on by default and the visitor can decline. Ads storage is always off. */
+  function track(name,params){if(GA_ID&&window.gtag)window.gtag('event',name,params||{});}
+  (function(){
+    if(!GA_ID)return;
+    var KEY='fk-consent',bar=$('consent'),saved=null;try{saved=localStorage.getItem(KEY);}catch(e){}
+    var EEA=['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'];
+    window.dataLayer=window.dataLayer||[];window.gtag=function(){window.dataLayer.push(arguments);};
+    var off={ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'};
+    gtag('consent','default',Object.assign({analytics_storage:'denied',region:EEA},off));
+    gtag('consent','default',Object.assign({analytics_storage:'granted'},off));
+    if(saved)gtag('consent','update',{analytics_storage:saved});
+    gtag('js',new Date());gtag('config',GA_ID);
+    var sc=document.createElement('script');sc.async=true;sc.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);document.head.appendChild(sc);
+    function choose(v){try{localStorage.setItem(KEY,v);}catch(e){}gtag('consent','update',{analytics_storage:v});bar.setAttribute('hidden','');syncBar();}
+    $('consentYes').addEventListener('click',function(){choose('granted');});
+    $('consentNo').addEventListener('click',function(){choose('denied');});
+    var open=$('consentOpen');open.removeAttribute('hidden');open.addEventListener('click',function(){bar.removeAttribute('hidden');syncBar();$('consentYes').focus();});
+    if(!saved){bar.removeAttribute('hidden');syncBar();}
+    /* what visitors actually do: one delegated listener in the capture phase, so it sees each control's state before its own handler changes it */
+    function where(el){return el.closest('#navCta,#navCv')?'nav':el.closest('.mobile-menu')?'menu':el.closest('.hero')?'hero':el.closest('.rcta')?'report':el.closest('.channels')?'contact':el.closest('#waBar')?'floating_bar':el.closest('footer')?'footer':el.closest('#about')?'about':'other';}
+    document.addEventListener('click',function(e){var el=e.target.closest('a,button');if(!el)return;var h=el.getAttribute('href')||'',id=el.id;
+      if(h.indexOf('wa.me')>-1)track('whatsapp_click',{placement:where(el)});
+      else if(/\.pdf$/.test(h))track('cv_download',{placement:where(el)});
+      else if(h.indexOf('tel:')===0)track('call_click',{placement:where(el)});
+      else if(h.indexOf('mailto:')===0)track('email_click',{placement:where(el)});
+      else if(h.indexOf('linkedin.com')>-1)track('linkedin_click',{placement:where(el),link:/activity/.test(h)?'post':'profile'});
+      else if(id==='watchBtn')track('demo_watch');
+      else if(id==='rerun')track(el.dataset.mode==='skip'?'demo_skip':el.dataset.mode==='report'?'report_open':'demo_rerun',{via:'side_button'});
+      else if(id==='tabReport')track('report_open',{via:'tab'});
+      else if(id==='pauseBtn')track(el.textContent==='Pause'?'demo_pause':'demo_resume');
+      else if(id==='copyReport')track('report_link_copy');
+      else if(id==='copyEmail')track('email_copy');
+      else if(id==='formToggle'&&el.getAttribute('aria-expanded')!=='true')track('contact_form_open');
+      else if(id==='svcMore'&&el.getAttribute('aria-expanded')!=='true')track('services_expand');
+      else if(el.classList.contains('sk'))track('skill_select',{skill:el.dataset.k});
+      else if(id==='themeBtn')track('theme_change',{to:document.documentElement.getAttribute('data-theme')==='light'?'dark':'light'});
+    },true);
+    if(location.hash==='#report')track('report_open',{via:'shared_link'});
   })();
 
   $('year').textContent=new Date().getFullYear();

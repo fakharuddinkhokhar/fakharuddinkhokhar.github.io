@@ -467,6 +467,11 @@ footer a:hover{color:var(--fg)}
 .hero.scan-go .hero-cta{animation-delay:.54s}
 @media (min-width:860px){.hero.scan-go .photo-wrap{animation-delay:.32s}}
 @keyframes wipe{from{clip-path:inset(0 0 100% 0);opacity:.15}to{clip-path:inset(0 0 0 0);opacity:1}}
+/* Headline decrypt (vanilla port of React Bits "Decrypted Text", MIT + Commons Clause, (c) David Haz): each letter shows noise until the scan resolves it, left to right. The real letter keeps its place, so nothing reflows. */
+.dx{position:relative}
+.dx.on{color:transparent}
+.dx.on::after{content:attr(data-g);position:absolute;left:50%;top:0;transform:translateX(-50%);color:var(--muted);opacity:.35}
+.dx.hot::after{color:var(--accent);opacity:1}
 /* Logos settle in after the scan; service cards stagger when reached */
 .logos.go .logo,.services.is-in .svc{animation:rise .55s var(--ease-out-expo) backwards;animation-delay:var(--d,0s)}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}}
@@ -964,6 +969,30 @@ footer a:hover{color:var(--fg)}
     var hero=document.querySelector('.hero'),logos=document.querySelector('.logos');
     [].slice.call(logos.querySelectorAll('.logo')).forEach(function(l,i){l.style.setProperty('--d',(0.8+i*0.06).toFixed(2)+'s');});
     hero.classList.add('scan-go');logos.classList.add('go');
+    /* decrypt the headline behind the scan line; the plain text is the end state and the accessible name throughout */
+    (function(h){
+      var text=h.textContent,pool='acdeghknorsuvxz/<>=*',cells=[];
+      h.setAttribute('aria-label',text);h.textContent='';
+      text.split(' ').forEach(function(w,wi){
+        if(wi)h.appendChild(document.createTextNode(' '));
+        var ws=document.createElement('span');ws.className='nw';ws.setAttribute('aria-hidden','true');
+        Array.from(w).forEach(function(ch){var c=document.createElement('span');c.className='dx on';c.textContent=ch;ws.appendChild(c);cells.push(c);});
+        h.appendChild(ws);
+      });
+      var t0=Date.now(),start=240,per=Math.max(12,820/cells.length);
+      function rnd(){return pool.charAt(Math.floor(Math.random()*pool.length));}
+      var iv=setInterval(function(){
+        var t=Date.now()-t0,left=0;
+        cells.forEach(function(c,i){
+          if(!c.classList.contains('on'))return;
+          var at=start+i*per;
+          if(t>=at){c.className='dx';c.removeAttribute('data-g');return;}
+          left++;c.setAttribute('data-g',rnd());c.classList.toggle('hot',at-t<90);
+        });
+        if(!left)clearInterval(iv);
+      },45);
+      setTimeout(function(){clearInterval(iv);cells.forEach(function(c){c.className='dx';c.removeAttribute('data-g');});},start+820+600);
+    })(hero.querySelector('h1'));
     setTimeout(function(){hero.classList.remove('scan-go');logos.classList.remove('go');},2600);
     var svc=document.querySelector('.services');
     if(svc&&'IntersectionObserver' in window){

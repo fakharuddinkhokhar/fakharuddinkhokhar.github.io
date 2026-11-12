@@ -1187,7 +1187,10 @@ footer a:hover{color:var(--fg)}
     gtag('consent','default',Object.assign({analytics_storage:'denied',region:EEA},off));
     gtag('consent','default',Object.assign({analytics_storage:'granted'},off));
     if(saved)gtag('consent','update',{analytics_storage:saved});
-    gtag('js',new Date());gtag('config',GA_ID);
+    /* the owner's own browsers: open the site once with ?me=1 (undo with ?me=0); their visits are tagged internal and GA4's Internal Traffic filter drops them */
+    var me=null;try{var q=new URLSearchParams(location.search).get('me');if(q==='1')localStorage.setItem('fk-internal','1');if(q==='0')localStorage.removeItem('fk-internal');me=localStorage.getItem('fk-internal');}catch(e){}
+    if(/[?&]me=[01]/.test(location.search)){try{history.replaceState(null,'',location.pathname+location.hash);}catch(e){}}
+    gtag('js',new Date());gtag('config',GA_ID,me==='1'?{traffic_type:'internal'}:{});
     var sc=document.createElement('script');sc.async=true;sc.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);document.head.appendChild(sc);
     function choose(v){try{localStorage.setItem(KEY,v);}catch(e){}gtag('consent','update',{analytics_storage:v});bar.setAttribute('hidden','');syncBar();}
     $('consentYes').addEventListener('click',function(){choose('granted');});
